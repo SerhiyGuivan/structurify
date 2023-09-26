@@ -1,11 +1,10 @@
 # Insertion Sort Algorithm in JavaScript
 
-Insertion sort is one of the more intuitive sorting algorithms.
-In computer science terms, Insertion Sort is known as an “online algorithm”
+**Insertion Sort** works by comparing an element with the elements to its left, until it reaches an element that is smaller than it; the element is then inserted in front of the smaller element.
+
+In computer science terms, Insertion Sort is known as an *“Online algorithm”*
 
 ## Insertion sort step-by-step
-
-Insertion Sort works by comparing an element with the elements to its left, until it reaches an element that is smaller than it; the element is then inserted in front of the smaller element.
 
 ![](insertion-sort-step-by-step.gif)
 
@@ -28,6 +27,24 @@ Insertion Sort works by comparing an element with the elements to its left, unti
 1. Is 3 < 4? Yes.
 1. Is 3 < 2? No => Insert after 2 => [1, 2, 3, 4, 5, 6]. The array is now sorted!
 
+## JavaScript implementation
+
+```js
+function insertionSort(arr) {
+  for (let i = 1; i < arr.length; i++) {
+    let currentValue = arr[i]
+    let j
+    for (j = i - 1; j >= 0 && arr[j] > currentValue; j--) {
+      arr[j + 1] = arr[j]
+    }
+    arr[j + 1] = currentValue
+  }
+  return arr
+}
+
+insertionSort([2, 1, 3, 7, 5]) // [1, 2, 3, 5, 7]
+```
+
 ## Performance summary
 
 | Title                         | Value      |
@@ -40,12 +57,10 @@ Insertion Sort works by comparing an element with the elements to its left, unti
 | **Stability?**                | Stable     | 
 | **Comparison Sort?**          | Comparison |
 
-Insertion Sort is good for:
+### Insertion Sort is good for:
 + Small arrays
 + Any size, almost sorted arrays
 + Sorting data in real-time
 
-Insertion Sort is bad for:
-- Larger arrays that aren’t “almost sorted”
-
-More info: https://www.doabledanny.com/insertion-sort-in-javascript
+### Insertion Sort is bad for:
+- Larger arrays that aren’t *“almost sorted”*
