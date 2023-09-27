@@ -39,17 +39,12 @@ Big O is a very important concept, and is fundamental to understanding algorithm
 
 Stable means that two elements with equal values will appear in the same order in the sorted output as they appear in the unsorted input array.
 
-#### Stable sorting algorithms:
-* Bubble Sort
-* Insertion Sort
-* Merge Sort
-* Radix Sort
-
-#### Unstable sorting algorithms:
-
-* Selection Sort
-* Heap Sort
-* Quick Sort
+| Stable sorting algorithms | Unstable sorting algorithms |
+|---------------------------|-----------------------------|
+| Bubble Sort               | Selection Sort              |
+| Insertion Sort            | Heap Sort                   |
+| Merge Sort                | Quick Sort                  |
+| Radix Sort                |                             |
 
 ### In-place algorithms
 
@@ -61,32 +56,20 @@ In-place algorithms have good space-complexity (take up less space in memory).
 
 The opposite of an in-place algorithm is an out-of-place algorithm, which does require auxiliary data structures.
 
-#### In-place algorithms: 
-
-* Bubble Sort
-* Selection Sort
-* Insertion Sort
-* Heap Sort.
-
-#### Out-of-place
-
-* Merge Sort.
+| In-place algorithms | Out-of-place |
+|---------------------|--------------|
+| Bubble Sort         | Merge Sort   |
+| Selection Sort      |              |
+| Insertion Sort      |              |
+| Heap Sort           |              |
 
 ### Comparison algorithms
 
 A comparison sorting algorithm is an algorithm that only reads a list of elements through a single abstract comparison operation (usually a “less than” or “equal to”) that determines which of the two elements should occur first in the final sorted output array.
 
-#### Comparison sorting algorithms:
+**Comparison sorting algorithms:** *Bubble Sort*, *Selection Sort*, *Insertion Sort*, *Merge Sort*, *Quick Sort*.
 
-* Bubble Sort
-* Selection Sort
-* Insertion Sort
-* Merge Sort
-* Quick Sort
-
-#### Non-comparison-type sorting algorithm
-
-* Radix Sort
+**Non-comparison-type sorting algorithm:** *Radix Sort*
 
 ### More about Algorithm Concepts
 
