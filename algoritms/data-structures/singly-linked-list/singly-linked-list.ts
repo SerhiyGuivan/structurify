@@ -166,4 +166,4 @@ class SinglyLinkedList<T> {
   }
 }
 
-export { Node, SinglyLinkedList }
+export default SinglyLinkedList;
