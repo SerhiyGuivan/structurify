@@ -8,7 +8,7 @@ class Node<T> {
   }
 }
 
-class SinglyLinkedList<T> {
+export default class SinglyLinkedList<T> {
   head: Node<T> | null;
   tail: Node<T> | null;
   length: number;
@@ -165,5 +165,3 @@ class SinglyLinkedList<T> {
     return this;
   }
 }
-
-export default SinglyLinkedList;
