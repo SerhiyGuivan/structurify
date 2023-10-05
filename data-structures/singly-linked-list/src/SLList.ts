@@ -95,16 +95,12 @@ export default class SLList<T> {
     const removedNode= this._head;
 
     if (this._head === this._tail) {
-      const val = this._head.val;
-
       this._head = null;
       this._tail = null;
-      this._length--;
-
-      return val;
+    } else {
+      this._head = removedNode.next;
     }
 
-    this._head = removedNode.next;
     this._length--;
 
     return removedNode.val;
