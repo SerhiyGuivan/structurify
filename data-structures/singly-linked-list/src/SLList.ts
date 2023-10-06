@@ -254,9 +254,3 @@ export default class SLList<T> {
   }
 }
 
-const list = SLList.fromArray([1,2,3]).rotate(-1);
-
-// console.log('tail:', list.tail)
-// console.log('head:', list.head)
-console.log('toArray', list.toArray());
-console.log('length', list.length);
