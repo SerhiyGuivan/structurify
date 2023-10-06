@@ -65,7 +65,7 @@ export default class DLList<T> {
 
     const removedNode = this._tail;
 
-    if (this._head ===  this._tail) {
+    if (this._head === this._tail) {
       this._tail = null;
       this._head = null;
     } else {
@@ -99,9 +99,7 @@ export default class DLList<T> {
 
   // Add a new node with the given value to the beginning of the linked list.
   unshift(val: T): DLList<T> {
-    console.log('unshift');
     const newNode = new DLNode<T>(val);
-
 
     if (this._head === null) {
       this._head = newNode;
@@ -243,5 +241,3 @@ export default class DLList<T> {
 
 }
 
-const list = new DLList().unshift(1).unshift(2);
-console.log(list.toArray());
