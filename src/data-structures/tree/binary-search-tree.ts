@@ -72,4 +72,77 @@ export default class BinarySearchTree {
 
     return false;
   }
+
+  breadthFirstSearch(): number[] {
+    const queue: (BSTNode| null)[] = [];
+    const visited: number[] = [];
+
+    if (this._root === null) return visited;
+
+    queue.push(this._root);
+
+    while (queue.length) {
+      const shift = queue.shift();
+
+      if (shift) {
+        visited.push(shift.val)
+
+        if (shift.left !== null) queue.push(shift.left)
+
+        if (shift.right !== null) queue.push(shift.right)
+      }
+    }
+
+    return visited;
+  }
+
+  depthFirstPreOrder(): number[] {
+    const traverse = (node: BSTNode | null, visited: number[] = []): number[] => {
+      if (node !== null) {
+        visited.push(node.val)
+
+        if (node.left) traverse(node.left, visited);
+
+        if (node.right) traverse(node.right, visited);
+      }
+
+      return visited;
+    }
+
+    return traverse(this._root);
+  }
+
+  depthFirstPostOrder(): number[] {
+    const traverse = (node: BSTNode | null, visited: number[] = []): number[] => {
+      if (node !== null) {
+
+        if (node.left) traverse(node.left, visited);
+
+        if (node.right) traverse(node.right, visited);
+
+        visited.push(node.val)
+      }
+
+      return visited;
+    }
+
+    return traverse(this._root);
+  }
+
+  depthFirstInOrder(): number[] {
+    const traverse = (node: BSTNode | null, visited: number[] = []): number[] => {
+      if (node !== null) {
+
+        if (node.left) traverse(node.left, visited);
+
+        visited.push(node.val)
+
+        if (node.right) traverse(node.right, visited);
+      }
+
+      return visited;
+    }
+
+    return traverse(this._root);
+  }
 }
