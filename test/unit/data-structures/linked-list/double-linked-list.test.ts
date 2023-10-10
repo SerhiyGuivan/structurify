@@ -1,10 +1,10 @@
-import SLList from '../src/SLList'; // Import the SLList class from your code
+import DoubleLinkedList from '../../../../src/data-structures/linked-list/double-linked-list';
 
-describe('SLList', () => {
-  let list: SLList<number>;
+describe('DoubleLinkedList', () => {
+  let list: DoubleLinkedList<number>;
 
   beforeEach(() => {
-    list = new SLList<number>();
+    list = new DoubleLinkedList<number>();
   });
 
   describe('push', () => {
@@ -118,34 +118,6 @@ describe('SLList', () => {
 
     it('should return an empty list as is', () => {
       expect(list.reverse().toArray()).toEqual([]);
-    });
-  });
-
-  describe('rotate', () => {
-    it('should rotate the order of nodes in the list to the right', () => {
-      list.push(1);
-      list.push(2);
-      list.push(3);
-      list.push(4);
-      list.push(5);
-      list.rotate(2);
-      expect(list.toArray()).toEqual([3, 4, 5, 1, 2]);
-    });
-
-    it('should rotate the order of nodes in the list to the left', () => {
-      list.push(1);
-      list.push(2);
-      list.push(3);
-      list.push(4);
-      list.push(5);
-      list.rotate(-1);
-      expect(list.toArray()).toEqual([5, 1, 2, 3, 4]);
-    });
-
-    it('should return the same list for a rotation of 0', () => {
-      list.push(1);
-      list.push(2);
-      expect(list.rotate(0).toArray()).toEqual([1, 2]);
     });
   });
 

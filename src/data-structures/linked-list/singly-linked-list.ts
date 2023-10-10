@@ -1,6 +1,6 @@
-class SLNode<T> {
+class SLLNode<T> {
   val: T;
-  next: SLNode<T> | null;
+  next: SLLNode<T> | null;
 
   constructor(val: T) {
     this.val = val;
@@ -8,32 +8,32 @@ class SLNode<T> {
   }
 }
 
-export default class SLList<T> {
-  private _head: SLNode<T> | null;
-  private _tail: SLNode<T> | null;
-  private _length: number;
+export default class SinglyLinkedList<T> {
+  private head: SLLNode<T> | null;
+  private tail: SLLNode<T> | null;
+  private length: number;
 
   constructor() {
-    this._head = null;
-    this._tail = null;
-    this._length = 0;
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
   }
 
-  get head():SLNode<T> | null {
-    return this._head;
+  get getHead():SLLNode<T> | null {
+    return this.head;
   }
 
-  get tail():SLNode<T> | null {
-    return  this._tail;
+  get getTail():SLLNode<T> | null {
+    return  this.tail;
   }
 
-  get length():number {
-    return this._length;
+  get getLength():number {
+    return this.length;
   }
 
   // Create a new instance of a SLList and populates it with the elements from the given array
-  static fromArray<T>(data: T[]):SLList<T> {
-    const list = new SLList<T>();
+  static fromArray<T>(data: T[]):SinglyLinkedList<T> {
+    const list = new SinglyLinkedList<T>();
 
     for (const item of data) {
       list.push(item);
@@ -43,81 +43,81 @@ export default class SLList<T> {
   }
 
   // Add a new node to the end of the linked list
-  push(val: T): SLList<T> {
-    const newNode = new SLNode(val);
+  push(val: T): SinglyLinkedList<T> {
+    const newNode = new SLLNode(val);
 
-    if (this._tail === null) {
-      this._head = newNode;
-      this._tail = newNode;
+    if (this.tail === null) {
+      this.head = newNode;
+      this.tail = newNode;
     } else {
-      this._tail!.next = newNode;
-      this._tail = newNode;
+      this.tail!.next = newNode;
+      this.tail = newNode;
     }
 
-    this._length++;
+    this.length++;
     return this;
   }
 
   // Remove and return the value of the last element in a linked list
   pop():T | undefined {
-    if (this._head === null) return undefined;
+    if (this.head === null) return undefined;
 
-    if (this._head === this._tail) {
-      const val = this._tail.val;
+    if (this.head === this.tail) {
+      const val = this.tail.val;
 
-      this._head = null;
-      this._tail = null;
-      this._length--;
+      this.head = null;
+      this.tail = null;
+      this.length--;
 
       return val;
     }
 
-    let currentNode = this._head;
+    let currentNode = this.head;
 
-    while (currentNode.next !== this._tail) {
+    while (currentNode.next !== this.tail) {
       currentNode = currentNode.next!;
     }
 
     currentNode.next = null;
 
-    const val = this._tail!.val;
+    const val = this.tail!.val;
 
-    this._tail = currentNode;
-    this._length--;
+    this.tail = currentNode;
+    this.length--;
 
     return val;
   }
 
   // Remove and return the value of the first node from the linked list.
   shift(): T | undefined {
-    if (this._head === null) return undefined;
+    if (this.head === null) return undefined;
 
-    const removedNode= this._head;
+    const removedNode= this.head;
 
-    if (this._head === this._tail) {
-      this._tail = null;
+    if (this.head === this.tail) {
+      this.tail = null;
     }
 
-    this._head = removedNode.next;
+    this.head = removedNode.next;
 
-    this._length--;
+    this.length--;
 
     return removedNode.val;
   }
 
   // Add a new node with the given value to the beginning of the linked list.
-  unshift(val: T): SLList<T> {
-    const newNode = new SLNode(val);
+  unshift(val: T): SinglyLinkedList<T> {
+    const newNode = new SLLNode(val);
 
-    if (this._head === null) {
-      this._head = newNode;
-      this._tail = this._head;
+    if (this.head === null) {
+      this.head = newNode;
+      this.tail = this.head;
     } else {
-      newNode.next = this._head;
-      this._head = newNode;
+      newNode.next = this.head;
+      this.head = newNode;
     }
 
-    this._length++;
+    this.length++;
     return this;
   }
 
@@ -130,10 +130,10 @@ export default class SLList<T> {
   }
 
   // Return the node at a specified index in a linked list
-  getNode(index: number): SLNode<T> | null {
-    if (index < 0 || index >= this._length) return null;
+  getNode(index: number): SLLNode<T> | null {
+    if (index < 0 || index >= this.length) return null;
 
-    let currentNode: SLNode<T> | null = this._head;
+    let currentNode: SLLNode<T> | null = this.head;
 
     for (let i: number = 0; i < index; i++) {
       currentNode = currentNode!.next;
@@ -144,7 +144,7 @@ export default class SLList<T> {
 
   // Update the value of the node at the specified index
   set(index: number, val: T): boolean {
-    const currentNode: SLNode<T> | null = this.getNode(index);
+    const currentNode: SLLNode<T> | null = this.getNode(index);
     if (currentNode !== null) {
       currentNode.val = val;
       return true;
@@ -154,13 +154,13 @@ export default class SLList<T> {
 
   // Insert a new node with the given value at the specified index
   insert(index: number, val: T): boolean {
-    if (index < 0 || index > this._length) return false;
+    if (index < 0 || index > this.length) return false;
 
-    if (index === this._length) return !!this.push(val);
+    if (index === this.length) return !!this.push(val);
 
     if (index === 0) return !!this.unshift(val);
 
-    const newNode = new SLNode(val);
+    const newNode = new SLLNode(val);
 
     const beforeNode = this.getNode(index - 1);
     const afterNode = beforeNode!.next;
@@ -168,18 +168,18 @@ export default class SLList<T> {
     beforeNode!.next = newNode;
     newNode.next = afterNode;
 
-    this._length++;
+    this.length++;
 
     return true;
   }
 
   // Remove and return the value at the specified index
   remove(index: number): T | undefined {
-    if (index < 0 || index >= this._length) return undefined;
+    if (index < 0 || index >= this.length) return undefined;
 
     if (index === 0) return this.shift();
 
-    if (index === this._length - 1) return this.pop();
+    if (index === this.length - 1) return this.pop();
 
     const beforeNode = this.getNode(index - 1);
 
@@ -188,7 +188,7 @@ export default class SLList<T> {
 
       beforeNode.next = removedNode!.next;
 
-      this._length--;
+      this.length--;
 
       return removedNode!.val;
     }
@@ -197,15 +197,15 @@ export default class SLList<T> {
   }
 
   // Reverse the order of nodes in the list
-  reverse(): SLList<T> {
-    [this._head, this._tail] = [this._tail, this._head];
+  reverse(): SinglyLinkedList<T> {
+    [this.head, this.tail] = [this.tail, this.head];
 
-    let currentNode = this._tail;
+    let currentNode = this.tail;
 
-    let nextNode: SLNode<T> | null;
-    let prevNode: SLNode<T> | null = null;
+    let nextNode: SLLNode<T> | null;
+    let prevNode: SLLNode<T> | null = null;
 
-    for (let i = 0; i < this._length; i++) {
+    for (let i = 0; i < this.length; i++) {
       nextNode = currentNode!.next;
       currentNode!.next = prevNode;
       prevNode = currentNode;
@@ -216,25 +216,25 @@ export default class SLList<T> {
   }
 
   // Rotate the order of nodes in the list
-  rotate(num: number): SLList<T> {
-    if (num % this._length === 0) return this;
+  rotate(num: number): SinglyLinkedList<T> {
+    if (num % this.length === 0) return this;
 
-    const rotation = num > 0 ? num % this._length : this._length + (num % this._length);
+    const rotation = num > 0 ? num % this.length : this.length + (num % this.length);
 
-    let currentNode = this._head;
-    let prevNode = this._head;
+    let currentNode = this.head;
+    let prevNode = this.head;
 
-    this._tail!.next = this._head;
+    this.tail!.next = this.head;
 
     for (let i = 0; i < rotation; i++) {
       prevNode = currentNode;
       currentNode = currentNode!.next;
     }
 
-    this._head = currentNode;
-    this._tail = prevNode;
+    this.head = currentNode;
+    this.tail = prevNode;
 
-    this._tail!.next = null;
+    this.tail!.next = null;
 
     return this;
   }
@@ -242,7 +242,7 @@ export default class SLList<T> {
   // Convert a linked list into an array
   toArray(): T[] {
     const arr: T[] = [];
-    let currentNode = this._head;
+    let currentNode = this.head;
 
     while (currentNode) {
       arr.push(currentNode.val);

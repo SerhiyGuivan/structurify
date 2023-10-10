@@ -1,7 +1,7 @@
-class DLNode<T> {
+class DLLNode<T> {
   val: T;
-  next: DLNode<T> | null;
-  prev: DLNode<T> | null;
+  next: DLLNode<T> | null;
+  prev: DLLNode<T> | null;
   constructor(val: T) {
     this.val = val;
     this.next = null;
@@ -9,31 +9,31 @@ class DLNode<T> {
   }
 }
 
-export default class DLList<T> {
-  private _head: DLNode<T> | null;
-  private _tail: DLNode<T> | null;
-  private _length: number;
+export default class DoubleLinkedList<T> {
+  private head: DLLNode<T> | null;
+  private tail: DLLNode<T> | null;
+  private length: number;
   constructor() {
-    this._head = null;
-    this._tail = null;
-    this._length = 0;
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
   }
 
-  get head():DLNode<T> | null {
-    return this._head;
+  get getHead():DLLNode<T> | null {
+    return this.head;
   }
 
-  get tail():DLNode<T> | null {
-    return  this._tail;
+  get getTail():DLLNode<T> | null {
+    return  this.tail;
   }
 
-  get length():number {
-    return this._length;
+  get getLength():number {
+    return this.length;
   }
 
   // Create a new instance of a DLList and populates it with the elements from the given array
-  static fromArray<T>(data: T[]):DLList<T> {
-    const list = new DLList<T>();
+  static fromArray<T>(data: T[]):DoubleLinkedList<T> {
+    const list = new DoubleLinkedList<T>();
 
     for (const item of data) {
       list.push(item);
@@ -43,75 +43,75 @@ export default class DLList<T> {
   }
 
   // Add a new node to the end of the linked list
-  push(val: T): DLList<T> {
-    const newNode = new DLNode<T>(val);
+  push(val: T): DoubleLinkedList<T> {
+    const newNode = new DLLNode<T>(val);
 
-    if (this._length === 0 || this._tail === null) {
-      this._head = newNode;
-      this._tail = newNode;
+    if (this.length === 0 || this.tail === null) {
+      this.head = newNode;
+      this.tail = newNode;
     } else {
-      this._tail.next = newNode;
-      newNode.prev = this._tail;
-      this._tail = newNode;
+      this.tail.next = newNode;
+      newNode.prev = this.tail;
+      this.tail = newNode;
     }
 
-    this._length++;
+    this.length++;
     return this;
   }
 
   // Remove and return the value of the last node in the linked list
   pop (): T | undefined {
-    if (this._tail === null) return undefined;
+    if (this.tail === null) return undefined;
 
-    const removedNode = this._tail;
+    const removedNode = this.tail;
 
-    if (this._head === this._tail) {
-      this._tail = null;
-      this._head = null;
+    if (this.head === this.tail) {
+      this.tail = null;
+      this.head = null;
     } else {
-      this._tail = removedNode.prev;
-      this._tail!.next = null;
+      this.tail = removedNode.prev;
+      this.tail!.next = null;
     }
 
-    this._length--;
+    this.length--;
 
     return removedNode.val;
   }
 
   // Remove and return the value of the first node from the linked list.
   shift (): T | undefined {
-    if (this._head === null) return undefined;
+    if (this.head === null) return undefined;
 
-    const removedNode = this._head;
+    const removedNode = this.head;
 
-    if (this._head === this._tail) {
-      this._tail = null;
-      this._head = null;
+    if (this.head === this.tail) {
+      this.tail = null;
+      this.head = null;
     } else {
-      this._head = removedNode.next;
-      this._head!.prev = null;
+      this.head = removedNode.next;
+      this.head!.prev = null;
     }
 
-    this._length--;
+    this.length--;
 
     return removedNode.val;
   }
 
   // Add a new node with the given value to the beginning of the linked list.
-  unshift(val: T): DLList<T> {
-    const newNode = new DLNode<T>(val);
+  unshift(val: T): DoubleLinkedList<T> {
+    const newNode = new DLLNode<T>(val);
 
-    if (this._head === null) {
-      this._head = newNode;
-      this._tail = newNode;
+    if (this.head === null) {
+      this.head = newNode;
+      this.tail = newNode;
     } else {
-      newNode.next = this._head;
-      this._head!.prev = newNode;
-      this._head = newNode;
+      newNode.next = this.head;
+      this.head!.prev = newNode;
+      this.head = newNode;
 
     }
 
-    this._length++;
+    this.length++;
 
     return this;
   }
@@ -126,22 +126,22 @@ export default class DLList<T> {
   }
 
   // Return the node at a specified index in a linked list
-  getNode(index: number): DLNode<T> | null {
-    if (index < 0 || index >= this._length) return null;
+  getNode(index: number): DLLNode<T> | null {
+    if (index < 0 || index >= this.length) return null;
 
-    let currentNode: DLNode<T> | null;
+    let currentNode: DLLNode<T> | null;
     let count: number;
 
     // Start from the closer end (head or tail) depending on the index
-    if (index <= this._length / 2) {
-      currentNode = this._head;
+    if (index <= this.length / 2) {
+      currentNode = this.head;
       count = index;
     } else {
-      currentNode = this._tail;
-      count = this._length - index - 1;
+      currentNode = this.tail;
+      count = this.length - index - 1;
     }
 
-    const direction = index <= this._length / 2 ? 'next' : 'prev';
+    const direction = index <= this.length / 2 ? 'next' : 'prev';
 
     for (let i = 0; i < count; i++) {
       currentNode = currentNode![direction];
@@ -165,13 +165,13 @@ export default class DLList<T> {
 
   // Insert a new node with the given value at the specified index
   insert (index: number, val: T): boolean {
-    if (index < 0 || index > this._length ) return false;
+    if (index < 0 || index > this.length ) return false;
 
     if (index === 0) return !!this.unshift(val);
 
-    if (index === this._length) return !!this.push(val);
+    if (index === this.length) return !!this.push(val);
 
-    const newNode = new DLNode(val);
+    const newNode = new DLLNode(val);
     const beforeNode = this.getNode(index - 1);
     const afterNode = beforeNode!.next;
 
@@ -181,16 +181,16 @@ export default class DLList<T> {
     newNode.prev = beforeNode;
     newNode.next = afterNode;
 
-    this._length++;
+    this.length++;
 
     return true;
   }
 
   // Remove and return the value at the specified index
   remove(index: number):T | undefined {
-    if (index < 0 || index >= this._length ) return undefined;
+    if (index < 0 || index >= this.length ) return undefined;
     if (index === 0) return this.shift();
-    if (index === this._length - 1) return this.pop();
+    if (index === this.length - 1) return this.pop();
 
     const removedNode = this.getNode(index);
 
@@ -201,7 +201,7 @@ export default class DLList<T> {
       beforeNode!.next = afterNode;
       afterNode!.prev =beforeNode;
 
-      this._length--;
+      this.length--;
 
       return removedNode.val;
     }
@@ -211,17 +211,17 @@ export default class DLList<T> {
   }
 
   // Reverse the order of nodes in the list
-  reverse():DLList<T> {
-    let currentNode = this._head;
-    let prevNode = this._head;
+  reverse():DoubleLinkedList<T> {
+    let currentNode = this.head;
+    let prevNode = this.head;
 
-    for (let i = 0; i < this._length; i++) {
+    for (let i = 0; i < this.length; i++) {
       prevNode = currentNode;
       currentNode = currentNode!.next;
       [prevNode!.prev, prevNode!.next] = [prevNode!.next, prevNode!.prev];
     }
 
-    [this._head, this._tail] = [this._tail, this._head];
+    [this.head, this.tail] = [this.tail, this.head];
 
     return this;
   }
@@ -229,7 +229,7 @@ export default class DLList<T> {
   // Convert a linked list into an array
   toArray(): T[] {
     const arr: T[] = [];
-    let currentNode = this._head;
+    let currentNode = this.head;
 
     while (currentNode) {
       arr.push(currentNode.val);
