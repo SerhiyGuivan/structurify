@@ -1,90 +1,81 @@
-class QueueNode<T> {
-  val: T;
-  next: QueueNode<T> | null;
+import SinglyLinkedList from '../linked-list/singly-linked-list';
 
-  constructor(val: T) {
-    this.val = val;
-    this.next = null;
-  }
-}
-
+/**
+ * Queue is a data structure that follows the First-In-First-Out (FIFO) principle.
+ * It uses a singly linked list internally for efficient enqueue and dequeue operations.
+ */
 export default class Queue<T> {
-  private first: QueueNode<T> | null;
-  private last: QueueNode<T> | null;
-  private size: number;
+  list: SinglyLinkedList<T>;
 
   constructor() {
-    this.first = null;
-    this.last = null;
-    this.size = 0;
+    // Initialize an empty queue using a singly linked list.
+    this.list = new SinglyLinkedList();
   }
 
-  // Getter method to retrieve the size of the queue
+  /**
+   * Gets the number of elements in the queue.
+   * Time Complexity: O(1)
+   * Space Complexity: O(1)
+   */
   get getSize(): number {
-    return this.size;
+    return this.list.getLength;
   }
 
-  // Getter method to check if the queue is empty
+  /**
+   * Checks if the queue is empty.
+   * Time Complexity: O(1)
+   * Space Complexity: O(1)
+   */
   get isEmpty(): boolean {
-    return this.size === 0;
+    return this.getSize === 0;
   }
 
-  // Adds an element to the rear of the queue
+  /**
+   * Adds an element to the rear of the queue.
+   * Time Complexity: O(1)
+   * Space Complexity: O(1)
+   */
   enqueue(val: T): number {
-    const newNode = new QueueNode(val);
-
-    if (this.last === null) {
-      // If the queue is empty, set both the front and rear to the new node
-      this.first = newNode;
-      this.last = newNode;
-    } else {
-      // Otherwise, add the new node to the rear and update the rear pointer
-      this.last.next = newNode;
-      this.last = newNode;
-    }
-
-    this.size++;
-
-    return this.size; // Return the new size of the queue
+    this.list.push(val);
+    return this.getSize;
   }
 
-  // Removes and returns the front element of the queue
+  /**
+   * Removes and returns the front element of the queue.
+   * Time Complexity: O(1)
+   * Space Complexity: O(1)
+   */
   dequeue(): T | undefined {
-    if (this.first === null) {
-      throw new Error("Queue underflow: Cannot dequeue from an empty queue.");
-    }
-
-    const removedNode = this.first;
-
-    if (this.first === this.last) {
-      // If there was only one element in the queue, update the rear pointer
-      this.last = null;
-    }
-
-    // Update the front pointer and decrease the size
-    this.first = removedNode.next;
-    this.size--;
-
-    return removedNode.val; // Return the value of the removed element
+    return this.list.shift();
   }
 
-  // Returns the value of the front element without removing it
+  /**
+   * Returns the value of the front element without removing it.
+   * Time Complexity: O(1)
+   * Space Complexity: O(1)
+   */
   peek(): T | undefined {
-    if (this.first === null) return undefined;
-    return this.first.val;
+    if (this.list.getHeadNode === null) return undefined;
+    return this.list.getHeadNode.val;
   }
 
-  // Removes all elements from the queue
+  /**
+   * Removes all elements from the queue.
+   * Time Complexity: O(1)
+   * Space Complexity: O(1)
+   */
   clear(): void {
-    this.first = null;   // Reset the front pointer
-    this.last = null;    // Reset the rear pointer
-    this.size = 0;       // Reset the size to 0
+    this.list.clear();
   }
 
-  // Converts the queue to an array, maintaining the order of elements
+  /**
+   * Converts the queue to an array, maintaining the order of elements.
+   * Time Complexity: O(n), where n is the number of elements in the queue.
+   * Space Complexity: O(n), as it creates a new array to hold the elements.
+   */
   toArray(): T[] {
     const result: T[] = [];
-    let current = this.first;
+    let current = this.list.getHeadNode;
     while (current !== null) {
       result.push(current.val); // Add each element to the result array
       current = current.next;
