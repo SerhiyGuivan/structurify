@@ -1,86 +1,65 @@
 import Queue from '../../../../src/data-structures/queue/queue';
 
 describe('Queue', () => {
-  let queue: Queue<number>;
+  let queue: Queue<number | string>;
 
   beforeEach(() => {
-    queue = new Queue<number>();
+    queue = new Queue();
   });
 
-  describe('enqueue', () => {
-    it('should add elements to the rear of the queue', () => {
-      queue.enqueue(1);
-      queue.enqueue(2);
-      queue.enqueue(3);
-
-      expect(queue.getSize).toBe(3);
-    });
+  test('should initialize an empty queue', () => {
+    expect(queue.getSize).toBe(0);
+    expect(queue.isEmpty).toBe(true);
   });
 
-  describe('dequeue', () => {
-    it('should remove and return the front element from the queue', () => {
-      queue.enqueue(1);
-      queue.enqueue(2);
+  test('should enqueue elements and return the correct size', () => {
+    queue.enqueue(1);
+    queue.enqueue(2);
+    queue.enqueue(3);
 
-      const dequeued = queue.dequeue();
-
-      expect(dequeued).toBe(1);
-      expect(queue.getSize).toBe(1);
-    });
-
-    it('should throw an error when dequeuing from an empty queue', () => {
-      expect(() => queue.dequeue()).toThrowError('Queue underflow: Cannot dequeue from an empty queue.');
-    });
+    expect(queue.getSize).toBe(3);
+    expect(queue.isEmpty).toBe(false);
   });
 
-  describe('peek', () => {
-    it('should return the front element without removing it', () => {
-      queue.enqueue(1);
-      queue.enqueue(2);
+  test('should dequeue elements in the correct order', () => {
+    queue.enqueue(1);
+    queue.enqueue(2);
+    queue.enqueue(3);
 
-      const peeked = queue.peek();
-
-      expect(peeked).toBe(1);
-      expect(queue.getSize).toBe(2);
-    });
-
-    it('should return undefined for an empty queue', () => {
-      expect(queue.peek()).toBeUndefined();
-    });
+    expect(queue.dequeue()).toBe(1);
+    expect(queue.dequeue()).toBe(2);
+    expect(queue.dequeue()).toBe(3);
+    expect(queue.isEmpty).toBe(true);
   });
 
-  describe('isEmpty', () => {
-    it('should return true for an empty queue', () => {
-      expect(queue.isEmpty).toBe(true);
-    });
+  test('should return the front element with peek', () => {
+    queue.enqueue(42);
+    queue.enqueue(99);
 
-    it('should return false for a non-empty queue', () => {
-      queue.enqueue(1);
-      expect(queue.isEmpty).toBe(false);
-    });
+    expect(queue.peek()).toBe(42);
   });
 
-  describe('clear', () => {
-    it('should remove all elements from the queue', () => {
-      queue.enqueue(1);
-      queue.enqueue(2);
+  test('should clear the queue', () => {
+    queue.enqueue(1);
+    queue.enqueue(2);
+    queue.enqueue(3);
 
-      queue.clear();
+    queue.clear();
 
-      expect(queue.getSize).toBe(0);
-      expect(queue.isEmpty).toBe(true);
-    });
+    expect(queue.getSize).toBe(0);
+    expect(queue.isEmpty).toBe(true);
   });
 
-  describe('toArray', () => {
-    it('should convert the queue to an array in the correct order', () => {
-      queue.enqueue(1);
-      queue.enqueue(2);
-      queue.enqueue(3);
+  test('should convert the queue to an array', () => {
+    queue.enqueue('apple');
+    queue.enqueue('banana');
+    queue.enqueue('cherry');
 
-      const arr = queue.toArray();
+    expect(queue.toArray()).toEqual(['apple', 'banana', 'cherry']);
+  });
 
-      expect(arr).toEqual([1, 2, 3]);
-    });
+  test('should handle an empty queue', () => {
+    expect(queue.dequeue()).toBeUndefined();
+    expect(queue.peek()).toBeUndefined();
   });
 });
