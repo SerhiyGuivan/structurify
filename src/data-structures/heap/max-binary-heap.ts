@@ -11,9 +11,14 @@ export default class MaxBinaryHeap {
     return [...this.values];
   }
 
+  // Getter to retrieve the size (number of elements) of the heap.
+  get getSize() {
+    return this.values.length;
+  }
+
   // Getter to check if the heap is empty
   get isEmpty() {
-    return this.values.length === 0;
+    return this.getSize === 0;
   }
 
   // Insert a new element into the heap
@@ -22,8 +27,8 @@ export default class MaxBinaryHeap {
     this.values.push(num);
 
     // If there's more than one element, adjust the heap to maintain the max-heap property
-    if (this.values.length > 1) {
-      let currentIndex = this.values.length - 1;
+    if (this.getSize > 1) {
+      let currentIndex = this.getSize - 1;
       let parentIndex = this.getParentIndex(currentIndex);
 
       while (this.isValidIndex(parentIndex) && this.values[currentIndex] > this.values[parentIndex]) {
@@ -70,7 +75,7 @@ export default class MaxBinaryHeap {
 
   // Helper method to check if an index is within the valid range
   private isValidIndex(index: number): boolean {
-    return index >= 0 && index < this.values.length;
+    return index >= 0 && index < this.getSize;
   }
 
   // Helper method to restructure the heap starting from a given index
