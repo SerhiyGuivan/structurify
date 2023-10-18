@@ -31,7 +31,7 @@ export default class MaxBinaryHeap {
       let currentIndex = this.getSize - 1;
       let parentIndex = this.getParentIndex(currentIndex);
 
-      while (this.isValidIndex(parentIndex) && this.values[currentIndex] > this.values[parentIndex]) {
+      while (currentIndex > 0 && this.values[currentIndex] > this.values[parentIndex]) {
         // Swap the current element with its parent
         [this.values[currentIndex], this.values[parentIndex]] = [this.values[parentIndex], this.values[currentIndex]];
 
