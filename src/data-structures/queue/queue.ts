@@ -17,8 +17,8 @@ export default class Queue<T> {
    * Time Complexity: O(1)
    * Space Complexity: O(1)
    */
-  get getSize(): number {
-    return this.list.getLength;
+  get size(): number {
+    return this.list.size;
   }
 
   /**
@@ -27,7 +27,7 @@ export default class Queue<T> {
    * Space Complexity: O(1)
    */
   get isEmpty(): boolean {
-    return this.getSize === 0;
+    return this.size === 0;
   }
 
   /**
@@ -37,7 +37,7 @@ export default class Queue<T> {
    */
   enqueue(val: T): number {
     this.list.push(val);
-    return this.getSize;
+    return this.size;
   }
 
   /**
@@ -74,12 +74,6 @@ export default class Queue<T> {
    * Space Complexity: O(n), as it creates a new array to hold the elements.
    */
   toArray(): T[] {
-    const result: T[] = [];
-    let current = this.list.getHeadNode;
-    while (current !== null) {
-      result.push(current.val); // Add each element to the result array
-      current = current.next;
-    }
-    return result;
+    return this.list.toArray();
   }
 }

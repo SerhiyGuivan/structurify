@@ -8,7 +8,7 @@ describe('Queue', () => {
   });
 
   test('should initialize an empty queue', () => {
-    expect(queue.getSize).toBe(0);
+    expect(queue.size).toBe(0);
     expect(queue.isEmpty).toBe(true);
   });
 
@@ -17,7 +17,7 @@ describe('Queue', () => {
     queue.enqueue(2);
     queue.enqueue(3);
 
-    expect(queue.getSize).toBe(3);
+    expect(queue.size).toBe(3);
     expect(queue.isEmpty).toBe(false);
   });
 
@@ -46,7 +46,7 @@ describe('Queue', () => {
 
     queue.clear();
 
-    expect(queue.getSize).toBe(0);
+    expect(queue.size).toBe(0);
     expect(queue.isEmpty).toBe(true);
   });
 
