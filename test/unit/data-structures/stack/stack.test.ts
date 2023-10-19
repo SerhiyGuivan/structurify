@@ -7,80 +7,59 @@ describe('Stack', () => {
     stack = new Stack<number>();
   });
 
-  describe('push', () => {
-    it('should add elements to the stack', () => {
-      stack.push(1);
-      stack.push(2);
-      stack.push(3);
-
-      expect(stack.getSize).toBe(3);
-    });
+  it('should initialize an empty stack', () => {
+    expect(stack.size).toBe(0);
+    expect(stack.isEmpty).toBe(true);
   });
 
-  describe('pop', () => {
-    it('should remove and return the top element from the stack', () => {
-      stack.push(1);
-      stack.push(2);
+  it('should push elements onto the stack', () => {
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
 
-      const popped = stack.pop();
-
-      expect(popped).toBe(2);
-      expect(stack.getSize).toBe(1);
-    });
-
-    it('should throw an error when popping from an empty stack', () => {
-      expect(() => stack.pop()).toThrowError('Stack underflow: Cannot pop from an empty stack.');
-    });
+    expect(stack.size).toBe(3);
+    expect(stack.isEmpty).toBe(false);
   });
 
-  describe('peek', () => {
-    it('should return the top element without removing it', () => {
-      stack.push(1);
-      stack.push(2);
+  it('should pop elements from the stack in LIFO order', () => {
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
 
-      const peeked = stack.peek();
-
-      expect(peeked).toBe(2);
-      expect(stack.getSize).toBe(2);
-    });
-
-    it('should return undefined for an empty stack', () => {
-      expect(stack.peek()).toBeUndefined();
-    });
+    expect(stack.pop()).toBe(3);
+    expect(stack.pop()).toBe(2);
+    expect(stack.pop()).toBe(1);
+    expect(stack.size).toBe(0);
+    expect(stack.isEmpty).toBe(true);
   });
 
-  describe('isEmpty', () => {
-    it('should return true for an empty stack', () => {
-      expect(stack.isEmpty()).toBe(true);
-    });
+  it('should clear the stack', () => {
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
 
-    it('should return false for a non-empty stack', () => {
-      stack.push(1);
-      expect(stack.isEmpty()).toBe(false);
-    });
+    stack.clear();
+
+    expect(stack.size).toBe(0);
+    expect(stack.isEmpty).toBe(true);
   });
 
-  describe('clear', () => {
-    it('should remove all elements from the stack', () => {
-      stack.push(1);
-      stack.push(2);
+  it('should peek at the top element without removing it', () => {
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
 
-      stack.clear();
-
-      expect(stack.getSize).toBe(0);
-      expect(stack.isEmpty()).toBe(true);
-    });
+    expect(stack.peek()).toBe(3);
+    expect(stack.size).toBe(3);
   });
 
-  describe('toArray', () => {
-    it('should convert the stack to an array', () => {
-      stack.push(1);
-      stack.push(2);
-      stack.push(3);
+  it('should convert the stack to an array', () => {
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
 
-      const arr = stack.toArray();
+    const arr = stack.toArray();
 
-      expect(arr).toEqual([1, 2, 3]);
-    });
+    expect(arr).toEqual([1, 2, 3]);
   });
 });

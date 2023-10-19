@@ -1,80 +1,76 @@
-class StackNode<T> {
-  val: T;
-  next: StackNode<T> | null;
+import SinglyLinkedList from '../linked-list/singly-linked-list';
 
-  constructor(val: T) {
-    this.val = val;
-    this.next = null;
-  }
-}
-
+/**
+ * Stack is a data structure that follows the Last-In-First-Out (LIFO) principle.
+ * It uses a singly linked list internally for efficient push and pop operations.
+ */
 export default class Stack<T> {
-  private topNode: StackNode<T> | null;
-  private size: number;
+  list: SinglyLinkedList<T>;
 
   constructor() {
-    this.topNode = null;
-    this.size = 0;
+    this.list = new SinglyLinkedList();
   }
 
-  get getSize(): number {
-    return this.size;
+  /**
+   * Gets the number of elements in the stack.
+   * Time Complexity: O(1)
+   * Space Complexity: O(1)
+   */
+  get size(): number {
+    return this.list.size;
   }
 
-  isEmpty(): boolean {
+  /**
+   * Checks if the stack is empty.
+   * Time Complexity: O(1)
+   * Space Complexity: O(1)
+   */
+  get isEmpty(): boolean {
     return this.size === 0;
   }
 
-  // Pushes a new element onto the stack.
+  /**
+   * Pushes an element onto the stack.
+   * Time Complexity: O(1)
+   * Space Complexity: O(1)
+   */
   push(val: T): void {
-    const newNode = new StackNode(val);
-
-    if (this.topNode === null) {
-      this.topNode = newNode;
-    } else {
-      newNode.next = this.topNode;
-      this.topNode = newNode;
-    }
-
-    this.size++;
+    this.list.unshift(val);
   }
 
-  // Removes and returns the top element from the stack.
-  // Throws an error if the stack is empty.
-  pop(): T {
-    if (this.topNode === null) {
-      throw new Error("Stack underflow: Cannot pop from an empty stack.");
-    }
-
-    const removedNode = this.topNode;
-
-    this.topNode = removedNode.next;
-
-    this.size--;
-
-    return removedNode.val;
+  /**
+   * Pops the top element from the stack and returns it.
+   * Time Complexity: O(1)
+   * Space Complexity: O(1)
+   */
+  pop(): T | undefined {
+    return this.list.shift();
   }
 
-  // Removes all elements from the stack.
+  /**
+   * Clears the stack.
+   * Time Complexity: O(1)
+   * Space Complexity: O(1)
+   */
   clear(): void {
-    this.topNode = null;
-    this.size = 0;
+    this.list.clear();
   }
 
-  // Returns the top element of the stack without removing it.
-  // Returns undefined if the stack is empty.
+  /**
+   * Peeks at the top element of the stack without removing it.
+   * Time Complexity: O(1)
+   * Space Complexity: O(1)
+   */
   peek(): T | undefined {
-    return this.topNode?.val;
+    return this.list.headNode?.val;
   }
 
-  // Converts the stack to an array with the top element as the first element in the array.
+  /**
+   * Converts the stack to an array.
+   * Time Complexity: O(n) where n is the size of the stack
+   * Space Complexity: O(n) where n is the size of the stack
+   */
   toArray(): T[] {
-    const arr: T[] = [];
-    let currentNode = this.topNode;
-    while (currentNode) {
-      arr.push(currentNode.val);
-      currentNode = currentNode.next;
-    }
-    return arr.reverse();
+    return this.list.toArray().reverse();
   }
 }
