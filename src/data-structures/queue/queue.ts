@@ -55,8 +55,8 @@ export default class Queue<T> {
    * Space Complexity: O(1)
    */
   peek(): T | undefined {
-    if (this.list.getHeadNode === null) return undefined;
-    return this.list.getHeadNode.val;
+    if (this.list.headNode === null) return undefined;
+    return this.list.headNode.val;
   }
 
   /**
