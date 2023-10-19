@@ -8,8 +8,8 @@ describe('SinglyLinkedList', () => {
   });
 
   it('should initialize an empty linked list', () => {
-    expect(list.getHeadNode).toBeNull();
-    expect(list.getTailNode).toBeNull();
+    expect(list.headNode).toBeNull();
+    expect(list.tailNode).toBeNull();
     expect(list.size).toBe(0);
   });
 

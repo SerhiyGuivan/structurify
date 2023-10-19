@@ -30,14 +30,14 @@ export default class SinglyLinkedList<T> {
   /**
    * Get the head node of the linked list.
    */
-  get getHeadNode(): SLLNode<T> | null {
+  get headNode(): SLLNode<T> | null {
     return this.head;
   }
 
   /**
    * Get the tail node of the linked list.
    */
-  get getTailNode(): SLLNode<T> | null {
+  get tailNode(): SLLNode<T> | null {
     return this.tail;
   }
 
