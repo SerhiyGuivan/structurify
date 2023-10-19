@@ -1,3 +1,6 @@
+/**
+ * A node in a Double Linked List (DLL) with a value 'val', a reference to the next node, and a reference to the previous node.
+ */
 class DLLNode<T> {
   val: T;
   next: DLLNode<T> | null;
@@ -9,29 +12,49 @@ class DLLNode<T> {
   }
 }
 
+/**
+ * A Double Linked List (DLL) data structure with methods for various operations.
+ */
 export default class DoubleLinkedList<T> {
   private head: DLLNode<T> | null;
   private tail: DLLNode<T> | null;
   private length: number;
+
   constructor() {
     this.head = null;
     this.tail = null;
     this.length = 0;
   }
 
-  get headNode():DLLNode<T> | null {
+  /**
+   * Gets the first node in the DLL.
+   */
+  get headNode(): DLLNode<T> | null {
     return this.head;
   }
 
-  get tailNode():DLLNode<T> | null {
+  /**
+   * Gets the last node in the DLL.
+   */
+  get tailNode(): DLLNode<T> | null {
     return this.tail;
   }
 
-  get size():number {
+  /**
+   * Gets the number of elements in the DLL.
+   * Time Complexity: O(1)
+   * Space Complexity: O(1)
+   */
+  get size(): number {
     return this.length;
   }
 
-  static fromArray<T>(data: T[]):DoubleLinkedList<T> {
+  /**
+   * Creates a new Double Linked List (DLL) from an array of elements.
+   * Time Complexity: O(n), where n is the length of the input array.
+   * Space Complexity: O(n)
+   */
+  static fromArray<T>(data: T[]): DoubleLinkedList<T> {
     const list = new DoubleLinkedList<T>();
 
     for (const item of data) {
@@ -41,6 +64,11 @@ export default class DoubleLinkedList<T> {
     return list;
   }
 
+  /**
+   * Appends an element to the end of the DLL.
+   * Time Complexity: O(1)
+   * Space Complexity: O(1)
+   */
   push(val: T): DoubleLinkedList<T> {
     const newNode = new DLLNode<T>(val);
 
@@ -57,7 +85,12 @@ export default class DoubleLinkedList<T> {
     return this;
   }
 
-  pop (): T | undefined {
+  /**
+   * Removes and returns the last element from the DLL.
+   * Time Complexity: O(1)
+   * Space Complexity: O(1)
+   */
+  pop(): T | undefined {
     if (this.tail === null) return undefined;
 
     const removedNode = this.tail;
@@ -75,7 +108,12 @@ export default class DoubleLinkedList<T> {
     return removedNode.val;
   }
 
-  shift (): T | undefined {
+  /**
+   * Removes and returns the first element from the DLL.
+   * Time Complexity: O(1)
+   * Space Complexity: O(1)
+   */
+  shift(): T | undefined {
     if (this.head === null) return undefined;
 
     const removedNode = this.head;
@@ -93,6 +131,11 @@ export default class DoubleLinkedList<T> {
     return removedNode.val;
   }
 
+  /**
+   * Prepends an element to the beginning of the DLL.
+   * Time Complexity: O(1)
+   * Space Complexity: O(1)
+   */
   unshift(val: T): DoubleLinkedList<T> {
     const newNode = new DLLNode<T>(val);
 
@@ -103,7 +146,6 @@ export default class DoubleLinkedList<T> {
       newNode.next = this.head;
       this.head!.prev = newNode;
       this.head = newNode;
-
     }
 
     this.length++;
@@ -111,6 +153,11 @@ export default class DoubleLinkedList<T> {
     return this;
   }
 
+  /**
+   * Gets the element at the specified index in the DLL.
+   * Time Complexity: O(n), where n is the index.
+   * Space Complexity: O(1)
+   */
   get(index: number): T | undefined {
     const currentNode = this.getNode(index);
 
@@ -119,6 +166,11 @@ export default class DoubleLinkedList<T> {
     return undefined;
   }
 
+  /**
+   * Gets the node at the specified index in the DLL.
+   * Time Complexity: O(n), where n is the index.
+   * Space Complexity: O(1)
+   */
   getNode(index: number): DLLNode<T> | null {
     if (index < 0 || index >= this.length) return null;
 
@@ -143,7 +195,12 @@ export default class DoubleLinkedList<T> {
     return currentNode;
   }
 
-  set (index: number, val: T): boolean {
+  /**
+   * Sets the element at the specified index in the DLL.
+   * Time Complexity: O(n), where n is the index.
+   * Space Complexity: O(1)
+   */
+  set(index: number, val: T): boolean {
     const currentNode = this.getNode(index)
 
     if (currentNode !== null) {
@@ -152,11 +209,15 @@ export default class DoubleLinkedList<T> {
     }
 
     return false;
-
   }
 
-  insert (index: number, val: T): boolean {
-    if (index < 0 || index > this.length ) return false;
+  /**
+   * Inserts an element at the specified index in the DLL.
+   * Time Complexity: O(n), where n is the index.
+   * Space Complexity: O(1)
+   */
+  insert(index: number, val: T): boolean {
+    if (index < 0 || index > this.length) return false;
     if (index === 0) return !!this.unshift(val);
     if (index === this.length) return !!this.push(val);
 
@@ -175,7 +236,12 @@ export default class DoubleLinkedList<T> {
     return true;
   }
 
-  remove(index: number):T | undefined {
+  /**
+   * Removes and returns the element at the specified index in the DLL.
+   * Time Complexity: O(n), where n is the index.
+   * Space Complexity: O(1)
+   */
+  remove(index: number): T | undefined {
     if (index < 0 || index >= this.length ) return undefined;
     if (index === 0) return this.shift();
     if (index === this.length - 1) return this.pop();
@@ -187,7 +253,7 @@ export default class DoubleLinkedList<T> {
       const afterNode = removedNode!.next;
 
       beforeNode!.next = afterNode;
-      afterNode!.prev =beforeNode;
+      afterNode!.prev = beforeNode;
 
       this.length--;
 
@@ -195,10 +261,14 @@ export default class DoubleLinkedList<T> {
     }
 
     return undefined;
-
   }
 
-  reverse():DoubleLinkedList<T> {
+  /**
+   * Reverses the order of elements in the DLL.
+   * Time Complexity: O(n)
+   * Space Complexity: O(1)
+   */
+  reverse(): DoubleLinkedList<T> {
     let currentNode = this.head;
     let prevNode = this.head;
 
@@ -213,6 +283,11 @@ export default class DoubleLinkedList<T> {
     return this;
   }
 
+  /**
+   * Converts the DLL to an array of elements.
+   * Time Complexity: O(n)
+   * Space Complexity: O(n)
+   */
   toArray(): T[] {
     const arr: T[] = [];
     let currentNode = this.head;
@@ -224,6 +299,4 @@ export default class DoubleLinkedList<T> {
 
     return arr;
   }
-
 }
-
