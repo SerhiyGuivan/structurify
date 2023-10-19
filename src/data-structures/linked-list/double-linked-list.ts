@@ -19,19 +19,18 @@ export default class DoubleLinkedList<T> {
     this.length = 0;
   }
 
-  get getHead():DLLNode<T> | null {
+  get headNode():DLLNode<T> | null {
     return this.head;
   }
 
-  get getTail():DLLNode<T> | null {
-    return  this.tail;
+  get tailNode():DLLNode<T> | null {
+    return this.tail;
   }
 
-  get getLength():number {
+  get size():number {
     return this.length;
   }
 
-  // Create a new instance of a DLList and populates it with the elements from the given array
   static fromArray<T>(data: T[]):DoubleLinkedList<T> {
     const list = new DoubleLinkedList<T>();
 
@@ -42,7 +41,6 @@ export default class DoubleLinkedList<T> {
     return list;
   }
 
-  // Add a new node to the end of the linked list
   push(val: T): DoubleLinkedList<T> {
     const newNode = new DLLNode<T>(val);
 
@@ -59,7 +57,6 @@ export default class DoubleLinkedList<T> {
     return this;
   }
 
-  // Remove and return the value of the last node in the linked list
   pop (): T | undefined {
     if (this.tail === null) return undefined;
 
@@ -78,7 +75,6 @@ export default class DoubleLinkedList<T> {
     return removedNode.val;
   }
 
-  // Remove and return the value of the first node from the linked list.
   shift (): T | undefined {
     if (this.head === null) return undefined;
 
@@ -97,7 +93,6 @@ export default class DoubleLinkedList<T> {
     return removedNode.val;
   }
 
-  // Add a new node with the given value to the beginning of the linked list.
   unshift(val: T): DoubleLinkedList<T> {
     const newNode = new DLLNode<T>(val);
 
@@ -116,7 +111,6 @@ export default class DoubleLinkedList<T> {
     return this;
   }
 
-  // Return the value at a specified index in a linked list
   get(index: number): T | undefined {
     const currentNode = this.getNode(index);
 
@@ -125,7 +119,6 @@ export default class DoubleLinkedList<T> {
     return undefined;
   }
 
-  // Return the node at a specified index in a linked list
   getNode(index: number): DLLNode<T> | null {
     if (index < 0 || index >= this.length) return null;
 
@@ -150,7 +143,6 @@ export default class DoubleLinkedList<T> {
     return currentNode;
   }
 
-  // Update the value of the node at the specified index
   set (index: number, val: T): boolean {
     const currentNode = this.getNode(index)
 
@@ -163,12 +155,9 @@ export default class DoubleLinkedList<T> {
 
   }
 
-  // Insert a new node with the given value at the specified index
   insert (index: number, val: T): boolean {
     if (index < 0 || index > this.length ) return false;
-
     if (index === 0) return !!this.unshift(val);
-
     if (index === this.length) return !!this.push(val);
 
     const newNode = new DLLNode(val);
@@ -186,7 +175,6 @@ export default class DoubleLinkedList<T> {
     return true;
   }
 
-  // Remove and return the value at the specified index
   remove(index: number):T | undefined {
     if (index < 0 || index >= this.length ) return undefined;
     if (index === 0) return this.shift();
@@ -210,7 +198,6 @@ export default class DoubleLinkedList<T> {
 
   }
 
-  // Reverse the order of nodes in the list
   reverse():DoubleLinkedList<T> {
     let currentNode = this.head;
     let prevNode = this.head;
@@ -226,7 +213,6 @@ export default class DoubleLinkedList<T> {
     return this;
   }
 
-  // Convert a linked list into an array
   toArray(): T[] {
     const arr: T[] = [];
     let currentNode = this.head;
