@@ -44,7 +44,7 @@ export default class SinglyLinkedList<T> {
   /**
    * Get the length of the linked list.
    */
-  get getLength(): number {
+  get size(): number {
     return this.length;
   }
 

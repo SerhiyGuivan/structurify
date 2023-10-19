@@ -10,7 +10,7 @@ describe('SinglyLinkedList', () => {
   it('should initialize an empty linked list', () => {
     expect(list.getHeadNode).toBeNull();
     expect(list.getTailNode).toBeNull();
-    expect(list.getLength).toBe(0);
+    expect(list.size).toBe(0);
   });
 
   it('should add elements to the end of the list using push', () => {
