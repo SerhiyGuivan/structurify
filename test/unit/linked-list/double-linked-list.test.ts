@@ -1,4 +1,4 @@
-import DoubleLinkedList from '../../../../src/data-structures/linked-list/double-linked-list';
+import DoubleLinkedList from '../../../src/linked-list/double-linked-list';
 
 describe('DoubleLinkedList', () => {
   let list: DoubleLinkedList<number>;
