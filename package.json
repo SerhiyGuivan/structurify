@@ -20,7 +20,8 @@
     "singly-linked-list",
     "double-linked-list",
     "stack",
-    "queue"
+    "queue",
+    "binary-tree"
   ],
   "scripts": {
     "build": "tsup",
