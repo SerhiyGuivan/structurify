@@ -256,7 +256,7 @@ describe('BinaryTree', () => {
     });
   });
 
-  describe('traversalBreadthFirst static method', () => {
+  describe('traversalBreadthFirst method', () => {
     it('should traverse the tree in a breadth-first manner and return the correct values', () => {
       const tree = new BinaryTree<number>()
       tree.insert(1, 1)
@@ -281,7 +281,7 @@ describe('BinaryTree', () => {
     });
   });
 
-  describe('traversalDepthFirstPreOrder static method', () => {
+  describe('traversalDepthFirstPreOrder method', () => {
     it('should perform a depth-first pre-order traversal and process each node value with the callback', () => {
       const tree = new BinaryTree<number>()
       tree.insert(1, 1)
@@ -306,7 +306,7 @@ describe('BinaryTree', () => {
     });
   });
 
-  describe('traversalDepthFirstInOrder static method', () => {
+  describe('traversalDepthFirstInOrder method', () => {
     it('should perform a depth-first in-order traversal and process each node value with the callback', () => {
       const tree = new BinaryTree<number>()
       tree.insert(1, 1)
@@ -328,6 +328,34 @@ describe('BinaryTree', () => {
       const result = tree.traversalDepthFirstInOrder( (value) => value);
 
       expect(result).toEqual([]);
+    });
+  });
+
+  describe('clear method', () => {
+    it('should clear the binary tree and set size to 0', () => {
+      const tree = new BinaryTree<number>();
+
+      tree.insert(1, 10);
+      tree.insert(2, 20);
+      tree.insert(3, 30);
+
+      expect(tree.size).toBe(3);
+
+      tree.clear(); // Clear the tree
+
+      expect(tree.size).toBe(0);
+      expect(tree.rootNode).toBeNull();
+    });
+
+    it('should handle clearing an empty tree', () => {
+      const tree = new BinaryTree<string>();
+
+      expect(tree.size).toBe(0);
+
+      tree.clear();
+
+      expect(tree.size).toBe(0);
+      expect(tree.rootNode).toBeNull();
     });
   });
 

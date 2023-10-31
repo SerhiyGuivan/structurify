@@ -322,4 +322,13 @@ export default class BinaryTree<T> {
 
     this.length--; // Decrement the size after deletion
   }
+
+  /**
+   * Empties the binary tree by removing all nodes and resetting the size to zero.
+   * Time complexity: O(1)
+   */
+  clear(): void {
+    this.root = null;
+    this.length = 0;
+  }
 }
