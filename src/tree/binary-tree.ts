@@ -17,6 +17,10 @@ export default class BinaryTree<T> {
     return this.length
   }
 
+  get isEmpty(): boolean {
+    return this.size === 0
+  }
+
   /**
    * Calculates the maximum number of nodes for a binary tree given its height.
    * Time complexity: O(1)
