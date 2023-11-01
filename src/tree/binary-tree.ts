@@ -1,6 +1,5 @@
 import { BinaryTreeHelper, TraversalFn, MatchFn } from './binary-tree-helper';
 import BTNode from './binary-tree-node';
-import Queue from '../queue/queue';
 
 export default class BinaryTree<T> {
   protected root: BTNode<T> | null
