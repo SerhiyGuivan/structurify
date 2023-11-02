@@ -4,6 +4,7 @@ import Queue from './queue/queue';
 import Stack from './stack/stack';
 import BTNode from './tree/binary-tree-node';
 import BinaryTree from './tree/binary-tree';
+import { BinaryTreeHelper } from './tree/binary-tree-helper';
 import BinarySearchTree from './tree/binary-search-tree';
 import MaxBinaryHeap from './heap/max-binary-heap';
 
@@ -14,6 +15,7 @@ export {
   Stack,
   BTNode,
   BinaryTree,
+  BinaryTreeHelper,
   BinarySearchTree,
   MaxBinaryHeap,
 }
