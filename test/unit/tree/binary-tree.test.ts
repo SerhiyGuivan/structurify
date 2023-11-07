@@ -28,8 +28,25 @@ describe('BinaryTree', () => {
     });
   });
 
-  describe('delete method', () => {
-    it('should delete a node from the binary tree and adjust size correctly', () => {
+  describe('find method', () => {
+    const tree = new BinaryTree<number | string>();
+    tree.insert(1, 'a')
+    tree.insert(2, 'b')
+    tree.insert(3, 500)
+
+    it('Find Node using BFS via find Method', () => {
+      const result = tree.find( (node) => node.val === 'a', 'bfs');
+      expect(result?.key).toBe(1);
+    });
+
+    it('Find Node using DFS via find Method', () => {
+      const result = tree.find( (node) => node.val === 500, 'dfs');
+      expect(result?.key).toBe(3);
+    });
+  });
+
+  describe('remove method', () => {
+    it('should remove a node from the binary tree and adjust size correctly', () => {
       const tree = new BinaryTree<number>();
 
       tree.insert(1, 10);
@@ -57,26 +74,35 @@ describe('BinaryTree', () => {
       expect(tree.size).toBe(1);
       expect(tree.bfs( node => node.val)).toEqual([20]);
 
-
       tree.remove(2);
 
       expect(tree.rootNode).toBe(null)
 
       expect(tree.size).toBe(0);
       expect(tree.bfs( node => node.val)).toEqual([]);
-
     });
 
-
-    it('should handle deleting from an empty tree', () => {
+    it('removing from an empty tree throws Error', () => {
       const tree = new BinaryTree<string>();
 
       expect(tree.size).toBe(0);
 
-      tree.remove(5);
+      expect(() => {
+        tree.remove(5);
+      }).toThrow('Tree is empty: Cannot remove from an empty tree')
 
-      expect(tree.size).toBe(0);
     });
+
+    it('removing from an binary tree when key is not found throws an error', () => {
+      const tree = new BinaryTree<number>();
+      tree.insert(1, 100)
+      tree.insert(2, 200)
+
+      expect(() => {
+        tree.remove( 5)
+      }).toThrow('Node with key 5 not found. Cannot remove node with key 5.')
+    });
+
   });
 
   describe('maxDepth  method', () => {
@@ -177,23 +203,6 @@ describe('BinaryTree', () => {
 
         expect(result).toEqual([]);
       });
-    });
-  });
-
-  describe('findNode  method', () => {
-    const tree = new BinaryTree<number | string>();
-    tree.insert(1, 'a')
-    tree.insert(2, 'b')
-    tree.insert(3, 500)
-
-    it('Find Node using BFS via findNode Method', () => {
-      const result = tree.findNode( (node) => node.val === 'a', 'bfs');
-      expect(result?.key).toBe(1);
-    });
-
-    it('Find Node using DFS via findNode Method', () => {
-      const result = tree.findNode( (node) => node.val === 500, 'dfs');
-      expect(result?.key).toBe(3);
     });
   });
 
