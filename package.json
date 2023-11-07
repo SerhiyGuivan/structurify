@@ -21,7 +21,8 @@
     "double-linked-list",
     "stack",
     "queue",
-    "binary-tree"
+    "binary-tree",
+    "binary-search-tree"
   ],
   "scripts": {
     "build": "tsup",
