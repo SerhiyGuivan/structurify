@@ -98,7 +98,6 @@ Binary Tree is a tree data structure in which each node has at most two children
 - `insert(key: number, val: T): void`: Inserts a new node into the binary tree using level-order (BFS) traversal for insertion.
 - `find(fn: MatchFn<T>, type: 'dfs' | 'bfs' = 'dfs'): BTNode<T> | null`: Finds a node in the binary tree using a matching function and search type.
 - `remove(key: number): void`: Deletes the node with the given key from the binary tree by replacing it with the bottom-most and rightmost node.
-- 
 - `maxDepth(): number`: Calculates the maximum depth of the tree.
 - `bfs(fn: TraversalFn<T>): ReturnType<TraversalFn<T>>[]`: Performs a breadth-first traversal.
 - `dfsPreOrder(fn: TraversalFn<T>): ReturnType<TraversalFn<T>>[]`: Performs a depth-first pre-order traversal.
@@ -121,7 +120,6 @@ Binary Search Tree is a rooted binary tree data structure with the key of each i
 #### Methods:
 - `insert(key: number, val: T): void`: Inserts a node into the binary search tree based on the specified comparator.
 - `get(key: number): BTNode<T> | null`: Retrieves a node from the tree using the given key.
-
 - `maxDepth(): number`: Calculates the maximum depth of the tree.
 - `bfs(fn: TraversalFn<T>): ReturnType<TraversalFn<T>>[]`: Performs a breadth-first traversal.
 - `dfsPreOrder(fn: TraversalFn<T>): ReturnType<TraversalFn<T>>[]`: Performs a depth-first pre-order traversal.
