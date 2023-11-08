@@ -9,8 +9,36 @@ This repository contains various data structures implemented in TypeScript, incl
 - [Binary Search Tree](#binary-search-tree)
 
 ## Singly Linked List
+
+A **singly linked list** is a special type of linked list in which each node has only one link that points to the next node in the linked list.
+
+![](assets\SInglyLinkedList.drawio.png)
+
+### Characteristics
+
+- **Unidirectional Linkage**: Nodes point to the next node, enabling traversal in a single direction.
+- **Dynamic Size**: Supports dynamic addition and removal of elements.
+- **Memory Efficiency**: Requires less memory per node as it contains a single pointer to the next node.
+- **No Bidirectional Traversal**: Only allows traversal from the head to the end; backward traversal requires reiterating the list.
+- **No Random Access**: Accessing elements by index involves traversing the list, resulting in O(n) time complexity.
+- **Simple Implementation**: Each node typically contains data and a reference to the next node.
+- **Insertion and Deletion**: Efficient at the beginning of the list due to direct pointer adjustments.
+
+### Applications of Singly Linked List:
+
+Here are some applications of a singly linked list, including:
+
+- **Implementing stacks and queues:** Singly linked lists can be used to implement stacks and queues. In a stack, elements are added and removed from one end of the list, while in a queue, elements are added at one end and removed from the other end of the list.
+- **Navigation in web browsers:** Singly linked lists can be used to store the browsing history in web browsers. Each URL visited is stored as a node in the list, with the next pointer pointing to the next URL visited.
+- **Implementing symbol tables:** Symbol tables are data structures used to store key-value pairs. Singly-linked lists can be used to implement symbol tables, with each node storing a key-value pair.
+- **Hash table chaining:** Hash table chaining is a technique used to handle collisions in hash tables. It involves using a singly linked list to store all the keys that hash to the same index in the table.
+
 ### `SinglyLinkedList<T>`
-A singly linked list is a linear data structure where each element points to the next one in the sequence. It allows for efficient insertion and deletion operations.
+
+#### Properties:
+- `private head: SLLNode<T> | null`: Represents the head node of the linked list.
+- `private tail: SLLNode<T> | null`: Represents the tail node of the linked list.
+- `private length: number`: Represents the count of nodes in the linked list.
 
 #### Getters:
 - `headNode: SLLNode<T> | null`: Gets the head node of the linked list.
@@ -33,28 +61,97 @@ A singly linked list is a linear data structure where each element points to the
 - `rotate(num: number): SinglyLinkedList<T>`: Rotates the linked list by a specified number of positions.
 - `toArray(): T[]`: Converts the linked list into an array and returns it.
 
+### Time and Space complexity
+
+| Method               | Time Complexity             | Space Complexity |
+|----------------------|-----------------------------|------------------|
+| `size`               | O(1)                        | O(1)             |
+| `fromArray`          | O(n) (n is length of array) | O(n)             |
+| `push(val)`          | O(1)                        | O(1)             |
+| `pop()`              | O(n)                        | O(1)             |
+| `shift()`            | O(1)                        | O(1)             |
+| `unshift(val)`       | O(1)                        | O(1)             |
+| `get(index)`         | O(n) (n is index)           | O(1)             |
+| `getNode(index)`     | O(n) (n is index)           | O(1)             |
+| `set(index, val)`    | O(n) (n is index)           | O(1)             |
+| `insert(index, val)` | O(n) (n is index)           | O(1)             |
+| `remove(index)`      | O(n) (n is index)           | O(1)             |
+| `clear()`            | O(1)                        | O(1)             |
+| `reverse()`          | O(n)                        | O(1)             |
+| `rotate(num)`        | O(n)                        | O(1)             |
+| `toArray()`          | O(n)                        | O(n)             |
+
+
 ## Doubly Linked List
+
+A **Doubly linked list** is a special type of linked list in which each node contains references to both the next and previous nodes. This allows for traversal in both forward and backward directions, but it requires additional memory for the backward reference.
+
+![](assets\DoubleLinkedList.drawio.png)
+
+## Characteristics of a Doubly Linked List
+
+- **Double Linkage**: Each node has pointers to both the previous and next nodes.
+- **Bidirectional Traversal**: Enables easy movement in both forward and backward directions.
+- **Dynamic Size**: Supports dynamic addition and removal of elements.
+- **Memory Overhead**: Requires additional memory for storing two pointers per node.
+- **Complexity**: Accessing elements by index is less efficient compared to arrays (O(n)).
+- **Insertion and Deletion**: Operations are generally faster due to pointer adjustments instead of element shifting.
+- **No Random Access**: No direct access using indices, traversal necessary.
+- **Implementation**: Nodes contain data and two pointers (previous and next nodes).
+
+### Applications of Double Linked List:
+Here, are the uses of a doubly linked list:
+
+- It can be used to implement various other data structures like hash tables, stacks, binary trees, etc.
+- It can be used to implement functionalities such as undo/redo.
+- It can be used in any software which requires forward and backward navigation e.g. music players, web browsers to move between previously visited and current pages, etc.
+- Used by a thread scheduler in many operating systems to maintain a list of all running processes.
+- Can also be used in games e.g. representing a deck of cards.
+
 ### `DoubleLinkedList<T>`
-A doubly linked list is an extension of a singly linked list where each node keeps a reference to the previous and next nodes.
+
+#### Properties:
+- `private head: SLLNode<T> | null`: Represents the head node of the linked list.
+- `private tail: SLLNode<T> | null`: Represents the tail node of the linked list.
+- `private length: number`: Represents the count of nodes in the linked list.
 
 #### Getters:
-- `headNode: DLLNode<T> | null`: Gets the first node in the DLL.
-- `tailNode: DLLNode<T> | null`: Gets the last node in the DLL.
-- `size: number`: Gets the number of elements in the DLL.
+- `headNode: SLLNode<T> | null`: Gets the head node of the linked list.
+- `tailNode: SLLNode<T> | null`: Gets the tail node of the linked list.
+- `size: number`: Gets the length of the linked list.
 
 #### Methods:
-- `static fromArray<T>(data: T[]): DoubleLinkedList<T>`: Creates a new DLL from an array of elements.
-- `push(val: T): DoubleLinkedList<T>`: Appends an element to the end of the DLL.
-- `pop(): T | undefined`: Removes and returns the last element from the DLL.
-- `shift(): T | undefined`: Removes and returns the first element from the DLL.
-- `unshift(val: T): DoubleLinkedList<T>`: Prepends an element to the beginning of the DLL.
-- `get(index: number): T | undefined`: Gets the element at the specified index in the DLL.
-- `getNode(index: number): DLLNode<T> | null`: Gets the node at the specified index in the DLL.
-- `set(index: number, val: T): boolean`: Sets the element at the specified index in the DLL.
-- `insert(index: number, val: T): boolean`: Inserts an element at the specified index in the DLL.
-- `remove(index: number): T | undefined`: Removes and returns the element at the specified index in the DLL.
-- `reverse(): DoubleLinkedList<T>`: Reverses the order of elements in the DLL.
-- `toArray(): T[]`: Converts the DLL to an array of elements.
+- **`static fromArray<T>(data: T[]): DoubleLinkedList<T>`**: Creates a new Double Linked List from an array of elements.
+- **`push(val: T): DoubleLinkedList<T>`**: Appends an element to the end of the Double Linked List.
+- **`pop(): T | undefined`**: Removes and returns the last element from the Double Linked List.
+- **`shift(): T | undefined`**: Removes and returns the first element from the Double Linked List.
+- **`unshift(val: T): DoubleLinkedList<T>`**: Prepends an element to the beginning of the Double Linked List.
+- **`get(index: number): T | undefined`**: Retrieves the element at the specified index in the Double Linked List.
+- **`getNode(index: number): DLLNode<T> | null`**: Retrieves the node at the specified index in the Double Linked List.
+- **`set(index: number, val: T): boolean`**: Sets the element at the specified index in the Double Linked List.
+- **`insert(index: number, val: T): boolean`**: Inserts an element at the specified index in the Double Linked List.
+- **`remove(index: number): T | undefined`**: Removes and returns the element at the specified index in the Double Linked List.
+- **`reverse(): DoubleLinkedList<T>`**: Reverses the order of elements in the Double Linked List.
+- **`toArray(): T[]`**: Converts the Double Linked List to an array of elements.
+
+### Time and Space complexity
+
+| Method               | Time Complexity             | Space Complexity |
+|----------------------|-----------------------------|------------------|
+| `size`               | O(1)                        | O(1)             |
+| `fromArray`          | O(n) (n is length of array) | O(n)             |
+| `push(val)`          | O(1)                        | O(1)             |
+| `pop()`              | O(1)                        | O(1)             |
+| `shift()`            | O(1)                        | O(1)             |
+| `unshift(val)`       | O(1)                        | O(1)             |
+| `get(index)`         | O(n) (n is index)           | O(1)             |
+| `getNode(index)`     | O(n) (n is index)           | O(1)             |
+| `set(index, val)`    | O(n) (n is index)           | O(1)             |
+| `insert(index, val)` | O(n) (n is index)           | O(1)             |
+| `remove(index)`      | O(n) (n is index)           | O(1)             |
+| `reverse()`          | O(n)                        | O(1)             |
+| `toArray()`          | O(n)                        | O(n)             |
+
 
 ## Queue
 ### `Queue<T>`
