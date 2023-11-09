@@ -1,5 +1,4 @@
 # Structurify
-
 This repository contains various data structures implemented in TypeScript, including: 
 - [Singly Linked List](#singly-linked-list),
 - [Doubly Linked List](#doubly-linked-list),
@@ -9,13 +8,11 @@ This repository contains various data structures implemented in TypeScript, incl
 - [Binary Search Tree](#binary-search-tree)
 
 ## Singly Linked List
-
 A **singly linked list** is a special type of linked list in which each node has only one link that points to the next node in the linked list.
 
 ![](assets\SInglyLinkedList.drawio.png)
 
 ### Characteristics
-
 - **Unidirectional Linkage**: Nodes point to the next node, enabling traversal in a single direction.
 - **Dynamic Size**: Supports dynamic addition and removal of elements.
 - **Memory Efficiency**: Requires less memory per node as it contains a single pointer to the next node.
@@ -24,14 +21,10 @@ A **singly linked list** is a special type of linked list in which each node has
 - **Simple Implementation**: Each node typically contains data and a reference to the next node.
 - **Insertion and Deletion**: Efficient at the beginning of the list due to direct pointer adjustments.
 
-### Applications of Singly Linked List:
-
-Here are some applications of a singly linked list, including:
-
-- **Implementing stacks and queues:** Singly linked lists can be used to implement stacks and queues. In a stack, elements are added and removed from one end of the list, while in a queue, elements are added at one end and removed from the other end of the list.
-- **Navigation in web browsers:** Singly linked lists can be used to store the browsing history in web browsers. Each URL visited is stored as a node in the list, with the next pointer pointing to the next URL visited.
-- **Implementing symbol tables:** Symbol tables are data structures used to store key-value pairs. Singly-linked lists can be used to implement symbol tables, with each node storing a key-value pair.
-- **Hash table chaining:** Hash table chaining is a technique used to handle collisions in hash tables. It involves using a singly linked list to store all the keys that hash to the same index in the table.
+### Some Applications of Singly Linked List:
+- **Data Structure Implementations:** Singly Linked Lists are fundamental in implementing various data structures like **Stacks**, **Queues**, and **Deques** due to their efficient insertion and deletion at one end. They provide a simple and flexible structure for managing data in a sequential manner.
+- **Undo/Redo Functionality:** Singly Linked Lists are widely used in applications where a history of actions needs to be stored. Text editors or any application with undo/redo features can utilize a linked list to maintain a history of changes made, allowing users to navigate back and forth through the changes.
+- **Browser History Management:** Browsers often use linked lists to maintain the history of visited web pages, enabling users to navigate through their browsing history.
 
 ### `SinglyLinkedList<T>`
 
@@ -62,7 +55,6 @@ Here are some applications of a singly linked list, including:
 - `toArray(): T[]`: Converts the linked list into an array and returns it.
 
 ### Time and Space complexity
-
 | Method               | Time Complexity             | Space Complexity |
 |----------------------|-----------------------------|------------------|
 | `size`               | O(1)                        | O(1)             |
@@ -83,13 +75,11 @@ Here are some applications of a singly linked list, including:
 
 
 ## Doubly Linked List
-
 A **Doubly linked list** is a special type of linked list in which each node contains references to both the next and previous nodes. This allows for traversal in both forward and backward directions, but it requires additional memory for the backward reference.
 
 ![](assets\DoubleLinkedList.drawio.png)
 
 ## Characteristics of a Doubly Linked List
-
 - **Double Linkage**: Each node has pointers to both the previous and next nodes.
 - **Bidirectional Traversal**: Enables easy movement in both forward and backward directions.
 - **Dynamic Size**: Supports dynamic addition and removal of elements.
@@ -99,14 +89,11 @@ A **Doubly linked list** is a special type of linked list in which each node con
 - **No Random Access**: No direct access using indices, traversal necessary.
 - **Implementation**: Nodes contain data and two pointers (previous and next nodes).
 
-### Applications of Double Linked List:
-Here, are the uses of a doubly linked list:
-
-- It can be used to implement various other data structures like hash tables, stacks, binary trees, etc.
-- It can be used to implement functionalities such as undo/redo.
-- It can be used in any software which requires forward and backward navigation e.g. music players, web browsers to move between previously visited and current pages, etc.
-- Used by a thread scheduler in many operating systems to maintain a list of all running processes.
-- Can also be used in games e.g. representing a deck of cards.
+### Some applications of Double Linked List:
+- **Undo/Redo Functionality:** Double linked lists are useful for implementing undo and redo functionalities in applications, allowing users to navigate backward and forward through their actions efficiently.
+- **LRU Cache (Least Recently Used):** Implementing caching mechanisms in JavaScript can benefit from double linked lists. They efficiently manage an LRU cache, allowing for quick removal of the least recently used items and easy rearrangement of the most recently used items.
+- **Browser History Management:** Browsers utilize double linked lists to manage the history of visited web pages, enabling users to navigate backward and forward through their browsing history.
+- **Playlist Management in Media Players:** JavaScript applications dealing with music or video players can use double linked lists to manage playlists. The bidirectional traversal allows users to navigate back and forth through the playlist efficiently.
 
 ### `DoubleLinkedList<T>`
 
@@ -135,7 +122,6 @@ Here, are the uses of a doubly linked list:
 - **`toArray(): T[]`**: Converts the Double Linked List to an array of elements.
 
 ### Time and Space complexity
-
 | Method               | Time Complexity             | Space Complexity |
 |----------------------|-----------------------------|------------------|
 | `size`               | O(1)                        | O(1)             |
@@ -152,10 +138,19 @@ Here, are the uses of a doubly linked list:
 | `reverse()`          | O(n)                        | O(1)             |
 | `toArray()`          | O(n)                        | O(n)             |
 
-
 ## Queue
+A **Queue** is a linear data structure that follows the First-In-First-Out (FIFO) principle.
+
+### Applications of Queue:
+- **Job Scheduling:** Queues are used in job scheduling algorithms or task management systems. New tasks are added to the queue and processed in a first-in, first-out (FIFO) manner.
+- **Breadth-First Search (BFS):** The BFS algorithm uses a queue to traverse a graph level by level in graph theory and algorithms, exploring neighboring nodes before moving to the next level.
+- **Printer Job Management:** Printing queues in JavaScript systems use queues to manage and execute printing tasks in the order they were submitted.
+- **Message Queues in Event Handling:** Queues are utilized in event-driven systems to manage asynchronous messages or events, ensuring they are processed in the order they were received.
+
 ### `Queue<T>`
-A queue is a linear data structure that follows the First-In-First-Out (FIFO) principle.
+
+#### Properties:
+- `list: SinglyLinkedList<T>`: An instance of singly linked list used to manage the elements in the queue.
 
 #### Getters:
 - `size: number`: Gets the number of elements in the queue.
@@ -168,9 +163,30 @@ A queue is a linear data structure that follows the First-In-First-Out (FIFO) pr
 - `clear(): void`: Removes all elements from the queue.
 - `toArray(): T[]`: Converts the queue to an array, maintaining the order of elements.
 
+### Time and Space complexity
+| Method    | Time Complexity              | Space Complexity             |
+|-----------|------------------------------|------------------------------|
+| `size`    | O(1)                         | O(1)                         |
+| `isEmpty` | O(1)                         | O(1)                         |
+| `enqueue` | O(1)                         | O(1)                         |
+| `dequeue` | O(1)                         | O(1)                         |
+| `peek`    | O(1)                         | O(1)                         |
+| `clear`   | O(1)                         | O(1)                         |
+| `toArray` | O(n) (n: number of elements) | O(n) (n: number of elements) |
+
 ## Stack
-### `Stack<T>`
 A stack is a linear data structure that follows the Last-In-First-Out (LIFO) principle.
+
+### Applications of Queue:
+- **Function Call Stack:** The call stack manages function calls in JavaScript, with functions being added and removed in a last-in, first-out (LIFO) manner.
+- **Undo Functionality in Text Editors:** Stacks are used to implement the undo functionality in text editors or applications. User actions are pushed onto the stack, enabling easy reversal of actions in the reverse order they were performed.
+- **Browser History:** Browser history management involves using a stack. Visited pages are added to the stack, allowing users to navigate backward through visited pages.
+- **Balanced Parentheses Checking:** Stacks are useful in checking the balancing of parentheses in mathematical expressions, ensuring the proper order of opening and closing brackets or parentheses.
+
+### `Stack<T>`
+
+#### Properties:
+- `list: SinglyLinkedList<T>`: An instance of singly linked list used to manage the elements in the stack.
 
 #### Getters:
 - `size: number`: Gets the number of elements in the stack.
@@ -182,6 +198,17 @@ A stack is a linear data structure that follows the Last-In-First-Out (LIFO) pri
 - `clear(): void`: Clears the stack.
 - `peek(): T | undefined`: Peeks at the top element of the stack without removing it.
 - `toArray(): T[]`: Converts the stack to an array.
+
+### Time and Space complexity
+| Method    | Time Complexity             | Space Complexity            |
+|-----------|-----------------------------|-----------------------------|
+| `size`    | O(1)                        | O(1)                        |
+| `isEmpty` | O(1)                        | O(1)                        |
+| `push`    | O(1)                        | O(1)                        |
+| `pop`     | O(1)                        | O(1)                        |
+| `clear`   | O(1)                        | O(1)                        |
+| `peek`    | O(1)                        | O(1)                        |
+| `toArray` | O(n) (n: size of the stack) | O(n) (n: size of the stack) |
 
 ## Binary Tree
 ### `BinaryTree<T>`
