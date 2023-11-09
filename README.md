@@ -98,18 +98,18 @@ Similar to the Singly Linked List, but each node also has a reference to the pre
 - `size: number`: Gets the length of the linked list.
 
 #### Methods:
-- **`static fromArray<T>(data: T[]): DoubleLinkedList<T>`**: Creates a new Double Linked List from an array of elements.
-- **`push(val: T): DoubleLinkedList<T>`**: Appends an element to the end of the Double Linked List.
-- **`pop(): T | undefined`**: Removes and returns the last element from the Double Linked List.
-- **`shift(): T | undefined`**: Removes and returns the first element from the Double Linked List.
-- **`unshift(val: T): DoubleLinkedList<T>`**: Prepends an element to the beginning of the Double Linked List.
-- **`get(index: number): T | undefined`**: Retrieves the element at the specified index in the Double Linked List.
-- **`getNode(index: number): DLLNode<T> | null`**: Retrieves the node at the specified index in the Double Linked List.
-- **`set(index: number, val: T): boolean`**: Sets the element at the specified index in the Double Linked List.
-- **`insert(index: number, val: T): boolean`**: Inserts an element at the specified index in the Double Linked List.
-- **`remove(index: number): T | undefined`**: Removes and returns the element at the specified index in the Double Linked List.
-- **`reverse(): DoubleLinkedList<T>`**: Reverses the order of elements in the Double Linked List.
-- **`toArray(): T[]`**: Converts the Double Linked List to an array of elements.
+- `static fromArray<T>(data: T[]): DoubleLinkedList<T>`: Creates a new Double Linked List from an array of elements.
+- `push(val: T): DoubleLinkedList<T>`: Appends an element to the end of the Double Linked List.
+- `pop(): T | undefined`: Removes and returns the last element from the Double Linked List.
+- `shift(): T | undefined`: Removes and returns the first element from the Double Linked List.
+- `unshift(val: T): DoubleLinkedList<T>`: Prepends an element to the beginning of the Double Linked List.
+- `get(index: number): T | undefined`: Retrieves the element at the specified index in the Double Linked List.
+- `getNode(index: number): DLLNode<T> | null`: Retrieves the node at the specified index in the Double Linked List.
+- `set(index: number, val: T): boolean`: Sets the element at the specified index in the Double Linked List.
+- `insert(index: number, val: T): boolean`: Inserts an element at the specified index in the Double Linked List.
+- `remove(index: number): T | undefined`: Removes and returns the element at the specified index in the Double Linked List.
+- `reverse(): DoubleLinkedList<T>`: Reverses the order of elements in the Double Linked List.
+- `toArray(): T[]`: Converts the Double Linked List to an array of elements.
 
 ### How to use
 ```ts
