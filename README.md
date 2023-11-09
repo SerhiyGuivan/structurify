@@ -1,5 +1,5 @@
 # Structurify
-This repository contains various data structures implemented in TypeScript, including: 
+This JavaScript/TypeScript module is a collection of fundamental data structures used in computer science and software development. It includes implementations of various data structures that can be imported and used in your projects. 
 - [Singly Linked List](#singly-linked-list),
 - [Doubly Linked List](#doubly-linked-list),
 - [Queue](#queue),
@@ -8,23 +8,11 @@ This repository contains various data structures implemented in TypeScript, incl
 - [Binary Search Tree](#binary-search-tree)
 
 ## Singly Linked List
-A **singly linked list** is a special type of linked list in which each node has only one link that points to the next node in the linked list.
+A linear data structure where elements (nodes) are linked in a sequential manner, each pointing to the next node in the sequence.
+- Provides methods for insertion, deletion, traversal, and access.
+- Useful for scenarios requiring efficient insertion and deletion at the beginning or end of the list.
 
 ![](assets\SInglyLinkedList.drawio.png)
-
-### Characteristics
-- **Unidirectional Linkage**: Nodes point to the next node, enabling traversal in a single direction.
-- **Dynamic Size**: Supports dynamic addition and removal of elements.
-- **Memory Efficiency**: Requires less memory per node as it contains a single pointer to the next node.
-- **No Bidirectional Traversal**: Only allows traversal from the head to the end; backward traversal requires reiterating the list.
-- **No Random Access**: Accessing elements by index involves traversing the list, resulting in O(n) time complexity.
-- **Simple Implementation**: Each node typically contains data and a reference to the next node.
-- **Insertion and Deletion**: Efficient at the beginning of the list due to direct pointer adjustments.
-
-### Some Applications of Singly Linked List:
-- **Data Structure Implementations:** Singly Linked Lists are fundamental in implementing various data structures like **Stacks**, **Queues**, and **Deques** due to their efficient insertion and deletion at one end. They provide a simple and flexible structure for managing data in a sequential manner.
-- **Undo/Redo Functionality:** Singly Linked Lists are widely used in applications where a history of actions needs to be stored. Text editors or any application with undo/redo features can utilize a linked list to maintain a history of changes made, allowing users to navigate back and forth through the changes.
-- **Browser History Management:** Browsers often use linked lists to maintain the history of visited web pages, enabling users to navigate through their browsing history.
 
 ### `SinglyLinkedList<T>`
 
@@ -54,6 +42,22 @@ A **singly linked list** is a special type of linked list in which each node has
 - `rotate(num: number): SinglyLinkedList<T>`: Rotates the linked list by a specified number of positions.
 - `toArray(): T[]`: Converts the linked list into an array and returns it.
 
+### How to use
+```ts
+// Example usage
+import { SinglyLinkedList } from 'structurify';
+
+const myList = new SinglyLinkedList<number>();
+myList.push(5).push(10).push(15);
+
+console.log(myList.toArray()); // Output: [5, 10, 15]
+
+myList.pop();
+console.log(myList.toArray()); // Output: [5, 10]
+
+// Other operations such as shift, unshift, get, set, insert, remove, reverse, rotate, etc.
+```
+
 ### Time and Space complexity
 | Method               | Time Complexity             | Space Complexity |
 |----------------------|-----------------------------|------------------|
@@ -75,25 +79,11 @@ A **singly linked list** is a special type of linked list in which each node has
 
 
 ## Doubly Linked List
-A **Doubly linked list** is a special type of linked list in which each node contains references to both the next and previous nodes. This allows for traversal in both forward and backward directions, but it requires additional memory for the backward reference.
+Similar to the Singly Linked List, but each node also has a reference to the previous node, allowing bidirectional traversal.
+- Supports insertion, deletion, and traversal from both ends.
+- Well-suited for applications needing easy access to previous elements.
 
 ![](assets\DoubleLinkedList.drawio.png)
-
-## Characteristics of a Doubly Linked List
-- **Double Linkage**: Each node has pointers to both the previous and next nodes.
-- **Bidirectional Traversal**: Enables easy movement in both forward and backward directions.
-- **Dynamic Size**: Supports dynamic addition and removal of elements.
-- **Memory Overhead**: Requires additional memory for storing two pointers per node.
-- **Complexity**: Accessing elements by index is less efficient compared to arrays (O(n)).
-- **Insertion and Deletion**: Operations are generally faster due to pointer adjustments instead of element shifting.
-- **No Random Access**: No direct access using indices, traversal necessary.
-- **Implementation**: Nodes contain data and two pointers (previous and next nodes).
-
-### Some applications of Double Linked List:
-- **Undo/Redo Functionality:** Double linked lists are useful for implementing undo and redo functionalities in applications, allowing users to navigate backward and forward through their actions efficiently.
-- **LRU Cache (Least Recently Used):** Implementing caching mechanisms in JavaScript can benefit from double linked lists. They efficiently manage an LRU cache, allowing for quick removal of the least recently used items and easy rearrangement of the most recently used items.
-- **Browser History Management:** Browsers utilize double linked lists to manage the history of visited web pages, enabling users to navigate backward and forward through their browsing history.
-- **Playlist Management in Media Players:** JavaScript applications dealing with music or video players can use double linked lists to manage playlists. The bidirectional traversal allows users to navigate back and forth through the playlist efficiently.
 
 ### `DoubleLinkedList<T>`
 
@@ -121,6 +111,22 @@ A **Doubly linked list** is a special type of linked list in which each node con
 - **`reverse(): DoubleLinkedList<T>`**: Reverses the order of elements in the Double Linked List.
 - **`toArray(): T[]`**: Converts the Double Linked List to an array of elements.
 
+### How to use
+```ts
+import { DoubleLinkedList } from 'structurify';
+
+const dll = new DoubleLinkedList<number>();
+dll.push(5).push(10).push(15);
+
+console.log(dll.toArray()); // Output: [5, 10, 15]
+
+dll.reverse();
+console.log(dll.toArray()); // Output: [15, 10, 5]
+
+dll.remove(1);
+console.log(dll.toArray()); // Output: [15, 5]
+```
+
 ### Time and Space complexity
 | Method               | Time Complexity             | Space Complexity |
 |----------------------|-----------------------------|------------------|
@@ -139,13 +145,9 @@ A **Doubly linked list** is a special type of linked list in which each node con
 | `toArray()`          | O(n)                        | O(n)             |
 
 ## Queue
-A **Queue** is a linear data structure that follows the First-In-First-Out (FIFO) principle.
-
-### Applications of Queue:
-- **Job Scheduling:** Queues are used in job scheduling algorithms or task management systems. New tasks are added to the queue and processed in a first-in, first-out (FIFO) manner.
-- **Breadth-First Search (BFS):** The BFS algorithm uses a queue to traverse a graph level by level in graph theory and algorithms, exploring neighboring nodes before moving to the next level.
-- **Printer Job Management:** Printing queues in JavaScript systems use queues to manage and execute printing tasks in the order they were submitted.
-- **Message Queues in Event Handling:** Queues are utilized in event-driven systems to manage asynchronous messages or events, ensuring they are processed in the order they were received.
+Follows the First In, First Out (FIFO) principle, allowing data to be inserted from one end (rear) and removed from the other end (front).
+- Offers methods like enqueue (add to the rear) and dequeue (remove from the front).
+- Useful in scenarios where data needs to be processed in a sequential order.
 
 ### `Queue<T>`
 
@@ -163,6 +165,27 @@ A **Queue** is a linear data structure that follows the First-In-First-Out (FIFO
 - `clear(): void`: Removes all elements from the queue.
 - `toArray(): T[]`: Converts the queue to an array, maintaining the order of elements.
 
+### How to use
+```ts
+import { Queue } from 'structurify';
+
+const queue = new Queue<number>();
+
+queue.enqueue(5);
+queue.enqueue(10);
+queue.enqueue(15);
+
+console.log(queue.dequeue()); // Output: 5
+
+console.log(queue.peek()); // Output: 10
+
+console.log(queue.toArray()); // Output: [10, 15]
+
+queue.clear();
+
+console.log(queue.isEmpty); // Output: true
+```
+
 ### Time and Space complexity
 | Method    | Time Complexity              | Space Complexity             |
 |-----------|------------------------------|------------------------------|
@@ -175,13 +198,9 @@ A **Queue** is a linear data structure that follows the First-In-First-Out (FIFO
 | `toArray` | O(n) (n: number of elements) | O(n) (n: number of elements) |
 
 ## Stack
-A stack is a linear data structure that follows the Last-In-First-Out (LIFO) principle.
-
-### Applications of Queue:
-- **Function Call Stack:** The call stack manages function calls in JavaScript, with functions being added and removed in a last-in, first-out (LIFO) manner.
-- **Undo Functionality in Text Editors:** Stacks are used to implement the undo functionality in text editors or applications. User actions are pushed onto the stack, enabling easy reversal of actions in the reverse order they were performed.
-- **Browser History:** Browser history management involves using a stack. Visited pages are added to the stack, allowing users to navigate backward through visited pages.
-- **Balanced Parentheses Checking:** Stacks are useful in checking the balancing of parentheses in mathematical expressions, ensuring the proper order of opening and closing brackets or parentheses.
+Adheres to the Last In, First Out (LIFO) principle, enabling data to be added and removed from the same end (top).
+- Provides methods such as push (add to the top) and pop (remove from the top).
+- Commonly used in applications involving function calls, expression evaluation, and backtracking.
 
 ### `Stack<T>`
 
@@ -199,6 +218,27 @@ A stack is a linear data structure that follows the Last-In-First-Out (LIFO) pri
 - `peek(): T | undefined`: Peeks at the top element of the stack without removing it.
 - `toArray(): T[]`: Converts the stack to an array.
 
+### How to use
+```ts
+import { Stack } from 'structurify';
+
+const stack = new Stack<number>();
+
+stack.push(5);
+stack.push(10);
+stack.push(15);
+
+console.log(stack.pop()); // Output: 15
+
+console.log(stack.peek()); // Output: 10
+
+console.log(stack.toArray()); // Output: [10, 5]
+
+stack.clear();
+
+console.log(stack.isEmpty); // Output: true
+```
+
 ### Time and Space complexity
 | Method    | Time Complexity             | Space Complexity            |
 |-----------|-----------------------------|-----------------------------|
@@ -211,8 +251,11 @@ A stack is a linear data structure that follows the Last-In-First-Out (LIFO) pri
 | `toArray` | O(n) (n: size of the stack) | O(n) (n: size of the stack) |
 
 ## Binary Tree
+A hierarchical structure where each node has at most two children.
+- Supports various tree traversal methods like level-order, in-order, pre-order, and post-order.
+- Crucial for applications requiring hierarchical data representation.
+
 ### `BinaryTree<T>`
-Binary Tree is a tree data structure in which each node has at most two children, referred to as the left child and the right child.
 
 #### Getters
 - `rootNode`: Accesses the root node of the binary tree.
@@ -230,9 +273,11 @@ Binary Tree is a tree data structure in which each node has at most two children
 - `clear(): void`: Empties the binary tree by removing all nodes.
 
 ## Binary Search Tree
-###  `BinarySearchTree<T>`
+A specialized form of a binary tree where the left child is less than the parent and the right child is greater.
+- Provides efficient searching and sorting capabilities.
+- Ideal for tasks involving ordered data and quick search operations.
 
-Binary Search Tree is a rooted binary tree data structure with the key of each internal node being greater than all the keys in the respective node's left subtree and less than the ones in its right subtree.
+###  `BinarySearchTree<T>`
 
 #### Constructor
 - `constructor(comparator: BSTComparator)`: Initializes the BinarySearchTree with the specified comparator.
@@ -250,17 +295,3 @@ Binary Search Tree is a rooted binary tree data structure with the key of each i
 - `dfsPostOrder(fn: TraversalFn<T>): ReturnType<TraversalFn<T>>[]`: Performs a depth-first post-order traversal.
 - `dfsInOrder(fn: TraversalFn<T>): ReturnType<TraversalFn<T>>[]`: Performs a depth-first in-order traversal.
 - `clear(): void`: Empties the binary tree by removing all nodes.
-
-## How to Use
-Each class can be used independently by creating an instance of the class and utilizing its available methods. Additionally, the classes support TypeScript for static type checking and are generic, allowing them to hold various data types.
-
-### Example:
-```typescript
-import { SinglyLinkedList } from 'structurify';
-
-const list = new SinglyLinkedList<number>();
-list.push(10);
-list.push(20);
-list.push(30);
-
-console.log(list.toArray()); // Output: [10, 20, 30]
