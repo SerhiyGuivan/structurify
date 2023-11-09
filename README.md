@@ -12,7 +12,7 @@ A linear data structure where elements (nodes) are linked in a sequential manner
 - Provides methods for insertion, deletion, traversal, and access.
 - Useful for scenarios requiring efficient insertion and deletion at the beginning or end of the list.
 
-![](assets\SInglyLinkedList.drawio.png)
+![](assets/SInglyLinkedList.drawio.png)
 
 ### `SinglyLinkedList<T>`
 
@@ -83,7 +83,7 @@ Similar to the Singly Linked List, but each node also has a reference to the pre
 - Supports insertion, deletion, and traversal from both ends.
 - Well-suited for applications needing easy access to previous elements.
 
-![](assets\DoubleLinkedList.drawio.png)
+![](assets/DoubleLinkedList.drawio.png)
 
 ### `DoubleLinkedList<T>`
 
