@@ -1,57 +1,34 @@
-/**
- * Define a generic class SLLNode<T> to represent a node in a singly linked list.
- * It contains a value 'val' of generic type T and a reference to the next node or null.
- */
-class SLLNode<T> {
-  val: T;
-  next: SLLNode<T> | null;
+import { BaseLinkedList, LLNode } from './base-linked-list';
 
+/**
+ * Represents a node in a singly linked list.
+ * @template T - Type of the value held by the node.
+ */
+export class SLLNode<T> extends LLNode<T, SLLNode<T>>{
+  val: T
+  next: SLLNode<T>
   constructor(val: T) {
+    super()
     this.val = val;
-    this.next = null;
+    this.next = null
   }
 }
 
 /**
- * Define a generic class SinglyLinkedList<T> to represent a singly linked list.
- * It contains a reference to the head, tail, and the length of the list.
+ * Represents a singly linked list.
+ * @template T - Type of the value held by the list.
  */
-export default class SinglyLinkedList<T> {
-  private head: SLLNode<T> | null;
-  private tail: SLLNode<T> | null;
-  private length: number;
-
+export default class SinglyLinkedList<T> extends BaseLinkedList<T, SLLNode<T>> {
   constructor() {
-    this.head = null;
-    this.tail = null;
-    this.length = 0;
+    super()
   }
 
   /**
-   * Get the head node of the linked list.
-   */
-  get headNode(): SLLNode<T> | null {
-    return this.head;
-  }
-
-  /**
-   * Get the tail node of the linked list.
-   */
-  get tailNode(): SLLNode<T> | null {
-    return this.tail;
-  }
-
-  /**
-   * Get the length of the linked list.
-   */
-  get size(): number {
-    return this.length;
-  }
-
-  /**
-   * Static method to create a new singly linked list from an array of data.
-   * Time Complexity: O(n) where n is the length of the input 'data'.
-   * Space Complexity: O(n) to store the newly created list.
+   * Create a singly linked list from an array.
+   * @param {T[]} data - Array to create the list from.
+   * @returns {SinglyLinkedList<T>} - Singly linked list created from the array.
+   * @timecomplexity O(n) - Where 'n' is the length of the input array.
+   * @spacecomplexity O(n) - Additional space used is linearly proportional to the length of the input array.
    */
   static fromArray<T>(data: T[]): SinglyLinkedList<T> {
     const list = new SinglyLinkedList<T>();
@@ -64,122 +41,138 @@ export default class SinglyLinkedList<T> {
   }
 
   /**
-   * Add a new node with the given value to the end of the linked list.
-   * Time Complexity: O(1) as it appends to the end in constant time.
-   * Space Complexity: O(1) as it creates a single new node.
+   * Adds a new node with the provided value to the end of the list.
+   * @param {T} val - Value to be added to the list.
+   * @returns {SinglyLinkedList<T>} - Updated list.
+   * @timecomplexity O(1) - Constant time complexity as it only adds to the end of the list.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
   push(val: T): SinglyLinkedList<T> {
     const newNode = new SLLNode(val);
 
-    if (this.tail === null) {
-      this.head = newNode;
-      this.tail = newNode;
+    if (this.isEmpty) {
+      this._head = newNode;
+      this._tail = newNode;
     } else {
-      this.tail!.next = newNode;
-      this.tail = newNode;
+      this._tail!.next = newNode;
+      this._tail = newNode;
     }
 
-    this.length++;
+    this._length++;
+
     return this;
   }
 
   /**
-   * Remove and return the last node from the linked list.
-   * Time Complexity: O(n) in the worst case as it traverses the list to find the last node.
-   * Space Complexity: O(1) as it only removes a single node.
+   * Removes and returns the value from the end of the list.
+   * @returns {T | undefined} - Removed value.
+   * @timecomplexity O(n) - Linear time as it may traverse the list to find the last element.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
   pop(): T | undefined {
-    if (this.head === null) return undefined;
+    if (this._head === null) {
+      return undefined;
+    }
 
-    if (this.head === this.tail) {
-      const val = this.tail.val;
-
-      this.head = null;
-      this.tail = null;
-      this.length--;
+    if (this._head === this._tail) {
+      const val = this._tail.val;
+      this._head = null;
+      this._tail = null;
+      this._length--;
 
       return val;
     }
 
-    let currentNode = this.head;
+    let currentNode = this._head;
 
-    while (currentNode.next !== this.tail) {
+    while (currentNode.next !== this._tail) {
       currentNode = currentNode.next!;
     }
 
     currentNode.next = null;
-
-    const val = this.tail!.val;
-
-    this.tail = currentNode;
-    this.length--;
+    const val = this._tail!.val;
+    this._tail = currentNode;
+    this._length--;
 
     return val;
   }
 
   /**
-   * Remove and return the first node from the linked list.
-   * Time Complexity: O(1) as it removes the first node in constant time.
-   * Space Complexity: O(1) as it only removes a single node.
+   * Removes and returns the value from the beginning of the list.
+   * @returns {T | undefined} - Removed value.
+   * @timecomplexity O(1) - Constant time complexity as it only removes from the beginning of the list.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
   shift(): T | undefined {
-    if (this.head === null) return undefined;
-
-    const removedNode = this.head;
-
-    if (this.head === this.tail) {
-      this.tail = null;
+    if (this._head === null) {
+      return undefined;
     }
 
-    this.head = removedNode.next;
+    const removedNode = this._head;
 
-    this.length--;
+    if (this._head === this._tail) {
+      this._tail = null;
+    }
+
+    this._head = removedNode.next;
+    this._length--;
 
     return removedNode.val;
   }
 
   /**
-   * Add a new node with the given value to the beginning of the linked list.
-   * Time Complexity: O(1) as it prepends to the beginning in constant time.
-   * Space Complexity: O(1) as it creates a single new node.
+   * Adds a new node with the provided value to the beginning of the list.
+   * @param {T} val - Value to be added to the beginning of the list.
+   * @returns {SinglyLinkedList<T>} - Updated list.
+   * @timecomplexity O(1) - Constant time complexity as it only adds to the beginning of the list.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
   unshift(val: T): SinglyLinkedList<T> {
     const newNode = new SLLNode(val);
 
-    if (this.head === null) {
-      this.head = newNode;
-      this.tail = this.head;
+    if (this.isEmpty) {
+      this._head = newNode;
+      this._tail = newNode;
     } else {
-      newNode.next = this.head;
-      this.head = newNode;
+      newNode.next = this._head;
+      this._head = newNode;
     }
 
-    this.length++;
+    this._length++;
+
     return this;
   }
 
   /**
-   * Get the value at a specific index in the linked list.
-   * Time Complexity: O(n) in the worst case as it may have to traverse the list.
-   * Space Complexity: O(1) as it only returns a single value.
+   * Get the value at the specified index.
+   * @param {number} index - Index of the value to retrieve.
+   * @returns {T | undefined} - Retrieved value.
+   * @timecomplexity O(n) - Linear time as it may traverse the list to find the node at the specified index.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
-  get(index: number): T | undefined {
-    const currentNode = this.getNode(index);
+  at(index: number): T | undefined {
+    const currentNode= this.nodeAt(index);
 
-    if (currentNode !== null) return currentNode.val;
+    if (currentNode !== null) {
+      return currentNode.val;
+    }
 
     return undefined;
   }
 
   /**
-   * Get the node at a specific index in the linked list.
-   * Time Complexity: O(n) in the worst case as it may have to traverse the list.
-   * Space Complexity: O(1) as it only returns a single node.
+   * Get the node at the specified index.
+   * @param {number} index - Index of the node to retrieve.
+   * @returns {SLLNode<T> | null} - Retrieved node or null if index is invalid.
+   * @timecomplexity O(n) - Linear time as it may traverse the list to find the node at the specified index.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
-  getNode(index: number): SLLNode<T> | null {
-    if (index < 0 || index >= this.length) return null;
+  nodeAt(index: number): SLLNode<T> | null {
+    if (!this.isValidIndex(index)) {
+      return null;
+    }
 
-    let currentNode: SLLNode<T> | null = this.head;
+    let currentNode = this._head;
 
     for (let i: number = 0; i < index; i++) {
       currentNode = currentNode!.next;
@@ -189,12 +182,15 @@ export default class SinglyLinkedList<T> {
   }
 
   /**
-   * Set the value at a specific index in the linked list.
-   * Time Complexity: O(n) in the worst case as it may have to traverse the list.
-   * Space Complexity: O(1) as it only updates a single value.
+   * Set the value at the specified index.
+   * @param {number} index - Index where the value needs to be set.
+   * @param {T} val - Value to be set.
+   * @returns {boolean} - Indicates if the value was successfully set or not.
+   * @timecomplexity O(n) - Linear time as it may traverse the list to find the node at the specified index.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
-  set(index: number, val: T): boolean {
-    const currentNode: SLLNode<T> | null = this.getNode(index);
+  setAt(index: number, val: T): boolean {
+    const currentNode = this.nodeAt(index);
 
     if (currentNode !== null) {
       currentNode.val = val;
@@ -205,82 +201,86 @@ export default class SinglyLinkedList<T> {
   }
 
   /**
-   * Insert a new node with the given value at a specific index in the linked list.
-   * Time Complexity: O(n) in the worst case as it may have to traverse the list.
-   * Space Complexity: O(1) as it only inserts a single new node.
+   * Insert a value at the specified index.
+   * @param {number} index - Index where the value needs to be inserted.
+   * @param {T} val - Value to be inserted.
+   * @returns {boolean} - Indicates if the value was successfully inserted or not.
+   * @timecomplexity O(n) - Linear time as it may traverse the list to find the node before the specified index.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
-  insert(index: number, val: T): boolean {
-    if (index < 0 || index > this.length) return false;
+  insertAt(index: number, val: T): boolean {
+    if (index < 0 || index > this._length) {
+      return false;
+    }
 
-    if (index === this.length) return !!this.push(val);
+    if (index === 0) {
+      return !!this.unshift(val);
+    }
 
-    if (index === 0) return !!this.unshift(val);
+    if (index === this._length) {
+      return !!this.push(val);
+    }
 
     const newNode = new SLLNode(val);
 
-    const beforeNode = this.getNode(index - 1);
+    const beforeNode = this.nodeAt(index - 1);
     const afterNode = beforeNode!.next;
 
     beforeNode!.next = newNode;
     newNode.next = afterNode;
 
-    this.length++;
+    this._length++;
 
     return true;
   }
 
   /**
-   * Remove and return a node at a specific index in the linked list.
-   * Time Complexity: O(n) in the worst case as it may have to traverse the list.
-   * Space Complexity: O(1) as it only removes a single node.
+   * Delete the value at the specified index.
+   * @param {number} index - Index where the value needs to be deleted.
+   * @returns {T | undefined} - Deleted value or undefined if index is invalid.
+   * @timecomplexity O(n) - Linear time as it may traverse the list to find the node before the specified index.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
-  remove(index: number): T | undefined {
-    if (index < 0 || index >= this.length) return undefined;
+  deleteAt(index: number): T | undefined {
+    if (!this.isValidIndex(index)) {
+      return undefined;
+    }
 
-    if (index === 0) return this.shift();
+    if (index === 0) {
+      return this.shift();
+    }
 
-    if (index === this.length - 1) return this.pop();
+    if (index === this._length - 1) {
+      return this.pop();
+    }
 
-    const beforeNode = this.getNode(index - 1);
+    const beforeNode = this.nodeAt(index - 1);
 
     if (beforeNode !== null) {
       const removedNode = beforeNode!.next;
-
       beforeNode.next = removedNode!.next;
-
-      this.length--;
+      this._length--;
 
       return removedNode!.val;
     }
 
     return undefined;
   }
-
   /**
-   * Clear the entire linked list by setting head, tail, and length to null/0.
-   * Time Complexity: O(1) as it clears the list in constant time.
-   * Space Complexity: O(1) as it only updates references.
-   */
-  clear() {
-    this.head = null;
-    this.tail = null;
-    this.length = 0;
-  }
-
-  /**
-   * Reverse the order of nodes in the linked list.
-   * Time Complexity: O(n) where n is the length of the list.
-   * Space Complexity: O(1) as it only involves swapping node references.
+   * Reverse the order of the nodes in the list.
+   * @returns {SinglyLinkedList<T>} - The reversed list.
+   * @timecomplexity O(n) - Linear time as it traverses through the entire list to reverse it.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
   reverse(): SinglyLinkedList<T> {
-    [this.head, this.tail] = [this.tail, this.head];
+    [this._head, this._tail] = [this._tail, this._head];
 
-    let currentNode = this.tail;
+    let currentNode = this._tail;
 
     let nextNode: SLLNode<T> | null;
     let prevNode: SLLNode<T> | null = null;
 
-    for (let i = 0; i < this.length; i++) {
+    for (let i = 0; i < this._length; i++) {
       nextNode = currentNode!.next;
       currentNode!.next = prevNode;
       prevNode = currentNode;
@@ -291,41 +291,44 @@ export default class SinglyLinkedList<T> {
   }
 
   /**
-   * Rotate the linked list by a specified number of positions.
-   * Time Complexity: O(n) where n is the length of the list.
-   * Space Complexity: O(1) as it only involves updating node references.
+   * Rotate the list by the specified number of positions.
+   * @param {number} n - Number of positions to rotate the list.
+   * @returns {SinglyLinkedList<T>} - The rotated list.
+   * @timecomplexity O(n) - Linear time as it may traverse through the list to perform rotations.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
-  rotate(num: number): SinglyLinkedList<T> {
-    if (num % this.length === 0) return this;
+  rotateByN(n: number): SinglyLinkedList<T> {
+    if (n % this._length === 0) return this;
 
-    const rotation = num > 0 ? num % this.length : this.length + (num % this.length);
+    const rotation = n > 0 ? n % this._length : this._length + (n % this._length);
 
-    let currentNode = this.head;
-    let prevNode = this.head;
+    let currentNode = this._head;
+    let prevNode = this._head;
 
-    this.tail!.next = this.head;
+    this._tail!.next = this._head;
 
     for (let i = 0; i < rotation; i++) {
       prevNode = currentNode;
       currentNode = currentNode!.next;
     }
 
-    this.head = currentNode;
-    this.tail = prevNode;
+    this._head = currentNode;
+    this._tail = prevNode;
 
-    this.tail!.next = null;
+    this._tail!.next = null;
 
     return this;
   }
 
   /**
-   * Convert the linked list into an array and return it.
-   * Time Complexity: O(n) where n is the length of the list.
-   * Space Complexity: O(n) as it creates a new array to store the list values.
+   * Convert the list to an array.
+   * @returns {T[]} - An array containing the elements of the list in order.
+   * @timecomplexity O(n) - Linear time as it traverses through the entire list to build the array.
+   * @spacecomplexity O(n) - Additional space used is linearly proportional to the list's length.
    */
   toArray(): T[] {
     const arr: T[] = [];
-    let currentNode = this.head;
+    let currentNode = this._head;
 
     while (currentNode) {
       arr.push(currentNode.val);

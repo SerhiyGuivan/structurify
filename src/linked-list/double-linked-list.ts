@@ -1,61 +1,39 @@
+import { BaseLinkedList, LLNode } from './base-linked-list';
+
 /**
- * A node in a Double Linked List (DLL) with a value 'val', a reference to the next node, and a reference to the previous node.
+ * Represents a node in a doubly linked list.
+ * @template T - Type of the value held by the node.
  */
-class DLLNode<T> {
-  val: T;
-  next: DLLNode<T> | null;
+class DLLNode<T> extends LLNode<T, DLLNode<T>> {
+  val: T
   prev: DLLNode<T> | null;
+  next: DLLNode<T> | null;
   constructor(val: T) {
-    this.val = val;
-    this.next = null;
+    super()
+    this.val = val
     this.prev = null;
+    this.next = null;
   }
 }
 
 /**
- * A Double Linked List (DLL) data structure with methods for various operations.
+ * Represents a doubly linked list.
+ * @template T - Type of the value held by the list.
  */
-export default class DoubleLinkedList<T> {
-  private head: DLLNode<T> | null;
-  private tail: DLLNode<T> | null;
-  private length: number;
-
+export default class DoubleLinkedList<T> extends BaseLinkedList<T, DLLNode<T>>{
   constructor() {
-    this.head = null;
-    this.tail = null;
-    this.length = 0;
+    super();
   }
 
   /**
-   * Gets the first node in the DLL.
-   */
-  get headNode(): DLLNode<T> | null {
-    return this.head;
-  }
-
-  /**
-   * Gets the last node in the DLL.
-   */
-  get tailNode(): DLLNode<T> | null {
-    return this.tail;
-  }
-
-  /**
-   * Gets the number of elements in the DLL.
-   * Time Complexity: O(1)
-   * Space Complexity: O(1)
-   */
-  get size(): number {
-    return this.length;
-  }
-
-  /**
-   * Creates a new Double Linked List (DLL) from an array of elements.
-   * Time Complexity: O(n), where n is the length of the input array.
-   * Space Complexity: O(n)
+   * Creates a doubly linked list from an array.
+   * @param {T[]} data - Array to create the list from.
+   * @returns {DoubleLinkedList<T>} - Doubly linked list created from the array.
+   * @timecomplexity O(n) - Linear time as it iterates through each element in the input array to create the list.
+   * @spacecomplexity O(n) - Additional space used is directly proportional to the number of elements in the input array and the resulting list.
    */
   static fromArray<T>(data: T[]): DoubleLinkedList<T> {
-    const list = new DoubleLinkedList<T>();
+    const list= new DoubleLinkedList<T>();
 
     for (const item of data) {
       list.push(item);
@@ -65,128 +43,143 @@ export default class DoubleLinkedList<T> {
   }
 
   /**
-   * Appends an element to the end of the DLL.
-   * Time Complexity: O(1)
-   * Space Complexity: O(1)
+   * Adds a new node with the provided value to the end of the list.
+   * @param {T} val - Value to be added to the list.
+   * @returns {DoubleLinkedList<T>} - Updated list.
+   * @timecomplexity O(1) - Constant time as it adds an element at the end of the list.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
   push(val: T): DoubleLinkedList<T> {
     const newNode = new DLLNode<T>(val);
 
-    if (this.length === 0 || this.tail === null) {
-      this.head = newNode;
-      this.tail = newNode;
+    if (this.isEmpty) {
+      this._head = newNode;
+      this._tail = newNode;
     } else {
-      this.tail.next = newNode;
-      newNode.prev = this.tail;
-      this.tail = newNode;
+      this._tail.next = newNode;
+      newNode.prev = this._tail;
+      this._tail = newNode;
     }
 
-    this.length++;
+    this._length++;
     return this;
   }
 
   /**
-   * Removes and returns the last element from the DLL.
-   * Time Complexity: O(1)
-   * Space Complexity: O(1)
+   * Removes and returns the value from the end of the list.
+   * @returns {T | undefined} - Removed value or undefined if the list is empty.
+   * @timecomplexity O(1) - Constant time as it removes an element from the end of the list.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
   pop(): T | undefined {
-    if (this.tail === null) return undefined;
-
-    const removedNode = this.tail;
-
-    if (this.head === this.tail) {
-      this.tail = null;
-      this.head = null;
-    } else {
-      this.tail = removedNode.prev;
-      this.tail!.next = null;
+    if (this.isEmpty) {
+      return undefined;
     }
 
-    this.length--;
+    const removedNode= this._tail;
 
+    if (this._head === this._tail) {
+      this._tail = null;
+      this._head = null;
+    } else {
+      this._tail = removedNode.prev;
+      this._tail!.next = null;
+    }
+
+    this._length--;
     return removedNode.val;
   }
 
   /**
-   * Removes and returns the first element from the DLL.
-   * Time Complexity: O(1)
-   * Space Complexity: O(1)
+   * Removes and returns the value from the beginning of the list.
+   * @returns {T | undefined} - Removed value or undefined if the list is empty.
+   * @timecomplexity O(1) - Constant time as it removes an element from the beginning of the list.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
   shift(): T | undefined {
-    if (this.head === null) return undefined;
-
-    const removedNode = this.head;
-
-    if (this.head === this.tail) {
-      this.tail = null;
-      this.head = null;
-    } else {
-      this.head = removedNode.next;
-      this.head!.prev = null;
+    if (this.isEmpty) {
+      return undefined;
     }
 
-    this.length--;
+    const removedNode = this._head;
 
+    if (this._head === this._tail) {
+      this._tail = null;
+      this._head = null;
+    } else {
+      this._head = removedNode.next;
+      this._head!.prev = null;
+    }
+
+    this._length--;
     return removedNode.val;
   }
 
   /**
-   * Prepends an element to the beginning of the DLL.
-   * Time Complexity: O(1)
-   * Space Complexity: O(1)
+   * Adds a new node with the provided value to the beginning of the list.
+   * @param {T} val - Value to be added to the beginning of the list.
+   * @returns {DoubleLinkedList<T>} - Updated list.
+   * @timecomplexity O(1) - Constant time as it adds an element at the beginning of the list.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
   unshift(val: T): DoubleLinkedList<T> {
     const newNode = new DLLNode<T>(val);
 
-    if (this.head === null) {
-      this.head = newNode;
-      this.tail = newNode;
+    if (this.isEmpty) {
+      this._head = newNode;
+      this._tail = newNode;
     } else {
-      newNode.next = this.head;
-      this.head!.prev = newNode;
-      this.head = newNode;
+      newNode.next = this._head;
+      this._head!.prev = newNode;
+      this._head = newNode;
     }
 
-    this.length++;
-
+    this._length++;
     return this;
   }
 
   /**
-   * Gets the element at the specified index in the DLL.
-   * Time Complexity: O(n), where n is the index.
-   * Space Complexity: O(1)
+   * Returns the value at the specified index in the list.
+   * @param {number} index - Index to retrieve the value from.
+   * @returns {T | undefined} - Value at the index or undefined if the index is out of range.
+   * @timecomplexity O(n) - Linear time in the worst case, as it traverses the list to reach the desired index.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
-  get(index: number): T | undefined {
-    const currentNode = this.getNode(index);
+  at(index: number): T | undefined {
+    const currentNode = this.nodeAt(index);
 
-    if (currentNode !== null) return currentNode.val;
+    if (currentNode !== null) {
+      return currentNode.val;
+    }
 
     return undefined;
   }
 
   /**
-   * Gets the node at the specified index in the DLL.
-   * Time Complexity: O(n), where n is the index.
-   * Space Complexity: O(1)
+   * Retrieves the node at the specified index in the list.
+   * @param {number} index - Index to retrieve the node from.
+   * @returns {DLLNode<T> | null} - Node at the index or null if the index is out of range.
+   * @timecomplexity O(n) - Linear time in the worst case, as it traverses the list to reach the desired index.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
-  getNode(index: number): DLLNode<T> | null {
-    if (index < 0 || index >= this.length) return null;
+  nodeAt(index: number): DLLNode<T> | null {
+    if (index < 0 || index >= this._length) {
+      return null;
+    }
 
     let currentNode: DLLNode<T> | null;
     let count: number;
 
     // Start from the closer end (head or tail) depending on the index
-    if (index <= this.length / 2) {
-      currentNode = this.head;
+    if (index <= this._length / 2) {
+      currentNode = this._head;
       count = index;
     } else {
-      currentNode = this.tail;
-      count = this.length - index - 1;
+      currentNode = this._tail;
+      count = this._length - index - 1;
     }
 
-    const direction = index <= this.length / 2 ? 'next' : 'prev';
+    const direction = index <= this._length / 2 ? 'next' : 'prev';
 
     for (let i = 0; i < count; i++) {
       currentNode = currentNode![direction];
@@ -196,12 +189,15 @@ export default class DoubleLinkedList<T> {
   }
 
   /**
-   * Sets the element at the specified index in the DLL.
-   * Time Complexity: O(n), where n is the index.
-   * Space Complexity: O(1)
+   * Sets the value at the specified index in the list.
+   * @param {number} index - Index where the value should be set.
+   * @param {T} val - Value to set at the index.
+   * @returns {boolean} - True if the value is successfully set, false if the index is out of range.
+   * @timecomplexity O(n) - Linear time in the worst case, as it traverses the list to reach the desired index.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
-  set(index: number, val: T): boolean {
-    const currentNode = this.getNode(index)
+  setAt(index: number, val: T): boolean {
+    const currentNode = this.nodeAt(index)
 
     if (currentNode !== null) {
       currentNode.val = val;
@@ -212,17 +208,28 @@ export default class DoubleLinkedList<T> {
   }
 
   /**
-   * Inserts an element at the specified index in the DLL.
-   * Time Complexity: O(n), where n is the index.
-   * Space Complexity: O(1)
+   * Inserts a new node with the provided value at the specified index in the list.
+   * @param {number} index - Index where the value should be inserted.
+   * @param {T} val - Value to insert at the index.
+   * @returns {boolean} - True if the value is successfully inserted, false if the index is out of range.
+   * @timecomplexity O(n) - Linear time in the worst case, as it might traverse the list to reach the desired index.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
-  insert(index: number, val: T): boolean {
-    if (index < 0 || index > this.length) return false;
-    if (index === 0) return !!this.unshift(val);
-    if (index === this.length) return !!this.push(val);
+  insertAt(index: number, val: T): boolean {
+    if (index < 0 || index > this._length) {
+      return false;
+    }
+
+    if (index === 0) {
+      return !!this.unshift(val);
+    }
+
+    if (index === this._length) {
+      return !!this.push(val);
+    }
 
     const newNode = new DLLNode(val);
-    const beforeNode = this.getNode(index - 1);
+    const beforeNode = this.nodeAt(index - 1);
     const afterNode = beforeNode!.next;
 
     beforeNode!.next = newNode;
@@ -231,22 +238,31 @@ export default class DoubleLinkedList<T> {
     newNode.prev = beforeNode;
     newNode.next = afterNode;
 
-    this.length++;
-
+    this._length++;
     return true;
   }
 
   /**
-   * Removes and returns the element at the specified index in the DLL.
-   * Time Complexity: O(n), where n is the index.
-   * Space Complexity: O(1)
+   * Deletes the node at the specified index in the list.
+   * @param {number} index - Index of the node to be deleted.
+   * @returns {T | undefined} - Value of the deleted node or undefined if the index is out of range.
+   * @timecomplexity O(n) - Linear time in the worst case, as it might traverse the list to reach the desired index.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
-  remove(index: number): T | undefined {
-    if (index < 0 || index >= this.length ) return undefined;
-    if (index === 0) return this.shift();
-    if (index === this.length - 1) return this.pop();
+  deleteAt(index: number): T | undefined {
+    if (index < 0 || index >= this._length ) {
+      return undefined;
+    }
 
-    const removedNode = this.getNode(index);
+    if (index === 0) {
+      return this.shift();
+    }
+
+    if (index === this._length - 1) {
+      return this.pop();
+    }
+
+    const removedNode = this.nodeAt(index);
 
     if (removedNode !== null) {
       const beforeNode = removedNode!.prev;
@@ -255,8 +271,7 @@ export default class DoubleLinkedList<T> {
       beforeNode!.next = afterNode;
       afterNode!.prev = beforeNode;
 
-      this.length--;
-
+      this._length--;
       return removedNode.val;
     }
 
@@ -264,33 +279,33 @@ export default class DoubleLinkedList<T> {
   }
 
   /**
-   * Reverses the order of elements in the DLL.
-   * Time Complexity: O(n)
-   * Space Complexity: O(1)
+   * Reverses the order of nodes in the list.
+   * @returns {DoubleLinkedList<T>} - The reversed list.
+   * @timecomplexity O(n) - Linear time, as it traverses the list to reverse the order of nodes.
+   * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
   reverse(): DoubleLinkedList<T> {
-    let currentNode = this.head;
-    let prevNode = this.head;
+    let currentNode = this._head;
+    [this._head, this._tail] = [this._tail, this._head];
 
-    for (let i = 0; i < this.length; i++) {
-      prevNode = currentNode;
-      currentNode = currentNode!.next;
-      [prevNode!.prev, prevNode!.next] = [prevNode!.next, prevNode!.prev];
+    while (currentNode) {
+      const next = currentNode.next;
+      [currentNode.prev, currentNode.next] = [currentNode.next, currentNode.prev];
+      currentNode = next;
     }
-
-    [this.head, this.tail] = [this.tail, this.head];
 
     return this;
   }
 
   /**
-   * Converts the DLL to an array of elements.
-   * Time Complexity: O(n)
-   * Space Complexity: O(n)
+   * Converts the list into an array of its values.
+   * @returns {T[]} - Array containing the values of the list.
+   * @timecomplexity O(n) - Linear time, as it traverses the list to create the array of values.
+   * @spacecomplexity O(n) - Additional space is directly proportional to the number of elements in the list.
    */
   toArray(): T[] {
     const arr: T[] = [];
-    let currentNode = this.head;
+    let currentNode = this._head;
 
     while (currentNode) {
       arr.push(currentNode.val);
