@@ -20,7 +20,7 @@ class DLLNode<T> extends LLNode<T, DLLNode<T>> {
  * Represents a doubly linked list.
  * @template T - Type of the value held by the list.
  */
-export default class DoubleLinkedList<T> extends BaseLinkedList<T, DLLNode<T>>{
+export default class DoublyLinkedList<T> extends BaseLinkedList<T, DLLNode<T>>{
   constructor() {
     super();
   }
@@ -28,12 +28,12 @@ export default class DoubleLinkedList<T> extends BaseLinkedList<T, DLLNode<T>>{
   /**
    * Creates a doubly linked list from an array.
    * @param {T[]} data - Array to create the list from.
-   * @returns {DoubleLinkedList<T>} - Doubly linked list created from the array.
+   * @returns {DoublyLinkedList<T>} - Doubly linked list created from the array.
    * @timecomplexity O(n) - Linear time as it iterates through each element in the input array to create the list.
    * @spacecomplexity O(n) - Additional space used is directly proportional to the number of elements in the input array and the resulting list.
    */
-  static fromArray<T>(data: T[]): DoubleLinkedList<T> {
-    const list= new DoubleLinkedList<T>();
+  static fromArray<T>(data: T[]): DoublyLinkedList<T> {
+    const list= new DoublyLinkedList<T>();
 
     for (const item of data) {
       list.push(item);
@@ -45,11 +45,11 @@ export default class DoubleLinkedList<T> extends BaseLinkedList<T, DLLNode<T>>{
   /**
    * Adds a new node with the provided value to the end of the list.
    * @param {T} val - Value to be added to the list.
-   * @returns {DoubleLinkedList<T>} - Updated list.
+   * @returns {DoublyLinkedList<T>} - Updated list.
    * @timecomplexity O(1) - Constant time as it adds an element at the end of the list.
    * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
-  push(val: T): DoubleLinkedList<T> {
+  push(val: T): DoublyLinkedList<T> {
     const newNode = new DLLNode<T>(val);
 
     if (this.isEmpty) {
@@ -118,11 +118,11 @@ export default class DoubleLinkedList<T> extends BaseLinkedList<T, DLLNode<T>>{
   /**
    * Adds a new node with the provided value to the beginning of the list.
    * @param {T} val - Value to be added to the beginning of the list.
-   * @returns {DoubleLinkedList<T>} - Updated list.
+   * @returns {DoublyLinkedList<T>} - Updated list.
    * @timecomplexity O(1) - Constant time as it adds an element at the beginning of the list.
    * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
-  unshift(val: T): DoubleLinkedList<T> {
+  unshift(val: T): DoublyLinkedList<T> {
     const newNode = new DLLNode<T>(val);
 
     if (this.isEmpty) {
@@ -280,11 +280,11 @@ export default class DoubleLinkedList<T> extends BaseLinkedList<T, DLLNode<T>>{
 
   /**
    * Reverses the order of nodes in the list.
-   * @returns {DoubleLinkedList<T>} - The reversed list.
+   * @returns {DoublyLinkedList<T>} - The reversed list.
    * @timecomplexity O(n) - Linear time, as it traverses the list to reverse the order of nodes.
    * @spacecomplexity O(1) - Constant space is used regardless of the list size.
    */
-  reverse(): DoubleLinkedList<T> {
+  reverse(): DoublyLinkedList<T> {
     let currentNode = this._head;
     [this._head, this._tail] = [this._tail, this._head];
 
