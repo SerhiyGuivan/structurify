@@ -1,6 +1,6 @@
-<div style="text-align:center">
+<p align="center">
   <img src="assets/logo.drawio.png" alt="Structurify">
-</div>
+</p>
 
 # Structurify
 
