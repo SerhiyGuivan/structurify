@@ -1,4 +1,6 @@
-![](assets/logo.drawio.png)
+<div style="text-align:center">
+  <img src="assets/logo.drawio.png" alt="Structurify">
+</div>
 
 # Structurify
 
@@ -17,8 +19,6 @@ A linear data structure where elements (nodes) are linked in a sequential manner
 - Useful for scenarios requiring efficient insertion and deletion at the beginning or end of the list.
 
 ![](assets/SinglyLinkedList.drawio.png)
-
-### API
 
 ### `SinglyLinkedList<T>`
 
@@ -89,8 +89,6 @@ Similar to the Singly Linked List, but each node also has a reference to the pre
 - Well-suited for applications needing easy access to previous elements.
 
 ![](assets/DoubleLinkedList.drawio.png)
-
-### API
 
 ### `DoublyLinkedList<T>`
 
