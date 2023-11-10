@@ -13,6 +13,30 @@ The TypeScript collection includes fundamental data structures used in computer 
 - [Binary Tree](#binary-tree),
 - [Binary Search Tree](#binary-search-tree)
 
+## Installation and Usage
+
+### npm
+
+```
+npm i structurify --save
+```
+
+### esm
+
+```ts
+import {
+  SinglyLinkedList, DoublyLinkedList, Queue, Stack, BinaryTree, BinarySearchTree,
+} from 'structurify';
+```
+
+### commonJS
+
+```ts
+const {
+  SinglyLinkedList, DoublyLinkedList, Queue, Stack, BinaryTree, BinarySearchTree,
+} = require('structurify');
+```
+
 ## Singly Linked List
 A linear data structure where elements (nodes) are linked in a sequential manner, each pointing to the next node in the sequence.
 - Provides methods for insertion, deletion, traversal, and access.
