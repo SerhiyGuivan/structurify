@@ -1,3 +1,5 @@
+![](assets/logo.drawio.png)
+
 # Structurify
 
 The TypeScript collection includes fundamental data structures used in computer science and software development. It provides implementations of various data structures that can be imported and used in your projects. 
@@ -81,44 +83,48 @@ console.log(myList.toArray()); // Output: [5, 10]
 | `toArray`   | O(n)            | O(n)             |
 | `unshift`   | O(1)            | O(1)             |
 
-n: represents the length of the linked list.
-
 ## Doubly Linked List
-Similar to the Singly Linked List, but each node also has a reference to the previous node, allowing bidirectional traversal.
+Similar to the Singly Linked List, but each node also has a reference to the previous node, allowing two-way traversal.
 - Supports insertion, deletion, and traversal from both ends.
 - Well-suited for applications needing easy access to previous elements.
 
 ![](assets/DoubleLinkedList.drawio.png)
 
-### `DoubleLinkedList<T>`
+### API
+
+### `DoublyLinkedList<T>`
+
+Represents a doubly linked list.
+
+#### Constructor
+- `DoublyLinkedList()`: Initializes an empty double linked list.
 
 #### Properties:
-- `private head: SLLNode<T> | null`: Represents the head node of the linked list.
-- `private tail: SLLNode<T> | null`: Represents the tail node of the linked list.
-- `private length: number`: Represents the count of nodes in the linked list.
+- `get head: SLLNode<T> | null`: Reference to the head node of the list.
+- `get isEmpty: boolean`: Indicates whether the list is empty or not.
+- `get size: number`: The size of the list.
+- `get tail: SLLNode<T> | null`: Reference to the tail node of the list.
 
-#### Getters:
-- `headNode: SLLNode<T> | null`: Gets the head node of the linked list.
-- `tailNode: SLLNode<T> | null`: Gets the tail node of the linked list.
-- `size: number`: Gets the length of the linked list.
+#### Static Methods
+- `static fromArray<T>(data: T[]): DoublyLinkedList<T>`: Creates a double linked list from an array.
 
-#### Methods:
-- `static fromArray<T>(data: T[]): DoubleLinkedList<T>`: Creates a new Double Linked List from an array of elements.
-- `push(val: T): DoubleLinkedList<T>`: Appends an element to the end of the Double Linked List.
-- `pop(): T | undefined`: Removes and returns the last element from the Double Linked List.
-- `shift(): T | undefined`: Removes and returns the first element from the Double Linked List.
-- `unshift(val: T): DoubleLinkedList<T>`: Prepends an element to the beginning of the Double Linked List.
-- `get(index: number): T | undefined`: Retrieves the element at the specified index in the Double Linked List.
-- `getNode(index: number): DLLNode<T> | null`: Retrieves the node at the specified index in the Double Linked List.
-- `set(index: number, val: T): boolean`: Sets the element at the specified index in the Double Linked List.
-- `insert(index: number, val: T): boolean`: Inserts an element at the specified index in the Double Linked List.
-- `remove(index: number): T | undefined`: Removes and returns the element at the specified index in the Double Linked List.
-- `reverse(): DoubleLinkedList<T>`: Reverses the order of elements in the Double Linked List.
-- `toArray(): T[]`: Converts the Double Linked List to an array of elements.
+#### Instance Methods
+- `at(index: number): T | undefined`: Gets the value at the specified index.
+- `clear(): void`: Clears the linked list by resetting its properties.
+- `deleteAt(index: number): T | undefined`: Deletes the value at the specified index.
+- `insertAt(index: number, val: T): boolean`: Inserts a value at the specified index.
+- `nodeAt(index: number): SLLNode<T> | null`: Gets the node at the specified index.
+- `pop(): T | undefined`: Removes and returns the value from the end of the list.
+- `push(val: T): DoublyLinkedList<T>`: Adds a new node with the provided value to the end of the list.
+- `reverse(): DoublyLinkedList<T>`: Reverses the order of the nodes in the list.
+- `setAt(index: number, val: T): boolean`: Sets the value at the specified index.
+- `shift(): T | undefined`: Removes and returns the value from the beginning of the list.
+- `toArray(): T[]`: Converts the list to an array.
+- `unshift(val: T): DoublyLinkedList<T>`: Adds a new node with the provided value to the beginning of the list.
 
 ### How to use
 ```ts
-import { DoubleLinkedList } from 'structurify';
+import { DoublyLinkedList } from 'structurify';
 
 const dll = new DoubleLinkedList<number>();
 dll.push(5).push(10).push(15);
@@ -133,21 +139,21 @@ console.log(dll.toArray()); // Output: [15, 5]
 ```
 
 ### Time and Space complexity
-| Method               | Time Complexity             | Space Complexity |
-|----------------------|-----------------------------|------------------|
-| `size`               | O(1)                        | O(1)             |
-| `fromArray`          | O(n) (n is length of array) | O(n)             |
-| `push(val)`          | O(1)                        | O(1)             |
-| `pop()`              | O(1)                        | O(1)             |
-| `shift()`            | O(1)                        | O(1)             |
-| `unshift(val)`       | O(1)                        | O(1)             |
-| `get(index)`         | O(n) (n is index)           | O(1)             |
-| `getNode(index)`     | O(n) (n is index)           | O(1)             |
-| `set(index, val)`    | O(n) (n is index)           | O(1)             |
-| `insert(index, val)` | O(n) (n is index)           | O(1)             |
-| `remove(index)`      | O(n) (n is index)           | O(1)             |
-| `reverse()`          | O(n)                        | O(1)             |
-| `toArray()`          | O(n)                        | O(n)             |
+| Method      | Time Complexity | Space Complexity |
+|-------------|-----------------|------------------|
+| `at`        | O(n)            | O(1)             |
+| `clear`     | O(1)            | O(1)             |
+| `deleteAt`  | O(n)            | O(1)             |
+| `fromArray` | O(n)            | O(n)             |
+| `insertAt`  | O(n)            | O(1)             |
+| `nodeAt`    | O(n)            | O(1)             |
+| `pop`       | O(1)            | O(1)             |
+| `push`      | O(1)            | O(1)             |
+| `reverse`   | O(n)            | O(1)             |
+| `shift`     | O(1)            | O(1)             |
+| `setAt`     | O(n)            | O(1)             |
+| `toArray`   | O(n)            | O(n)             |
+| `unshift`   | O(1)            | O(1)             |
 
 ## Queue
 Follows the First In, First Out (FIFO) principle, allowing data to be inserted from one end (rear) and removed from the other end (front).
