@@ -112,7 +112,7 @@ Similar to the Singly Linked List, but each node also has a reference to the pre
 - Supports insertion, deletion, and traversal from both ends.
 - Well-suited for applications needing easy access to previous elements.
 
-![](assets/DoubleLinkedList.drawio.png)
+![](assets/DoublyLinkedList.drawio.png)
 
 ### `DoublyLinkedList<T>`
 
