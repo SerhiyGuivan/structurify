@@ -1,8 +1,8 @@
-import DoubleLinkedList from '../../../src/linked-list/double-linked-list';
-describe('SinglyLinkedList.fromArray', () => {
+import DoublyLinkedList from '../../../src/linked-list/doubly-linked-list';
+describe('DoublyLinkedList.fromArray', () => {
   it('should create a linked list from an array', () => {
     const data = [10, 20, 30];
-    const list = DoubleLinkedList.fromArray<number>(data);
+    const list = DoublyLinkedList.fromArray<number>(data);
 
     const {
       head,
@@ -30,11 +30,11 @@ describe('SinglyLinkedList.fromArray', () => {
   });
 })
 
-describe('DoubleLinkedList', () => {
-  let list: DoubleLinkedList<number>;
+describe('DoublyLinkedList', () => {
+  let list: DoublyLinkedList<number>;
 
   beforeEach(() => {
-    list = new DoubleLinkedList<number>();
+    list = new DoublyLinkedList<number>();
   });
 
   it('should initialize an empty linked list', () => {
@@ -58,7 +58,7 @@ describe('DoubleLinkedList', () => {
     });
 
     it('should add nodes to the end of the list', () => {
-      list = DoubleLinkedList.fromArray<number>([10, 20]);
+      list = DoublyLinkedList.fromArray<number>([10, 20]);
       expect(list.size).toEqual(2);
 
       list.push(30);
@@ -74,7 +74,7 @@ describe('DoubleLinkedList', () => {
 
   describe('pop', () => {
     it('should remove and return the value of last node', () => {
-      list = DoubleLinkedList.fromArray<number>([1, 2, 3]);
+      list = DoublyLinkedList.fromArray<number>([1, 2, 3]);
 
       expect(list.pop()).toBe(3);
 
@@ -105,7 +105,7 @@ describe('DoubleLinkedList', () => {
 
   describe('shift', () => {
     it('should remove and return the value of first node', () => {
-      list = DoubleLinkedList.fromArray<number>([1, 2, 3]);
+      list = DoublyLinkedList.fromArray<number>([1, 2, 3]);
 
       expect(list.shift()).toBe(1);
 
@@ -148,7 +148,7 @@ describe('DoubleLinkedList', () => {
     });
 
     it('should add elements to the beginning of the list', () => {
-      list = DoubleLinkedList.fromArray<number>([3, 4, 5, 6]);
+      list = DoublyLinkedList.fromArray<number>([3, 4, 5, 6]);
       expect(list.size).toEqual(4);
 
       list.unshift(2);
@@ -165,7 +165,7 @@ describe('DoubleLinkedList', () => {
 
   describe('at', () => {
     it('should return the value at a valid index', () => {
-      list = DoubleLinkedList.fromArray<number>([100, 200, 300]);
+      list = DoublyLinkedList.fromArray<number>([100, 200, 300]);
 
       expect(list.at(0)).toBe(100);
       expect(list.at(1)).toBe(200);
@@ -173,7 +173,7 @@ describe('DoubleLinkedList', () => {
     });
 
     it('should return undefined for an invalid index', () => {
-      list = DoubleLinkedList.fromArray<number>([100, 200, 300]);
+      list = DoublyLinkedList.fromArray<number>([100, 200, 300]);
 
       expect(list.at(-1)).toBeUndefined();
       expect(list.at(3)).toBeUndefined();
@@ -186,7 +186,7 @@ describe('DoubleLinkedList', () => {
 
   describe('nodeAt', () => {
     it('should return the node at a valid index', () => {
-      list = DoubleLinkedList.fromArray<number>([10, 20, 30]);
+      list = DoublyLinkedList.fromArray<number>([10, 20, 30]);
 
       let node1 = list.nodeAt(0);
       let node2 = list.nodeAt(1);
@@ -203,7 +203,7 @@ describe('DoubleLinkedList', () => {
     });
 
     it('should return null for an invalid index', () => {
-      list = DoubleLinkedList.fromArray<number>([10, 20, 30]);
+      list = DoublyLinkedList.fromArray<number>([10, 20, 30]);
 
       expect(list.nodeAt(-1)).toBeNull();
       expect(list.nodeAt(3)).toBeNull();
@@ -216,7 +216,7 @@ describe('DoubleLinkedList', () => {
 
   describe('setAt', () => {
     it('should set the value at a valid index', () => {
-      list = DoubleLinkedList.fromArray<number>([10, 20]);
+      list = DoublyLinkedList.fromArray<number>([10, 20]);
 
       expect(list.setAt(1, 20)).toBe(true);
       expect(list.at(1)).toBe(20);
@@ -242,7 +242,7 @@ describe('DoubleLinkedList', () => {
     });
 
     it('should insert at the beginning of the list when the list is not empty', () => {
-      list = DoubleLinkedList.fromArray<number>([2, 3]);
+      list = DoublyLinkedList.fromArray<number>([2, 3]);
 
       expect(list.insertAt(0, 1)).toBe(true);
 
@@ -257,7 +257,7 @@ describe('DoubleLinkedList', () => {
     });
 
     it('should insert at the end of the list when using the size index', () => {
-      list = DoubleLinkedList.fromArray<number>([10, 20]);
+      list = DoublyLinkedList.fromArray<number>([10, 20]);
 
       expect(list.insertAt(2, 30)).toBe(true);
 
@@ -273,7 +273,7 @@ describe('DoubleLinkedList', () => {
 
 
     it('should insert in the middle of the list', () => {
-      list = DoubleLinkedList.fromArray<number>([100, 300]);
+      list = DoublyLinkedList.fromArray<number>([100, 300]);
 
       expect(list.insertAt(1, 200)).toBe(true);
 
@@ -287,7 +287,7 @@ describe('DoubleLinkedList', () => {
     });
 
     it('should not insert, should return false if index exceeds size', () => {
-      list = DoubleLinkedList.fromArray<number>([15, 30]);
+      list = DoublyLinkedList.fromArray<number>([15, 30]);
 
       expect(list.insertAt(3, 45)).toBe(false);
 
@@ -307,7 +307,7 @@ describe('DoubleLinkedList', () => {
 
   describe('deleteAt', () => {
     it('should delete and return the value at the specified index', () => {
-      list = DoubleLinkedList.fromArray<number>([10, 20, 30]);
+      list = DoublyLinkedList.fromArray<number>([10, 20, 30]);
 
       expect(list.deleteAt(1)).toBe(20);
 
@@ -319,7 +319,7 @@ describe('DoubleLinkedList', () => {
       expect(list.size).toBe(2);
     });
     it('should not delete, should return undefined if index is higher than tail index', () => {
-      list = DoubleLinkedList.fromArray<number>([2, 4, 8]);
+      list = DoublyLinkedList.fromArray<number>([2, 4, 8]);
 
       expect(list.deleteAt(3)).toBeUndefined();
 
@@ -328,7 +328,7 @@ describe('DoubleLinkedList', () => {
     });
 
     it('shouldn\'t delete, should return false for a negative index', () => {
-      list = DoubleLinkedList.fromArray<number>([1, 3, 5]);
+      list = DoublyLinkedList.fromArray<number>([1, 3, 5]);
 
       expect(list.deleteAt(-1)).toBeUndefined();
 
@@ -339,7 +339,7 @@ describe('DoubleLinkedList', () => {
 
   describe('reverse', () => {
     it('should reverse the linked list', () => {
-      list = DoubleLinkedList.fromArray<number>([1, 2, 3]);
+      list = DoublyLinkedList.fromArray<number>([1, 2, 3]);
 
       list.reverse();
 
@@ -349,7 +349,7 @@ describe('DoubleLinkedList', () => {
 
   describe('clear', () => {
     it('should clear the linked list', () => {
-      list = DoubleLinkedList.fromArray<number>([1, 20, 300]);
+      list = DoublyLinkedList.fromArray<number>([1, 20, 300]);
 
       list.clear();
 
@@ -366,7 +366,7 @@ describe('DoubleLinkedList', () => {
     });
 
     it('should return an array with values', () => {
-      list = DoubleLinkedList.fromArray<number>([1, 2, 3]);
+      list = DoublyLinkedList.fromArray<number>([1, 2, 3]);
 
       expect(list.toArray()).toEqual([1, 2, 3])
     });
