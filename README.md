@@ -1,5 +1,7 @@
 # Structurify
-This JavaScript/TypeScript module is a collection of fundamental data structures used in computer science and software development. It includes implementations of various data structures that can be imported and used in your projects. 
+
+The TypeScript collection includes fundamental data structures used in computer science and software development. It provides implementations of various data structures that can be imported and used in your projects. 
+
 - [Singly Linked List](#singly-linked-list),
 - [Doubly Linked List](#doubly-linked-list),
 - [Queue](#queue),
@@ -12,35 +14,40 @@ A linear data structure where elements (nodes) are linked in a sequential manner
 - Provides methods for insertion, deletion, traversal, and access.
 - Useful for scenarios requiring efficient insertion and deletion at the beginning or end of the list.
 
-![](assets/SInglyLinkedList.drawio.png)
+![](assets/SinglyLinkedList.drawio.png)
+
+### API
 
 ### `SinglyLinkedList<T>`
 
-#### Properties:
-- `private head: SLLNode<T> | null`: Represents the head node of the linked list.
-- `private tail: SLLNode<T> | null`: Represents the tail node of the linked list.
-- `private length: number`: Represents the count of nodes in the linked list.
+Represents a singly linked list.
 
-#### Getters:
-- `headNode: SLLNode<T> | null`: Gets the head node of the linked list.
-- `tailNode: SLLNode<T> | null`: Gets the tail node of the linked list.
-- `size: number`: Gets the length of the linked list.
+#### Constructor
+- `SinglyLinkedList()`: Initializes an empty singly linked list.
 
-#### Methods:
-- `static fromArray<T>(data: T[]): SinglyLinkedList<T>`: Creates a new singly linked list from an array of data.
-- `push(val: T): SinglyLinkedList<T>`: Adds a new node with the given value to the end of the linked list.
-- `pop(): T | undefined`: Removes and returns the last node from the linked list.
-- `shift(): T | undefined`: Removes and returns the first node from the linked list.
-- `unshift(val: T): SinglyLinkedList<T>`: Adds a new node with the given value to the beginning of the linked list.
-- `get(index: number): T | undefined`: Gets the value at a specific index in the linked list.
-- `getNode(index: number): SLLNode<T> | null`: Gets the node at a specific index in the linked list.
-- `set(index: number, val: T): boolean`: Sets the value at a specific index in the linked list.
-- `insert(index: number, val: T): boolean`: Inserts a new node with the given value at a specific index in the linked list.
-- `remove(index: number): T | undefined`: Removes and returns a node at a specific index in the linked list.
-- `clear(): void`: Clears the entire linked list.
-- `reverse(): SinglyLinkedList<T>`: Reverses the order of nodes in the linked list.
-- `rotate(num: number): SinglyLinkedList<T>`: Rotates the linked list by a specified number of positions.
-- `toArray(): T[]`: Converts the linked list into an array and returns it.
+#### Properties
+- `get head: SLLNode<T> | null`: Reference to the head node of the list.
+- `get isEmpty: boolean`: Indicates whether the list is empty or not.
+- `get size: number`: The size of the list.
+- `get tail: SLLNode<T> | null`: Reference to the tail node of the list.
+
+#### Static Methods
+- `static fromArray<T>(data: T[]): SinglyLinkedList<T>`: Creates a singly linked list from an array.
+
+#### Instance Methods
+- `at(index: number): T | undefined`: Gets the value at the specified index.
+- `clear(): void`: Clears the linked list by resetting its properties.
+- `deleteAt(index: number): T | undefined`: Deletes the value at the specified index.
+- `insertAt(index: number, val: T): boolean`: Inserts a value at the specified index.
+- `nodeAt(index: number): SLLNode<T> | null`: Gets the node at the specified index.
+- `pop(): T | undefined`: Removes and returns the value from the end of the list.
+- `push(val: T): SinglyLinkedList<T>`: Adds a new node with the provided value to the end of the list.
+- `reverse(): SinglyLinkedList<T>`: Reverses the order of the nodes in the list.
+- `rotateByN(n: number): SinglyLinkedList<T>`: Rotates the list by the specified number of positions.
+- `setAt(index: number, val: T): boolean`: Sets the value at the specified index.
+- `shift(): T | undefined`: Removes and returns the value from the beginning of the list.
+- `toArray(): T[]`: Converts the list to an array.
+- `unshift(val: T): SinglyLinkedList<T>`: Adds a new node with the provided value to the beginning of the list.
 
 ### How to use
 ```ts
@@ -54,29 +61,27 @@ console.log(myList.toArray()); // Output: [5, 10, 15]
 
 myList.pop();
 console.log(myList.toArray()); // Output: [5, 10]
-
-// Other operations such as shift, unshift, get, set, insert, remove, reverse, rotate, etc.
 ```
 
 ### Time and Space complexity
-| Method               | Time Complexity             | Space Complexity |
-|----------------------|-----------------------------|------------------|
-| `size`               | O(1)                        | O(1)             |
-| `fromArray`          | O(n) (n is length of array) | O(n)             |
-| `push(val)`          | O(1)                        | O(1)             |
-| `pop()`              | O(n)                        | O(1)             |
-| `shift()`            | O(1)                        | O(1)             |
-| `unshift(val)`       | O(1)                        | O(1)             |
-| `get(index)`         | O(n) (n is index)           | O(1)             |
-| `getNode(index)`     | O(n) (n is index)           | O(1)             |
-| `set(index, val)`    | O(n) (n is index)           | O(1)             |
-| `insert(index, val)` | O(n) (n is index)           | O(1)             |
-| `remove(index)`      | O(n) (n is index)           | O(1)             |
-| `clear()`            | O(1)                        | O(1)             |
-| `reverse()`          | O(n)                        | O(1)             |
-| `rotate(num)`        | O(n)                        | O(1)             |
-| `toArray()`          | O(n)                        | O(n)             |
+| Method      | Time Complexity | Space Complexity |
+|-------------|-----------------|------------------|
+| `at`        | O(n)            | O(1)             |
+| `clear`     | O(1)            | O(1)             |
+| `deleteAt`  | O(n)            | O(1)             |
+| `fromArray` | O(n)            | O(n)             |
+| `insertAt`  | O(n)            | O(1)             |
+| `nodeAt`    | O(n)            | O(1)             |
+| `pop`       | O(n)            | O(1)             |
+| `push`      | O(1)            | O(1)             |
+| `reverse`   | O(n)            | O(1)             |
+| `rotateByN` | O(n)            | O(1)             |
+| `shift`     | O(1)            | O(1)             |
+| `setAt`     | O(n)            | O(1)             |
+| `toArray`   | O(n)            | O(n)             |
+| `unshift`   | O(1)            | O(1)             |
 
+n: represents the length of the linked list.
 
 ## Doubly Linked List
 Similar to the Singly Linked List, but each node also has a reference to the previous node, allowing bidirectional traversal.
