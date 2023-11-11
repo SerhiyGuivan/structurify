@@ -1,7 +1,7 @@
 {
   "name": "structurify",
   "author": "Serhii Guivan",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Data structures implementation in JavaScript and TypeScript",
   "license": "ISC",
   "type": "module",
