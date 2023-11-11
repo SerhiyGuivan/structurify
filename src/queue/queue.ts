@@ -57,7 +57,7 @@ export default class Queue<T> {
   }
 
   /**
-   * Adds an element to the end of the queue.
+   * Adds an element to the rear of the queue and returns the new size of the queue.
    * @param {T} val - The value to enqueue.
    * @returns {number} - The updated size of the queue.
    * @timecomplexity O(1)
