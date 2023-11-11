@@ -62,7 +62,7 @@ export default class Stack<T> {
    * Space Complexity: O(1)
    */
   peek(): T | undefined {
-    return this.list.headNode?.val;
+    return this.list.head?.val;
   }
 
   /**

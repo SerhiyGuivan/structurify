@@ -1,7 +1,7 @@
 {
   "name": "structurify",
   "author": "Serhii Guivan",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Data structures implementation in JavaScript and TypeScript",
   "license": "ISC",
   "type": "module",
@@ -18,7 +18,7 @@
     "ts data structures",
     "typed data structures",
     "singly-linked-list",
-    "double-linked-list",
+    "doubly-linked-list",
     "stack",
     "queue",
     "binary-tree",

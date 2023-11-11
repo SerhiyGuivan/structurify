@@ -1,6 +1,11 @@
+<p align="center">
+  <img src="assets/logo.drawio.png" alt="Structurify">
+</p>
+
 # Structurify
 
-This repository contains various data structures implemented in TypeScript, including: 
+The TypeScript collection includes fundamental data structures used in computer science and software development. It provides implementations of various data structures that can be imported and used in your projects. 
+
 - [Singly Linked List](#singly-linked-list),
 - [Doubly Linked List](#doubly-linked-list),
 - [Queue](#queue),
@@ -8,57 +13,179 @@ This repository contains various data structures implemented in TypeScript, incl
 - [Binary Tree](#binary-tree),
 - [Binary Search Tree](#binary-search-tree)
 
+## Installation and Usage
+
+### npm
+
+```
+npm i structurify --save
+```
+
+### esm
+
+```ts
+import {
+  SinglyLinkedList, DoublyLinkedList, Queue, Stack, BinaryTree, BinarySearchTree,
+} from 'structurify';
+```
+
+### commonJS
+
+```ts
+const {
+  SinglyLinkedList, DoublyLinkedList, Queue, Stack, BinaryTree, BinarySearchTree,
+} = require('structurify');
+```
+
 ## Singly Linked List
+A linear data structure where elements (nodes) are linked in a sequential manner, each pointing to the next node in the sequence.
+- Provides methods for insertion, deletion, traversal, and access.
+- Useful for scenarios requiring efficient insertion and deletion at the beginning or end of the list.
+
+![](assets/SinglyLinkedList.drawio.png)
+
 ### `SinglyLinkedList<T>`
-A singly linked list is a linear data structure where each element points to the next one in the sequence. It allows for efficient insertion and deletion operations.
 
-#### Getters:
-- `headNode: SLLNode<T> | null`: Gets the head node of the linked list.
-- `tailNode: SLLNode<T> | null`: Gets the tail node of the linked list.
-- `size: number`: Gets the length of the linked list.
+Represents a singly linked list.
 
-#### Methods:
-- `static fromArray<T>(data: T[]): SinglyLinkedList<T>`: Creates a new singly linked list from an array of data.
-- `push(val: T): SinglyLinkedList<T>`: Adds a new node with the given value to the end of the linked list.
-- `pop(): T | undefined`: Removes and returns the last node from the linked list.
-- `shift(): T | undefined`: Removes and returns the first node from the linked list.
-- `unshift(val: T): SinglyLinkedList<T>`: Adds a new node with the given value to the beginning of the linked list.
-- `get(index: number): T | undefined`: Gets the value at a specific index in the linked list.
-- `getNode(index: number): SLLNode<T> | null`: Gets the node at a specific index in the linked list.
-- `set(index: number, val: T): boolean`: Sets the value at a specific index in the linked list.
-- `insert(index: number, val: T): boolean`: Inserts a new node with the given value at a specific index in the linked list.
-- `remove(index: number): T | undefined`: Removes and returns a node at a specific index in the linked list.
-- `clear(): void`: Clears the entire linked list.
-- `reverse(): SinglyLinkedList<T>`: Reverses the order of nodes in the linked list.
-- `rotate(num: number): SinglyLinkedList<T>`: Rotates the linked list by a specified number of positions.
-- `toArray(): T[]`: Converts the linked list into an array and returns it.
+#### Constructor
+- `SinglyLinkedList()`: Initializes an empty singly linked list.
+
+#### Properties
+- `get head: SLLNode<T> | null`: Reference to the head node of the list.
+- `get isEmpty: boolean`: Indicates whether the list is empty or not.
+- `get size: number`: The size of the list.
+- `get tail: SLLNode<T> | null`: Reference to the tail node of the list.
+
+#### Static Methods
+- `static fromArray<T>(data: T[]): SinglyLinkedList<T>`: Creates a singly linked list from an array.
+
+#### Instance Methods
+- `at(index: number): T | undefined`: Gets the value at the specified index.
+- `clear(): void`: Clears the linked list by resetting its properties.
+- `deleteAt(index: number): T | undefined`: Deletes the value at the specified index.
+- `insertAt(index: number, val: T): boolean`: Inserts a value at the specified index.
+- `nodeAt(index: number): SLLNode<T> | null`: Gets the node at the specified index.
+- `pop(): T | undefined`: Removes and returns the value from the end of the list.
+- `push(val: T): SinglyLinkedList<T>`: Adds a new node with the provided value to the end of the list.
+- `reverse(): SinglyLinkedList<T>`: Reverses the order of the nodes in the list.
+- `rotateByN(n: number): SinglyLinkedList<T>`: Rotates the list by the specified number of positions.
+- `setAt(index: number, val: T): boolean`: Sets the value at the specified index.
+- `shift(): T | undefined`: Removes and returns the value from the beginning of the list.
+- `toArray(): T[]`: Converts the list to an array.
+- `unshift(val: T): SinglyLinkedList<T>`: Adds a new node with the provided value to the beginning of the list.
+
+### How to use
+```ts
+// Example usage
+import { SinglyLinkedList } from 'structurify';
+
+const myList = new SinglyLinkedList<number>();
+myList.push(5).push(10).push(15);
+
+console.log(myList.toArray()); // Output: [5, 10, 15]
+
+myList.pop();
+console.log(myList.toArray()); // Output: [5, 10]
+```
+
+### Time and Space complexity
+| Method      | Time Complexity | Space Complexity |
+|-------------|-----------------|------------------|
+| `at`        | O(n)            | O(1)             |
+| `clear`     | O(1)            | O(1)             |
+| `deleteAt`  | O(n)            | O(1)             |
+| `fromArray` | O(n)            | O(n)             |
+| `insertAt`  | O(n)            | O(1)             |
+| `nodeAt`    | O(n)            | O(1)             |
+| `pop`       | O(n)            | O(1)             |
+| `push`      | O(1)            | O(1)             |
+| `reverse`   | O(n)            | O(1)             |
+| `rotateByN` | O(n)            | O(1)             |
+| `shift`     | O(1)            | O(1)             |
+| `setAt`     | O(n)            | O(1)             |
+| `toArray`   | O(n)            | O(n)             |
+| `unshift`   | O(1)            | O(1)             |
 
 ## Doubly Linked List
-### `DoubleLinkedList<T>`
-A doubly linked list is an extension of a singly linked list where each node keeps a reference to the previous and next nodes.
+Similar to the Singly Linked List, but each node also has a reference to the previous node, allowing two-way traversal.
+- Supports insertion, deletion, and traversal from both ends.
+- Well-suited for applications needing easy access to previous elements.
 
-#### Getters:
-- `headNode: DLLNode<T> | null`: Gets the first node in the DLL.
-- `tailNode: DLLNode<T> | null`: Gets the last node in the DLL.
-- `size: number`: Gets the number of elements in the DLL.
+![](assets/DoublyLinkedList.drawio.png)
 
-#### Methods:
-- `static fromArray<T>(data: T[]): DoubleLinkedList<T>`: Creates a new DLL from an array of elements.
-- `push(val: T): DoubleLinkedList<T>`: Appends an element to the end of the DLL.
-- `pop(): T | undefined`: Removes and returns the last element from the DLL.
-- `shift(): T | undefined`: Removes and returns the first element from the DLL.
-- `unshift(val: T): DoubleLinkedList<T>`: Prepends an element to the beginning of the DLL.
-- `get(index: number): T | undefined`: Gets the element at the specified index in the DLL.
-- `getNode(index: number): DLLNode<T> | null`: Gets the node at the specified index in the DLL.
-- `set(index: number, val: T): boolean`: Sets the element at the specified index in the DLL.
-- `insert(index: number, val: T): boolean`: Inserts an element at the specified index in the DLL.
-- `remove(index: number): T | undefined`: Removes and returns the element at the specified index in the DLL.
-- `reverse(): DoubleLinkedList<T>`: Reverses the order of elements in the DLL.
-- `toArray(): T[]`: Converts the DLL to an array of elements.
+### `DoublyLinkedList<T>`
+
+Represents a doubly linked list.
+
+#### Constructor
+- `DoublyLinkedList()`: Initializes an empty double linked list.
+
+#### Properties:
+- `get head: SLLNode<T> | null`: Reference to the head node of the list.
+- `get isEmpty: boolean`: Indicates whether the list is empty or not.
+- `get size: number`: The size of the list.
+- `get tail: SLLNode<T> | null`: Reference to the tail node of the list.
+
+#### Static Methods
+- `static fromArray<T>(data: T[]): DoublyLinkedList<T>`: Creates a double linked list from an array.
+
+#### Instance Methods
+- `at(index: number): T | undefined`: Gets the value at the specified index.
+- `clear(): void`: Clears the linked list by resetting its properties.
+- `deleteAt(index: number): T | undefined`: Deletes the value at the specified index.
+- `insertAt(index: number, val: T): boolean`: Inserts a value at the specified index.
+- `nodeAt(index: number): SLLNode<T> | null`: Gets the node at the specified index.
+- `pop(): T | undefined`: Removes and returns the value from the end of the list.
+- `push(val: T): DoublyLinkedList<T>`: Adds a new node with the provided value to the end of the list.
+- `reverse(): DoublyLinkedList<T>`: Reverses the order of the nodes in the list.
+- `setAt(index: number, val: T): boolean`: Sets the value at the specified index.
+- `shift(): T | undefined`: Removes and returns the value from the beginning of the list.
+- `toArray(): T[]`: Converts the list to an array.
+- `unshift(val: T): DoublyLinkedList<T>`: Adds a new node with the provided value to the beginning of the list.
+
+### How to use
+```ts
+import { DoublyLinkedList } from 'structurify';
+
+const dll = new DoubleLinkedList<number>();
+dll.push(5).push(10).push(15);
+
+console.log(dll.toArray()); // Output: [5, 10, 15]
+
+dll.reverse();
+console.log(dll.toArray()); // Output: [15, 10, 5]
+
+dll.remove(1);
+console.log(dll.toArray()); // Output: [15, 5]
+```
+
+### Time and Space complexity
+| Method      | Time Complexity | Space Complexity |
+|-------------|-----------------|------------------|
+| `at`        | O(n)            | O(1)             |
+| `clear`     | O(1)            | O(1)             |
+| `deleteAt`  | O(n)            | O(1)             |
+| `fromArray` | O(n)            | O(n)             |
+| `insertAt`  | O(n)            | O(1)             |
+| `nodeAt`    | O(n)            | O(1)             |
+| `pop`       | O(1)            | O(1)             |
+| `push`      | O(1)            | O(1)             |
+| `reverse`   | O(n)            | O(1)             |
+| `shift`     | O(1)            | O(1)             |
+| `setAt`     | O(n)            | O(1)             |
+| `toArray`   | O(n)            | O(n)             |
+| `unshift`   | O(1)            | O(1)             |
 
 ## Queue
+Follows the First In, First Out (FIFO) principle, allowing data to be inserted from one end (rear) and removed from the other end (front).
+- Offers methods like enqueue (add to the rear) and dequeue (remove from the front).
+- Useful in scenarios where data needs to be processed in a sequential order.
+
 ### `Queue<T>`
-A queue is a linear data structure that follows the First-In-First-Out (FIFO) principle.
+
+#### Properties:
+- `list: SinglyLinkedList<T>`: An instance of singly linked list used to manage the elements in the queue.
 
 #### Getters:
 - `size: number`: Gets the number of elements in the queue.
@@ -71,9 +198,47 @@ A queue is a linear data structure that follows the First-In-First-Out (FIFO) pr
 - `clear(): void`: Removes all elements from the queue.
 - `toArray(): T[]`: Converts the queue to an array, maintaining the order of elements.
 
+### How to use
+```ts
+import { Queue } from 'structurify';
+
+const queue = new Queue<number>();
+
+queue.enqueue(5);
+queue.enqueue(10);
+queue.enqueue(15);
+
+console.log(queue.dequeue()); // Output: 5
+
+console.log(queue.peek()); // Output: 10
+
+console.log(queue.toArray()); // Output: [10, 15]
+
+queue.clear();
+
+console.log(queue.isEmpty); // Output: true
+```
+
+### Time and Space complexity
+| Method    | Time Complexity              | Space Complexity             |
+|-----------|------------------------------|------------------------------|
+| `size`    | O(1)                         | O(1)                         |
+| `isEmpty` | O(1)                         | O(1)                         |
+| `enqueue` | O(1)                         | O(1)                         |
+| `dequeue` | O(1)                         | O(1)                         |
+| `peek`    | O(1)                         | O(1)                         |
+| `clear`   | O(1)                         | O(1)                         |
+| `toArray` | O(n) (n: number of elements) | O(n) (n: number of elements) |
+
 ## Stack
+Adheres to the Last In, First Out (LIFO) principle, enabling data to be added and removed from the same end (top).
+- Provides methods such as push (add to the top) and pop (remove from the top).
+- Commonly used in applications involving function calls, expression evaluation, and backtracking.
+
 ### `Stack<T>`
-A stack is a linear data structure that follows the Last-In-First-Out (LIFO) principle.
+
+#### Properties:
+- `list: SinglyLinkedList<T>`: An instance of singly linked list used to manage the elements in the stack.
 
 #### Getters:
 - `size: number`: Gets the number of elements in the stack.
@@ -86,9 +251,44 @@ A stack is a linear data structure that follows the Last-In-First-Out (LIFO) pri
 - `peek(): T | undefined`: Peeks at the top element of the stack without removing it.
 - `toArray(): T[]`: Converts the stack to an array.
 
+### How to use
+```ts
+import { Stack } from 'structurify';
+
+const stack = new Stack<number>();
+
+stack.push(5);
+stack.push(10);
+stack.push(15);
+
+console.log(stack.pop()); // Output: 15
+
+console.log(stack.peek()); // Output: 10
+
+console.log(stack.toArray()); // Output: [10, 5]
+
+stack.clear();
+
+console.log(stack.isEmpty); // Output: true
+```
+
+### Time and Space complexity
+| Method    | Time Complexity             | Space Complexity            |
+|-----------|-----------------------------|-----------------------------|
+| `size`    | O(1)                        | O(1)                        |
+| `isEmpty` | O(1)                        | O(1)                        |
+| `push`    | O(1)                        | O(1)                        |
+| `pop`     | O(1)                        | O(1)                        |
+| `clear`   | O(1)                        | O(1)                        |
+| `peek`    | O(1)                        | O(1)                        |
+| `toArray` | O(n) (n: size of the stack) | O(n) (n: size of the stack) |
+
 ## Binary Tree
+A hierarchical structure where each node has at most two children.
+- Supports various tree traversal methods like level-order, in-order, pre-order, and post-order.
+- Crucial for applications requiring hierarchical data representation.
+
 ### `BinaryTree<T>`
-Binary Tree is a tree data structure in which each node has at most two children, referred to as the left child and the right child.
 
 #### Getters
 - `rootNode`: Accesses the root node of the binary tree.
@@ -106,9 +306,11 @@ Binary Tree is a tree data structure in which each node has at most two children
 - `clear(): void`: Empties the binary tree by removing all nodes.
 
 ## Binary Search Tree
-###  `BinarySearchTree<T>`
+A specialized form of a binary tree where the left child is less than the parent and the right child is greater.
+- Provides efficient searching and sorting capabilities.
+- Ideal for tasks involving ordered data and quick search operations.
 
-Binary Search Tree is a rooted binary tree data structure with the key of each internal node being greater than all the keys in the respective node's left subtree and less than the ones in its right subtree.
+###  `BinarySearchTree<T>`
 
 #### Constructor
 - `constructor(comparator: BSTComparator)`: Initializes the BinarySearchTree with the specified comparator.
@@ -126,17 +328,3 @@ Binary Search Tree is a rooted binary tree data structure with the key of each i
 - `dfsPostOrder(fn: TraversalFn<T>): ReturnType<TraversalFn<T>>[]`: Performs a depth-first post-order traversal.
 - `dfsInOrder(fn: TraversalFn<T>): ReturnType<TraversalFn<T>>[]`: Performs a depth-first in-order traversal.
 - `clear(): void`: Empties the binary tree by removing all nodes.
-
-## How to Use
-Each class can be used independently by creating an instance of the class and utilizing its available methods. Additionally, the classes support TypeScript for static type checking and are generic, allowing them to hold various data types.
-
-### Example:
-```typescript
-import { SinglyLinkedList } from 'structurify';
-
-const list = new SinglyLinkedList<number>();
-list.push(10);
-list.push(20);
-list.push(30);
-
-console.log(list.toArray()); // Output: [10, 20, 30]

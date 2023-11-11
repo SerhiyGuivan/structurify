@@ -27,7 +27,7 @@ export default class Queue<T> {
    * Space Complexity: O(1)
    */
   get isEmpty(): boolean {
-    return this.size === 0;
+    return this.list.isEmpty;
   }
 
   /**
@@ -55,8 +55,7 @@ export default class Queue<T> {
    * Space Complexity: O(1)
    */
   peek(): T | undefined {
-    if (this.list.headNode === null) return undefined;
-    return this.list.headNode.val;
+    return this.list.head?.val;
   }
 
   /**
