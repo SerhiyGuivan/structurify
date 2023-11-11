@@ -1,21 +1,46 @@
 import SinglyLinkedList from '../linked-list/singly-linked-list';
 
 /**
- * Queue is a data structure that follows the First-In-First-Out (FIFO) principle.
+ * Queue class represents a basic queue data structure that follows the First-In-First-Out (FIFO) principle.
  * It uses a singly linked list internally for efficient enqueue and dequeue operations.
+ * @template T - The type of elements stored in the queue.
  */
 export default class Queue<T> {
   list: SinglyLinkedList<T>;
 
+  /**
+   * Creates an instance of the Queue class.
+   * The underlying data structure is a singly linked list.
+   */
   constructor() {
-    // Initialize an empty queue using a singly linked list.
     this.list = new SinglyLinkedList();
   }
 
   /**
-   * Gets the number of elements in the queue.
-   * Time Complexity: O(1)
-   * Space Complexity: O(1)
+   * Retrieves the value at the front of the queue.
+   * @returns {T | undefined} The value at the front of the queue, or undefined if the queue is empty.
+   * @timecomplexity O(1) - Constant time complexity as accessing the head of a linked list is a constant time operation.
+   * @spacecomplexity O(1) - Constant space complexity as no additional data structures are used.
+   */
+  get front(): T | undefined {
+    return this.list.head?.val;
+  }
+
+  /**
+   * Retrieves the value at the rear of the queue.
+   * @returns {T | undefined} The value at the rear of the queue, or undefined if the queue is empty.
+   * @timecomplexity O(1) - Constant time complexity as accessing the tail of a linked list is a constant time operation.
+   * @spacecomplexity O(1) - Constant space complexity as no additional data structures are used.
+   */
+  get rear(): T | undefined {
+    return this.list.tail?.val;
+  }
+
+  /**
+   * Returns the number of elements in the queue.
+   * @returns {number} - The size of the queue.
+   * @timecomplexity O(1)
+   * @spacecomplexity O(1)
    */
   get size(): number {
     return this.list.size;
@@ -23,17 +48,20 @@ export default class Queue<T> {
 
   /**
    * Checks if the queue is empty.
-   * Time Complexity: O(1)
-   * Space Complexity: O(1)
+   * @returns {boolean} - True if the queue is empty, false otherwise.
+   * @timecomplexity O(1)
+   * @spacecomplexity O(1)
    */
   get isEmpty(): boolean {
     return this.list.isEmpty;
   }
 
   /**
-   * Adds an element to the rear of the queue.
-   * Time Complexity: O(1)
-   * Space Complexity: O(1)
+   * Adds an element to the rear of the queue and returns the new size of the queue.
+   * @param {T} val - The value to enqueue.
+   * @returns {number} - The updated size of the queue.
+   * @timecomplexity O(1)
+   * @spacecomplexity O(1)
    */
   enqueue(val: T): number {
     this.list.push(val);
@@ -41,36 +69,49 @@ export default class Queue<T> {
   }
 
   /**
-   * Removes and returns the front element of the queue.
-   * Time Complexity: O(1)
-   * Space Complexity: O(1)
+   * Removes and returns the element from the front of the queue.
+   * @returns {T | undefined} - The value dequeued from the front of the queue.
+   * @timecomplexity O(1)
+   * @spacecomplexity O(1)
    */
   dequeue(): T | undefined {
     return this.list.shift();
   }
 
   /**
-   * Returns the value of the front element without removing it.
-   * Time Complexity: O(1)
-   * Space Complexity: O(1)
+   * Retrieves the value at the front of the queue without removing it.
+   * @returns {T | undefined} - The value at the front of the queue.
+   * @timecomplexity O(1)
+   * @spacecomplexity O(1)
    */
   peek(): T | undefined {
     return this.list.head?.val;
   }
 
   /**
-   * Removes all elements from the queue.
-   * Time Complexity: O(1)
-   * Space Complexity: O(1)
+   * Retrieves the value at the rear of the queue without removing it.
+   * @returns {T | undefined} - The value at the rear of the queue.
+   * @timecomplexity O(1)
+   * @spacecomplexity O(1)
+   */
+  peekRear(): T | undefined {
+    return this.list.tail?.val;
+  }
+
+  /**
+   * Clears all elements from the queue.
+   * @timecomplexity O(1)
+   * @spacecomplexity O(1)
    */
   clear(): void {
     this.list.clear();
   }
 
   /**
-   * Converts the queue to an array, maintaining the order of elements.
-   * Time Complexity: O(n), where n is the number of elements in the queue.
-   * Space Complexity: O(n), as it creates a new array to hold the elements.
+   * Converts the queue to an array.
+   * @returns {T[]} - An array containing all elements in the queue.
+   * @timecomplexity O(n)
+   * @spacecomplexity O(n)
    */
   toArray(): T[] {
     return this.list.toArray();

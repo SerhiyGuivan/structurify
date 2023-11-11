@@ -156,7 +156,7 @@ console.log(dll.toArray()); // Output: [5, 10, 15]
 dll.reverse();
 console.log(dll.toArray()); // Output: [15, 10, 5]
 
-dll.remove(1);
+dll.deleteAt(1);
 console.log(dll.toArray()); // Output: [15, 5]
 ```
 
@@ -182,21 +182,28 @@ Follows the First In, First Out (FIFO) principle, allowing data to be inserted f
 - Offers methods like enqueue (add to the rear) and dequeue (remove from the front).
 - Useful in scenarios where data needs to be processed in a sequential order.
 
+![](assets/Queue.drawio.png)
+
 ### `Queue<T>`
+Queue class represents a basic queue data structure that follows the First-In-First-Out (FIFO) principle.
+It uses a singly linked list internally for efficient enqueue and dequeue operations.
+
+#### Constructor
+- `Queue()`: Creates an instance of the Queue class.
 
 #### Properties:
-- `list: SinglyLinkedList<T>`: An instance of singly linked list used to manage the elements in the queue.
+- `get isEmpty(): : boolean`: Checks if the queue is empty.
+- `get front(): T | undefined`: Retrieves the value at the front of the queue.
+- `get rear(): T | undefined`: Retrieves the value at the rear of the queue.
+- `get size(): number`: Returns the number of elements in the queue.
 
-#### Getters:
-- `size: number`: Gets the number of elements in the queue.
-- `isEmpty: boolean`: Checks if the queue is empty.
-
-#### Methods:
+#### Instance Methods:
+- `clear(): void`: Clears all elements from the queue.
+- `dequeue(): T | undefined`: Removes and returns the element from the front of the queue.
 - `enqueue(val: T): number`: Adds an element to the rear of the queue and returns the new size of the queue.
-- `dequeue(): T | undefined`: Removes and returns the front element of the queue.
-- `peek(): T | undefined`: Returns the value of the front element without removing it.
-- `clear(): void`: Removes all elements from the queue.
-- `toArray(): T[]`: Converts the queue to an array, maintaining the order of elements.
+- `peek(): T | undefined`: Retrieves the value at the front of the queue without removing it.
+- `peekRear(): T | undefined`: Retrieves the value at the rear of the queue without removing it.
+- `toArray(): T[]`: Converts the queue to an array.
 
 ### How to use
 ```ts
@@ -220,15 +227,14 @@ console.log(queue.isEmpty); // Output: true
 ```
 
 ### Time and Space complexity
-| Method    | Time Complexity              | Space Complexity             |
-|-----------|------------------------------|------------------------------|
-| `size`    | O(1)                         | O(1)                         |
-| `isEmpty` | O(1)                         | O(1)                         |
-| `enqueue` | O(1)                         | O(1)                         |
-| `dequeue` | O(1)                         | O(1)                         |
-| `peek`    | O(1)                         | O(1)                         |
-| `clear`   | O(1)                         | O(1)                         |
-| `toArray` | O(n) (n: number of elements) | O(n) (n: number of elements) |
+| Method     | Time Complexity | Space Complexity |
+|------------|-----------------|------------------|
+| `clear`    | O(1)            | O(1)             |
+| `dequeue`  | O(1)            | O(1)             |
+| `enqueue`  | O(1)            | O(1)             |
+| `peek`     | O(1)            | O(1)             |
+| `peekRear` | O(1)            | O(1)             |
+| `toArray`  | O(n)            | O(n)             |
 
 ## Stack
 Adheres to the Last In, First Out (LIFO) principle, enabling data to be added and removed from the same end (top).
