@@ -1,20 +1,36 @@
 import SinglyLinkedList from '../linked-list/singly-linked-list';
 
 /**
- * Stack is a data structure that follows the Last-In-First-Out (LIFO) principle.
+ * Represents a stack data structure that follows the Last-In-First-Out (LIFO) principle.
  * It uses a singly linked list internally for efficient push and pop operations.
+ * @template T - The type of elements in the stack.
  */
 export default class Stack<T> {
-  list: SinglyLinkedList<T>;
+  private list: SinglyLinkedList<T>;
 
+  /**
+   * Creates a new instance of the Stack class.
+   * The underlying data structure is a singly linked list.
+   */
   constructor() {
     this.list = new SinglyLinkedList();
   }
 
   /**
-   * Gets the number of elements in the stack.
-   * Time Complexity: O(1)
-   * Space Complexity: O(1)
+   * Retrieves the value at the top of the stack.
+   * @returns {T | undefined} The value at the front of the queue, or undefined if the queue is empty.
+   * @timecomplexity O(1) - Constant time complexity as accessing the head of a linked list is a constant time operation.
+   * @spacecomplexity O(1) - Constant space complexity as no additional data structures are used.
+   */
+  get top (): T | undefined {
+    return this.list.head?.val;
+  }
+
+  /**
+   * Returns the number of elements in the stack.
+   * @returns {number} - The size of the stack.
+   * @timecomplexity O(1)
+   * @spacecomplexity O(1)
    */
   get size(): number {
     return this.list.size;
@@ -22,53 +38,57 @@ export default class Stack<T> {
 
   /**
    * Checks if the stack is empty.
-   * Time Complexity: O(1)
-   * Space Complexity: O(1)
+   * @returns {boolean} - True if the stack is empty, false otherwise.
+   * @timecomplexity O(1)
+   * @spacecomplexity O(1)
    */
   get isEmpty(): boolean {
     return this.size === 0;
   }
 
   /**
-   * Pushes an element onto the stack.
-   * Time Complexity: O(1)
-   * Space Complexity: O(1)
+   * Adds a new element to the top of the stack.
+   * @param {T} val - The value to be pushed onto the stack.
+   * @timecomplexity O(1)
+   * @spacecomplexity O(1)
    */
   push(val: T): void {
     this.list.unshift(val);
   }
 
   /**
-   * Pops the top element from the stack and returns it.
-   * Time Complexity: O(1)
-   * Space Complexity: O(1)
+   * Removes and returns the element from the top of the stack.
+   * @returns {T | undefined} The value popped from the stack, or undefined if the stack is empty.
+   * @timecomplexity O(1)
+   * @spacecomplexity O(1)
    */
   pop(): T | undefined {
     return this.list.shift();
   }
 
   /**
-   * Clears the stack.
-   * Time Complexity: O(1)
-   * Space Complexity: O(1)
+   * Retrieves the value at the top of the stack without removing it.
+   * @returns {T | undefined} The value at the top of the stack, or undefined if the stack is empty.
+   * @timecomplexity O(1)
+   * @spacecomplexity O(1)
+   */
+  peek(): T | undefined {
+    return this.list.head?.val;
+  }
+  /**
+   * Removes all elements from the stack.
+   * @timecomplexity O(1)
+   * @spacecomplexity O(1)
    */
   clear(): void {
     this.list.clear();
   }
 
   /**
-   * Peeks at the top element of the stack without removing it.
-   * Time Complexity: O(1)
-   * Space Complexity: O(1)
-   */
-  peek(): T | undefined {
-    return this.list.head?.val;
-  }
-
-  /**
-   * Converts the stack to an array.
-   * Time Complexity: O(n) where n is the size of the stack
-   * Space Complexity: O(n) where n is the size of the stack
+   * Returns an array representation of the stack.
+   * @returns {T[]} An array containing the elements of the stack in top-to-bottom order.
+   * @timecomplexity O(n)
+   * @spacecomplexity O(n)
    */
   toArray(): T[] {
     return this.list.toArray().reverse();

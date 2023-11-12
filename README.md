@@ -51,16 +51,16 @@ Represents a singly linked list.
 #### Constructor
 - `SinglyLinkedList()`: Initializes an empty singly linked list.
 
-#### Properties
+#### Properties:
 - `get head: SLLNode<T> | null`: Reference to the head node of the list.
 - `get isEmpty: boolean`: Indicates whether the list is empty or not.
 - `get size: number`: The size of the list.
 - `get tail: SLLNode<T> | null`: Reference to the tail node of the list.
 
-#### Static Methods
+#### Static Methods:
 - `static fromArray<T>(data: T[]): SinglyLinkedList<T>`: Creates a singly linked list from an array.
 
-#### Instance Methods
+#### Instance Methods:
 - `at(index: number): T | undefined`: Gets the value at the specified index.
 - `clear(): void`: Clears the linked list by resetting its properties.
 - `deleteAt(index: number): T | undefined`: Deletes the value at the specified index.
@@ -127,10 +127,10 @@ Represents a doubly linked list.
 - `get size: number`: The size of the list.
 - `get tail: SLLNode<T> | null`: Reference to the tail node of the list.
 
-#### Static Methods
+#### Static Methods:
 - `static fromArray<T>(data: T[]): DoublyLinkedList<T>`: Creates a double linked list from an array.
 
-#### Instance Methods
+#### Instance Methods:
 - `at(index: number): T | undefined`: Gets the value at the specified index.
 - `clear(): void`: Clears the linked list by resetting its properties.
 - `deleteAt(index: number): T | undefined`: Deletes the value at the specified index.
@@ -198,12 +198,12 @@ It uses a singly linked list internally for efficient enqueue and dequeue operat
 - `get size(): number`: Returns the number of elements in the queue.
 
 #### Instance Methods:
-- `clear(): void`: Clears all elements from the queue.
+- `clear(): void`: Removes all elements from the queue.
 - `dequeue(): T | undefined`: Removes and returns the element from the front of the queue.
 - `enqueue(val: T): number`: Adds an element to the rear of the queue and returns the new size of the queue.
 - `peek(): T | undefined`: Retrieves the value at the front of the queue without removing it.
 - `peekRear(): T | undefined`: Retrieves the value at the rear of the queue without removing it.
-- `toArray(): T[]`: Converts the queue to an array.
+- `toArray(): T[]`: Returns an array representation of the queue.
 
 ### How to use
 ```ts
@@ -240,22 +240,27 @@ console.log(queue.isEmpty); // Output: true
 Adheres to the Last In, First Out (LIFO) principle, enabling data to be added and removed from the same end (top).
 - Provides methods such as push (add to the top) and pop (remove from the top).
 - Commonly used in applications involving function calls, expression evaluation, and backtracking.
+  
+![](assets/Stack.drawio.png)
 
 ### `Stack<T>`
+Represents a stack data structure that follows the Last-In-First-Out (LIFO) principle.
+It uses a singly linked list internally for efficient enqueue and dequeue operations.
+
+#### Constructor
+- `Stack()`: Creates an instance of the Stack class.
 
 #### Properties:
-- `list: SinglyLinkedList<T>`: An instance of singly linked list used to manage the elements in the stack.
+- `get isEmpty(): : boolean`: Checks if the stack is empty.
+- `get size(): number`: Returns the number of elements in the stack.
+- `get top(): T | undefined`: Retrieves the value at the top of the stack.
 
-#### Getters:
-- `size: number`: Gets the number of elements in the stack.
-- `isEmpty: boolean`: Checks if the stack is empty.
-
-#### Methods:
-- `push(val: T): void`: Pushes an element onto the stack.
-- `pop(): T | undefined`: Pops the top element from the stack and returns it.
-- `clear(): void`: Clears the stack.
-- `peek(): T | undefined`: Peeks at the top element of the stack without removing it.
-- `toArray(): T[]`: Converts the stack to an array.
+#### Instance Methods:
+- `clear(): void`: Removes all elements from the stack.
+- `peek(): T | undefined`: Retrieves the value at the top of the stack without removing it.
+- `pop(): T | undefined`: Removes and returns the element from the top of the stack.
+- `push(val: T): void`: Adds a new element to the top of the stack.
+- `toArray(): T[]`: Returns an array representation of the stack.
 
 ### How to use
 ```ts
@@ -279,15 +284,13 @@ console.log(stack.isEmpty); // Output: true
 ```
 
 ### Time and Space complexity
-| Method    | Time Complexity             | Space Complexity            |
-|-----------|-----------------------------|-----------------------------|
-| `size`    | O(1)                        | O(1)                        |
-| `isEmpty` | O(1)                        | O(1)                        |
-| `push`    | O(1)                        | O(1)                        |
-| `pop`     | O(1)                        | O(1)                        |
-| `clear`   | O(1)                        | O(1)                        |
-| `peek`    | O(1)                        | O(1)                        |
-| `toArray` | O(n) (n: size of the stack) | O(n) (n: size of the stack) |
+| Method    | Time Complexity | Space Complexity |
+|-----------|-----------------|------------------|
+| `clear`   | O(1)            | O(1)             |
+| `peek`    | O(1)            | O(1)             |
+| `pop`     | O(1)            | O(1)             |
+| `push`    | O(1)            | O(1)             |
+| `toArray` | O(n)            | O(n)             |
 
 ## Binary Tree
 A hierarchical structure where each node has at most two children.

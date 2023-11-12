@@ -1,10 +1,10 @@
 import Stack from '../../../src/stack/stack';
 
 describe('Stack', () => {
-  let stack: Stack<number>;
+  let stack: Stack<number | string>;
 
   beforeEach(() => {
-    stack = new Stack<number>();
+    stack = new Stack();
   });
 
   it('should initialize an empty stack', () => {
@@ -12,54 +12,70 @@ describe('Stack', () => {
     expect(stack.isEmpty).toBe(true);
   });
 
-  it('should push elements onto the stack', () => {
-    stack.push(1);
-    stack.push(2);
-    stack.push(3);
+  describe('push', () => {
+    it('should push elements onto the stack', () => {
+      stack.push('Apple');
+      stack.push('Banana');
+      stack.push('Lemon');
 
-    expect(stack.size).toBe(3);
-    expect(stack.isEmpty).toBe(false);
-  });
+      expect(stack.size).toBe(3);
+      expect(stack.top).toBe('Lemon');
+      expect(stack.isEmpty).toBe(false);
+    });
+  })
 
-  it('should pop elements from the stack in LIFO order', () => {
-    stack.push(1);
-    stack.push(2);
-    stack.push(3);
+  describe('pop', () => {
+    it('should pop elements from the stack in LIFO order', () => {
+      stack.push(1);
+      stack.push(2);
+      stack.push(3);
 
-    expect(stack.pop()).toBe(3);
-    expect(stack.pop()).toBe(2);
-    expect(stack.pop()).toBe(1);
-    expect(stack.size).toBe(0);
-    expect(stack.isEmpty).toBe(true);
-  });
+      expect(stack.pop()).toBe(3);
+      expect(stack.pop()).toBe(2);
+      expect(stack.pop()).toBe(1);
 
-  it('should clear the stack', () => {
-    stack.push(1);
-    stack.push(2);
-    stack.push(3);
+      expect(stack.top).toBeUndefined();
+      expect(stack.size).toBe(0);
+      expect(stack.isEmpty).toBe(true);
+    });
 
-    stack.clear();
+    it('should return undefined on pop from an empty stack', () => {
+      expect(stack.pop()).toBeUndefined()
+    })
+  })
 
-    expect(stack.size).toBe(0);
-    expect(stack.isEmpty).toBe(true);
-  });
+  describe('peek', () => {
+    it('should peek at the top element without removing it', () => {
+      stack.push('Apple');
+      stack.push('Banana');
+      stack.push('Lemon');
 
-  it('should peek at the top element without removing it', () => {
-    stack.push(1);
-    stack.push(2);
-    stack.push(3);
+      expect(stack.peek()).toBe('Lemon');
+      expect(stack.size).toBe(3);
+    });
+  })
 
-    expect(stack.peek()).toBe(3);
-    expect(stack.size).toBe(3);
-  });
+  describe('clear', () => {
+    it('should clear the stack', () => {
+      stack.push(10);
+      stack.push(20);
+      stack.push(30);
 
-  it('should convert the stack to an array', () => {
-    stack.push(1);
-    stack.push(2);
-    stack.push(3);
+      stack.clear();
 
-    const arr = stack.toArray();
+      expect(stack.top).toBeUndefined();
+      expect(stack.size).toBe(0);
+      expect(stack.isEmpty).toBe(true);
+    });
+  })
 
-    expect(arr).toEqual([1, 2, 3]);
-  });
+  describe('toArray', () => {
+    it('should convert the stack to an array', () => {
+      stack.push(12);
+      stack.push(38);
+      stack.push(45);
+
+      expect(stack.toArray()).toEqual([12, 38, 45]);
+    });
+  })
 });
