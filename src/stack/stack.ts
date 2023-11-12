@@ -17,6 +17,16 @@ export default class Stack<T> {
   }
 
   /**
+   * Retrieves the value at the top of the stack.
+   * @returns {T | undefined} The value at the front of the queue, or undefined if the queue is empty.
+   * @timecomplexity O(1) - Constant time complexity as accessing the head of a linked list is a constant time operation.
+   * @spacecomplexity O(1) - Constant space complexity as no additional data structures are used.
+   */
+  get top (): T | undefined {
+    return this.list.head?.val;
+  }
+
+  /**
    * Returns the number of elements in the stack.
    * @returns {number} - The size of the stack.
    * @timecomplexity O(1)
