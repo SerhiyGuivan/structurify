@@ -6,7 +6,7 @@ import SinglyLinkedList from '../linked-list/singly-linked-list';
  * @template T - The type of elements in the stack.
  */
 export default class Stack<T> {
-  list: SinglyLinkedList<T>;
+  private list: SinglyLinkedList<T>;
 
   /**
    * Creates a new instance of the Stack class.
