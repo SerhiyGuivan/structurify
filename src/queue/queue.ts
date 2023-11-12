@@ -99,7 +99,7 @@ export default class Queue<T> {
   }
 
   /**
-   * Clears all elements from the queue.
+   * Removes all elements from the queue
    * @timecomplexity O(1)
    * @spacecomplexity O(1)
    */
@@ -108,7 +108,7 @@ export default class Queue<T> {
   }
 
   /**
-   * Converts the queue to an array.
+   * Returns an array representation of the queue.
    * @returns {T[]} - An array containing all elements in the queue.
    * @timecomplexity O(n)
    * @spacecomplexity O(n)
