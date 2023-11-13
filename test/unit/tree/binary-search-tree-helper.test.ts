@@ -1,5 +1,5 @@
-import { BinarySearchTreeHelper, BSTComparator} from '../../../src/tree/binary-search-tree-helper';
-import BTNode from '../../../src/tree/binary-tree-node';
+import { BinarySearchTreeHelper, BSTComparator} from '../../../src/binary-tree/binary-search-tree-helper';
+import BTNode from '../../../src/binary-tree/binary-tree-node';
 
 describe('BinarySearchTreeHelper', () => {
   describe('insert static method', () => {

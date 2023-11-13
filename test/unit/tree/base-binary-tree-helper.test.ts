@@ -1,5 +1,5 @@
-import { BaseBinaryTreeHelper } from '../../../src/tree/base-binary-tree-helper';
-import BTNode from '../../../src/tree/binary-tree-node';
+import { BaseBinaryTreeHelper } from '../../../src/binary-tree/base-binary-tree-helper';
+import BTNode from '../../../src/binary-tree/binary-tree-node';
 
 describe('BaseBinaryTreeHelper', () => {
   describe('maxNodesAtDepth static method', () => {

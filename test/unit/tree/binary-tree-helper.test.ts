@@ -1,5 +1,5 @@
-import { BinaryTreeHelper } from '../../../src/tree/binary-tree-helper';
-import BTNode from '../../../src/tree/binary-tree-node';
+import { BinaryTreeHelper } from '../../../src/binary-tree/binary-tree-helper';
+import BTNode from '../../../src/binary-tree/binary-tree-node';
 
 describe('BinaryTreeHelper', () => {
   describe('find | findBFS | findDFS static method', () => {

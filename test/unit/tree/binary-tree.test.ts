@@ -1,4 +1,4 @@
-import BinaryTree from '../../../src/tree/binary-tree';
+import BinaryTree from '../../../src/binary-tree/binary-tree';
 
 describe('BinaryTree', () => {
   describe('insert method', () => {
