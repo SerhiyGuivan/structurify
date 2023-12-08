@@ -1,4 +1,4 @@
-import { BTNode } from '../../binary-tree/node/node';
+import { BTNode } from '../../data-structures/binary-tree/node/node';
 
 export type Key = number | string;
 
