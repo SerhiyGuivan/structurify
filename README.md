@@ -4,7 +4,9 @@
 
 # Structurify
 
-The TypeScript collection includes fundamental data structures used in computer science and software development. It provides implementations of various data structures that can be imported and used in your projects. 
+A collection of fundamental data structures implemented in TypeScript, widely used in computer science and software development. This library includes implementations of various structures that can be effortlessly imported and employed in your projects.
+
+Included Data Structures:
 
 - [Singly Linked List](#singly-linked-list),
 - [Doubly Linked List](#doubly-linked-list),
@@ -273,9 +275,7 @@ stack.push(10);
 stack.push(15);
 
 console.log(stack.pop()); // Output: 15
-
 console.log(stack.peek()); // Output: 10
-
 console.log(stack.toArray()); // Output: [10, 5]
 
 stack.clear();
@@ -293,47 +293,133 @@ console.log(stack.isEmpty); // Output: true
 | `toArray` | O(n)            | O(n)             |
 
 ## Binary Tree
-A hierarchical structure where each node has at most two children.
-- Supports various tree traversal methods like level-order, in-order, pre-order, and post-order.
-- Crucial for applications requiring hierarchical data representation.
+A node-based tree data structure in which each node can have at most two children, which are referred to as the left child and the right child.
 
-### `BinaryTree<T>`
+![](assets/BinaryTree.drawio.png)
 
-#### Getters
-- `rootNode`: Accesses the root node of the binary tree.
-- `size`: Retrieves the total number of nodes in the tree.
+### How to use
+```ts
+import { BinaryTree, TraversalOrder } from 'structurify';
 
-#### Methods:
-- `insert(key: number, val: T): void`: Inserts a new node into the binary tree using level-order (BFS) traversal for insertion.
-- `find(fn: MatchFn<T>, type: 'dfs' | 'bfs' = 'dfs'): BTNode<T> | null`: Finds a node in the binary tree using a matching function and search type.
-- `remove(key: number): void`: Deletes the node with the given key from the binary tree by replacing it with the bottom-most and rightmost node.
-- `maxDepth(): number`: Calculates the maximum depth of the tree.
-- `bfs(fn: TraversalFn<T>): ReturnType<TraversalFn<T>>[]`: Performs a breadth-first traversal.
-- `dfsPreOrder(fn: TraversalFn<T>): ReturnType<TraversalFn<T>>[]`: Performs a depth-first pre-order traversal.
-- `dfsPostOrder(fn: TraversalFn<T>): ReturnType<TraversalFn<T>>[]`: Performs a depth-first post-order traversal.
-- `dfsInOrder(fn: TraversalFn<T>): ReturnType<TraversalFn<T>>[]`: Performs a depth-first in-order traversal.
-- `clear(): void`: Empties the binary tree by removing all nodes.
+const tree = new BinaryTree<number, string>(); 
+
+tree.add(1, 'Apple');
+tree.add(2, 'Lime');
+tree.add(3, 'Pear');
+tree.add(4, 'Kiwi');
+tree.add(5, 'Mango');
+tree.add(6, 'Orange');
+
+console.log(tree.size) // 6
+
+for (let fruit of tree.values(TraversalOrder.LevelOrder)) {
+  console.log(fruit) // 'Apple', 'Lime' 'Pear', 'Kiwi', 'Mango', 'Orange'
+}
+```
+
+### API Reference
+For detailed information, please refer to the [Binary Tree API Reference](src/binary-tree/docs/class-api/binary-tree.md).
+
+### Time and Space complexity
+| Method                        | Time Complexity | Space Complexity |
+|-------------------------------|-----------------|------------------|
+| `static fromEntries(entries)` | O(n)            | O(w)             |
+| `add(key, val)`               | O(n)            | O(w)             |
+| `addMany(entries)`            | O(n log n)      | O(log n)         |
+| `delete(key)`                 | O(n)            | O(w)             |
+| `get(key, order)`             | O(n)            | O(h) or O(w)     |
+| `has(key, order)`             | O(n)            | O(h) or O(w)     |
+| `set(key, val, order)`        | O(n)            | O(h) or O(w)     |
+| `node(key)`                   | O(n)            | O(h) or O(w)     |
+
+#### Inherited from `BaseBinaryTree`
+
+| Method                 | Time Complexity | Space Complexity |
+|------------------------|-----------------|------------------|
+| `clear()`              | O(1)            | O(1)             |
+| `entries(order)`       | O(n)            | O(h) or O(w)     |
+| `every(fn, order)`     | O(n)            | O(h) or O(w)     |
+| `findNode(fn, order)`  | O(n)            | O(h) or O(w)     |
+| `findValue(fn, order)` | O(n)            | O(h) or O(w)     |
+| `forEach(fn, order)`   | O(n)            | O(h) or O(w)     |
+| `isEqual(root)`        | O(n)            | O(h)             |
+| `isBalanced()`         | O(n)            | O(h)             |
+| `isComplete()`         | O(n)            | O(w)             |
+| `isFull()`             | O(n)            | O(h)             |
+| `isPerfect()`          | O(n)            | O(h)             |
+| `keys(order)`          | O(n)            | O(h) or O(w)     |
+| `maxDepth()`           | O(n)            | O(h)             |
+| `some(fn, order)`      | O(n)            | O(h) or O(w)     |
+| `values(order)`        | O(n)            | O(h) or O(w)     |
+
+- **n** - the number of nodes in the binary tree.
+- **h** - the height of the binary tree.
+- **w** - the maximum width of the binary tree.
 
 ## Binary Search Tree
-A specialized form of a binary tree where the left child is less than the parent and the right child is greater.
-- Provides efficient searching and sorting capabilities.
-- Ideal for tasks involving ordered data and quick search operations.
+A node-based binary tree data structure which has the following properties:
 
-###  `BinarySearchTree<T>`
+- The left subtree of a node contains only nodes with keys lesser than the node’s key.
+- The right subtree of a node contains only nodes with keys greater than the node’s key.
+- The left and right subtree each must also be a binary search tree.
 
-#### Constructor
-- `constructor(comparator: BSTComparator)`: Initializes the BinarySearchTree with the specified comparator.
+![](assets/BinarySearchTree.drawio.png)
 
-#### Getters
-- `rootNode`: Accesses the root node of the binary search tree.
-- `size`: Retrieves the total number of nodes in the tree.
+### How to use
+```ts
+import { BinarySearchTree, TraversalOrder } from 'structurify';
 
-#### Methods:
-- `insert(key: number, val: T): void`: Inserts a node into the binary search tree based on the specified comparator.
-- `get(key: number): BTNode<T> | null`: Retrieves a node from the tree using the given key.
-- `maxDepth(): number`: Calculates the maximum depth of the tree.
-- `bfs(fn: TraversalFn<T>): ReturnType<TraversalFn<T>>[]`: Performs a breadth-first traversal.
-- `dfsPreOrder(fn: TraversalFn<T>): ReturnType<TraversalFn<T>>[]`: Performs a depth-first pre-order traversal.
-- `dfsPostOrder(fn: TraversalFn<T>): ReturnType<TraversalFn<T>>[]`: Performs a depth-first post-order traversal.
-- `dfsInOrder(fn: TraversalFn<T>): ReturnType<TraversalFn<T>>[]`: Performs a depth-first in-order traversal.
-- `clear(): void`: Empties the binary tree by removing all nodes.
+const tree = new BinarySearchTree.fromSortedEntries<number, string>([
+  [1, 'Kiwi'],
+  [2, 'Lime'],
+  [3, 'Mango'],
+  [4, 'Apple'],
+  [5, 'Orange'],
+  [6, 'Pear'],
+]);
+
+console.log(tree.size) // 6
+
+for (let fruit of tree.values(TraversalOrder.InOrder)) {
+  console.log(fruit) // 'Kiwi', 'Lime' 'Mango', 'Apple', 'Orange', 'Pear'
+}
+```
+
+### API Reference
+For detailed information, please refer to the [Binary Search Tree API Reference](src/binary-tree/docs/class-api/binary-search-tree.md).
+
+### Time and Space complexity
+| Method                                          | Time Complexity | Space Complexity |
+|-------------------------------------------------|-----------------|------------------|
+| `static fromEntries(entries, comparator)`       | O(n log n)      | O(log n)         |
+| `static fromSortedEntries(entries, comparator)` | O(n)            | O(log n)         |
+| `add(key, val)`                                 | O(log n)        | O(log n)         |
+| `addMany(entries)`                              | O(n log n)      | O(log n)         |
+| `delete(key)`                                   | O(log n)        | O(log n)         |
+| `get(key)`                                      | O(log n)        | O(1)             |
+| `has(key)`                                      | O(log n)        | O(1)             |
+| `set(key, val)`                                 | O(log n)        | O(1)             |
+| `node(key)`                                     | O(log n)        | O(1)             |
+
+#### Inherited from `BaseBinaryTree`
+| Method                 | Time Complexity | Space Complexity |
+|------------------------|-----------------|------------------|
+| `clear()`              | O(1)            | O(1)             |
+| `entries(order)`       | O(n)            | O(h) or O(w)     |
+| `every(fn, order)`     | O(n)            | O(h) or O(w)     |
+| `findNode(fn, order)`  | O(n)            | O(h) or O(w)     |
+| `findValue(fn, order)` | O(n)            | O(h) or O(w)     |
+| `forEach(fn, order)`   | O(n)            | O(h) or O(w)     |
+| `isEqual(root)`        | O(n)            | O(h)             |
+| `isBalanced()`         | O(n)            | O(h)             |
+| `isComplete()`         | O(n)            | O(w)             |
+| `isFull()`             | O(n)            | O(h)             |
+| `isPerfect()`          | O(n)            | O(h)             |
+| `keys(order)`          | O(n)            | O(h) or O(w)     |
+| `maxDepth()`           | O(n)            | O(h)             |
+| `some(fn, order)`      | O(n)            | O(h) or O(w)     |
+| `values(order)`        | O(n)            | O(h) or O(w)     |
+
+- **n** - the number of nodes in the binary tree.
+- **h** - the height of the binary tree.
+- **w** - the maximum width of the binary tree.
