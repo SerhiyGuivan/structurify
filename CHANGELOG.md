@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 0.1.4 (2023-12-08)
+- Updated documentation
+  - Moved class api documentation from README.md to separate md files for every structure into docs folder
+  - Updated description in README.md
+- Updated file structures
+  - Added path alias to src folder
+  - Updated folders structures
+
 ## Version 0.1.3 (2023-12-08)
 
 ### Updated BaseBinaryTree
