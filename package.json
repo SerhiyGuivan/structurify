@@ -1,7 +1,7 @@
 {
   "name": "structurify",
   "author": "Serhii Guivan",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A collection of fundamental data structures implemented in TypeScript, widely used in computer science and software development.",
   "license": "ISC",
   "type": "module",
